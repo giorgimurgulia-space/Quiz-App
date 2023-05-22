@@ -8,7 +8,7 @@
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
-        <item name="android:statusBarColor">@color/Neutral_04_White</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
     </style>
 </resources>
