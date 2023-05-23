@@ -17,12 +17,16 @@ class StartViewModel : ViewModel() {
     fun startButtonListener(userName: String?) {
         if (userName.isNullOrEmpty()) {
             _startMessage.tryEmit("გთხოვთ შიყვანოთ სახელი")
-        } else if (!isStrongUserName(userName)) {
-            _startMessage.tryEmit("სახელის სტრუქტურა")
-        } else {
+        }else{
             _startMessage.tryEmit(isStrongUserName(userName).toString())
-            checkUser(userName)
         }
+
+//        } else if (!isStrongUserName(userName)) {
+//            _startMessage.tryEmit("სახელის სტრუქტურა არასწორია")
+//        } else {
+//            _startMessage.tryEmit(isStrongUserName(userName).toString())
+//            checkUser(userName)
+//        }
     }
 
     private fun checkUser(userName: String): String {
@@ -30,23 +34,13 @@ class StartViewModel : ViewModel() {
     }
 
     private fun isStrongUserName(userName: String): Boolean {
-        var check = true
 
-        check = userName.length in 8..20
+        // regexPattern : minimum of 8 and maximum of 20 characters
+        // containing at least one uppercase letter and one number
+        // does not start with a period (.) or an underscore (_)
 
-        if (check)
-            check = !userName.startsWith(".")
-
-        if (check)
-            check = !userName.startsWith("_")
-
-        if (check)
-            check = !userName.contains(" ")
-
-        if (check)
-            check = userName != userName.lowercase()
-
-        return check
+        val regexPattern = "^(?!\\.|_)(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$".toRegex()
+        return regexPattern.matches(userName)
     }
 
 

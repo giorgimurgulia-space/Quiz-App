@@ -42,6 +42,6 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
     }
 
     protected fun toast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
