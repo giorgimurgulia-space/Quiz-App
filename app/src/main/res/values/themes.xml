@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.QuizApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/Yellow_Primary</item>
-        <item name="colorPrimaryVariant">@color/Blue_Secondary_Default</item>
-        <item name="colorOnPrimary">@color/Neutral_04_White</item>
+        <item name="colorPrimary">@color/yellow_primary</item>
+        <item name="colorPrimaryVariant">@color/blue_secondary_default</item>
+        <item name="colorOnPrimary">@color/neutral_04_white</item>
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->

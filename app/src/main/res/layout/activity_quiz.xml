@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".QuizActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/top_user_fragment"
-        android:name="com.space.quizapp.presentation.start.StartFragment"
+        android:name="com.space.quizapp.ui.start.StartFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

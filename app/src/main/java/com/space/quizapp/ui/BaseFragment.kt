@@ -1,9 +1,10 @@
-package com.space.quizapp.presentation
+package com.space.quizapp.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.space.quizapp.Inflater
@@ -15,6 +16,8 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
     val binding get() = _binding!!
 
     abstract fun onBind()
+    open fun observes() {}
+    open fun listeners() {}
 
 
     override fun onCreateView(
@@ -29,6 +32,8 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onBind()
+        observes()
+        listeners()
     }
 
     override fun onDestroyView() {
@@ -36,5 +41,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
         _binding = null
     }
 
-
+    protected fun toast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
 }
