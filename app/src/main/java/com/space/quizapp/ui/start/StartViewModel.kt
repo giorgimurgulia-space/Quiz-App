@@ -14,9 +14,40 @@ class StartViewModel : ViewModel() {
     val startMessage get() = _startMessage.asSharedFlow()
 
 
-    fun startButtonListener(name: String?) {
-        if (name.isNullOrEmpty()) {
+    fun startButtonListener(userName: String?) {
+        if (userName.isNullOrEmpty()) {
             _startMessage.tryEmit("გთხოვთ შიყვანოთ სახელი")
+        } else if (!isStrongUserName(userName)) {
+            _startMessage.tryEmit("სახელის სტრუქტურა")
+        } else {
+            _startMessage.tryEmit(isStrongUserName(userName).toString())
+            checkUser(userName)
         }
     }
+
+    private fun checkUser(userName: String): String {
+        return "user id"
+    }
+
+    private fun isStrongUserName(userName: String): Boolean {
+        var check = true
+
+        check = userName.length in 8..20
+
+        if (check)
+            check = !userName.startsWith(".")
+
+        if (check)
+            check = !userName.startsWith("_")
+
+        if (check)
+            check = !userName.contains(" ")
+
+        if (check)
+            check = userName != userName.lowercase()
+
+        return check
+    }
+
+
 }

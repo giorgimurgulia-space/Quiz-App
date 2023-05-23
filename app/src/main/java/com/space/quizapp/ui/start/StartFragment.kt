@@ -22,8 +22,8 @@ class StartFragment : BaseFragment<FragmentStartBinding>(FragmentStartBinding::i
         }
 
         startButton.setOnClickListener {
-            val name = nameEditText.text?.toString()
-            viewModel.startButtonListener(name)
+            val userName = nameEditText.text?.toString()
+            viewModel.startButtonListener(userName)
         }
     }
 
