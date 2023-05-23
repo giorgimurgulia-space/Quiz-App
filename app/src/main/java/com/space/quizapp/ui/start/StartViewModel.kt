@@ -17,16 +17,12 @@ class StartViewModel : ViewModel() {
     fun startButtonListener(userName: String?) {
         if (userName.isNullOrEmpty()) {
             _startMessage.tryEmit("გთხოვთ შიყვანოთ სახელი")
-        }else{
+        } else if (!isStrongUserName(userName)) {
+            _startMessage.tryEmit("სახელის სტრუქტურა არასწორია")
+        } else {
             _startMessage.tryEmit(isStrongUserName(userName).toString())
+            checkUser(userName)
         }
-
-//        } else if (!isStrongUserName(userName)) {
-//            _startMessage.tryEmit("სახელის სტრუქტურა არასწორია")
-//        } else {
-//            _startMessage.tryEmit(isStrongUserName(userName).toString())
-//            checkUser(userName)
-//        }
     }
 
     private fun checkUser(userName: String): String {
