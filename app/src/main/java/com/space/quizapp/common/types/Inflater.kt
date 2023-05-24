@@ -1,4 +1,4 @@
-package com.space.quizapp
+package com.space.quizapp.common.types
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
