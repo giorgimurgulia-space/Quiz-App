@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class UserEntity(
     @PrimaryKey
     val userId: String,
-    val userName: String
+    val username: String
 )

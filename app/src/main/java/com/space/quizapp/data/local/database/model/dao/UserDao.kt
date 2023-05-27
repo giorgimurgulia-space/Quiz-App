@@ -12,9 +12,13 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: UserEntity)
 
-    @Query("select * from user where userName = :userName")
-    suspend fun getUser(userName: String): UserEntity
+    @Query("select * from user where userId = :userId")
+    suspend fun getByIdUser(userId: String): UserEntity
 
-    @Query("SELECT EXISTS(SELECT * FROM user WHERE userName = :userName)")
-    suspend fun isUserNameExist(userName: String): Boolean
+    @Query("select * from user where username = :username")
+    suspend fun getByUsername(username: String): UserEntity
+
+
+    @Query("select exists(select * from user where userName = :username)")
+    suspend fun isUsernameExist(username: String): Boolean
 }

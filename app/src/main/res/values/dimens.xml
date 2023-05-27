@@ -5,9 +5,11 @@
 
 
     <dimen name="dimen_0_dp">0dp</dimen>
+    <dimen name="dimen_3_dp">3dp</dimen>
     <dimen name="dimen_19_dp">19dp</dimen>
     <dimen name="dimen_23_dp">23dp</dimen>
     <dimen name="dimen_24_dp">24dp</dimen>
+    <dimen name="dimen_26_dp">26dp</dimen>
     <dimen name="dimen_34_dp">34dp</dimen>
     <dimen name="dimen_44_dp">44dp</dimen>
     <dimen name="dimen_55_dp">55dp</dimen>

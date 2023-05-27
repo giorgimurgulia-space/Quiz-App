@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/dimen_44_dp"
-    tools:context="com.space.quizapp.ui.start.StartFragment">
+    tools:context="com.space.quizapp.ui.start.AuthenticationStartFragment">
 
     <com.space.quizapp.ui.custom.StartIllustrationBackground
         android:id="@+id/illustration_bkg_view"
@@ -57,7 +57,7 @@
         android:layout_height="@dimen/dimen_44_dp"
         android:layout_marginHorizontal="@dimen/dimen_117_dp"
         android:layout_marginTop="@dimen/dimen_24_dp"
-        android:background="@drawable/shape_input_background"
+        android:background="@drawable/shape_button_background"
         android:backgroundTint="@color/yellow_primary"
         android:text="@string/start_quiz"
         android:textColor="@color/neutral_04_white"
