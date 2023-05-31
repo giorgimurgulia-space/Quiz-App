@@ -11,7 +11,6 @@ class AuthenticationUseCase @Inject constructor(private val userRepository: User
     }
     suspend fun signInUser(userId: String): Boolean {
         userRepository.signInUser(userId)
-
         return userId == userRepository.getCurrentUser().userId
     }
 

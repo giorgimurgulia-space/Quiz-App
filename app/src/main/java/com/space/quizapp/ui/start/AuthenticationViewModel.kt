@@ -3,6 +3,7 @@ package com.space.quizapp.ui.start
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.R
+import com.space.quizapp.common.RegexPattern
 import com.space.quizapp.domain.usecase.start.AuthenticationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -64,14 +65,7 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     private fun isStrongUserName(userName: String): Boolean {
-
-        // regexPattern : minimum of 8 and maximum of 20 characters
-        // containing at least one uppercase letter and one number
-        // does not start with a period "." or an underscore "_"
-
-        // regx class
-        val regexPattern = "^(?!\\.|_)(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,20}$".toRegex()
-        return regexPattern.matches(userName)
+        return RegexPattern.usernamePattern.matches(userName)
     }
 
 
