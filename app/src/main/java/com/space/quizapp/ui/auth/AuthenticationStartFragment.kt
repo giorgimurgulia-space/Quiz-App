@@ -34,7 +34,7 @@ class AuthenticationStartFragment :
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.toastMessage1.collect { messages ->
+                viewModel.toastMessage.collect { messages ->
                     toast(resources.getString(messages))
                 }
             }

@@ -21,9 +21,9 @@ class AuthenticationViewModel @Inject constructor(
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    val toastMessage1 get() = _toastMessage.asSharedFlow()
+    val toastMessage get() = _toastMessage.asSharedFlow()
 
-    private val _userId = MutableSharedFlow<Boolean>(
+    private val _userId = MutableSharedFlow<Unit>(
         replay = 0,
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
@@ -35,6 +35,7 @@ class AuthenticationViewModel @Inject constructor(
         if (username.isNullOrEmpty()) {
             _toastMessage.tryEmit(R.string.please_input_username)
         } else if (!isStrongUserName(username)) {
+            _toastMessage.tryEmit(R.string.invalid_username)
         } else {
             startButtonProcess(username)
         }
@@ -51,9 +52,9 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     private suspend fun sigInUser(username: String) {
-        val useId = authenticationUseCase.getUserId(username)
-        if (authenticationUseCase.signInUser(useId)) {
-            _userId.tryEmit(true)
+        val userId = authenticationUseCase.getUserId(username)
+        if (authenticationUseCase.signInUser(userId)) {
+            _userId.tryEmit(Unit)
         } else {
             _toastMessage.tryEmit(R.string.try_again)
         }
