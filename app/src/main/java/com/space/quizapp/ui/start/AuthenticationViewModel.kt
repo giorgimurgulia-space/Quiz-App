@@ -2,6 +2,7 @@ package com.space.quizapp.ui.start
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.space.quizapp.R
 import com.space.quizapp.domain.usecase.start.AuthenticationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -12,14 +13,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val checkUser: AuthenticationUseCase
+    private val authenticationUseCase: AuthenticationUseCase
 ) : ViewModel() {
-    private val _toastMessage = MutableSharedFlow<String>(
+    private val _toastMessage = MutableSharedFlow<Int>(
         replay = 0,
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
-    val toastMessage get() = _toastMessage.asSharedFlow()
+    val toastMessage1 get() = _toastMessage.asSharedFlow()
 
     private val _userId = MutableSharedFlow<Boolean>(
         replay = 0,
@@ -31,10 +32,8 @@ class AuthenticationViewModel @Inject constructor(
 
     fun startButtonListener(username: String?) {
         if (username.isNullOrEmpty()) {
-            // string
-            _toastMessage.tryEmit("გთხოვთ შეიყავნოთ სახელი")
+            _toastMessage.tryEmit(R.string.please_input_username)
         } else if (!isStrongUserName(username)) {
-            _toastMessage.tryEmit("სახელის სტრუქტურა არასწორია")
         } else {
             startButtonProcess(username)
         }
@@ -42,7 +41,7 @@ class AuthenticationViewModel @Inject constructor(
 
     private fun startButtonProcess(username: String) {
         viewModelScope.launch {
-            if (checkUser.checkUser(username)) {
+            if (authenticationUseCase.checkUser(username)) {
                 sigInUser(username)
             } else {
                 signUpUser(username)
@@ -51,16 +50,16 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     private suspend fun sigInUser(username: String) {
-        val useId = checkUser.getUserId(username)
-        if (checkUser.signInUser(useId)) {
+        val useId = authenticationUseCase.getUserId(username)
+        if (authenticationUseCase.signInUser(useId)) {
             _userId.tryEmit(true)
         } else {
-            _toastMessage.tryEmit("გთხოვთ კიდევ სცადეთ")
+            _toastMessage.tryEmit(R.string.try_again)
         }
     }
 
     private suspend fun signUpUser(username: String) {
-        checkUser.signUpUser(username)
+        authenticationUseCase.signUpUser(username)
         sigInUser(username)
     }
 

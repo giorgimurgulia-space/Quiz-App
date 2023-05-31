@@ -4,6 +4,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.space.quizapp.R
 import com.space.quizapp.databinding.FragmentAuthenticationBinding
 import com.space.quizapp.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,18 +24,19 @@ class AuthenticationStartFragment :
     }
 
     override fun observes() {
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.toastMessage.collect { messages ->
-                    toast(messages)
+                viewModel.userId.collect { userId ->
+                    binding.startTitleText.text = userId.toString()
                 }
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userId.collect { userId ->
-                    binding.startTitleText.text = userId.toString()
+                viewModel.toastMessage1.collect { messages ->
+                    toast(resources.getString(messages))
                 }
             }
         }
