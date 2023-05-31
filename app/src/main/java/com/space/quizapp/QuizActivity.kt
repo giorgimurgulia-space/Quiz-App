@@ -3,14 +3,25 @@ package com.space.quizapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.WindowCompat
+import androidx.navigation.fragment.NavHostFragment
+import com.space.quizapp.databinding.ActivityQuizBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class QuizActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityQuizBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz)
+
+        binding = ActivityQuizBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
+
+
     }
 }

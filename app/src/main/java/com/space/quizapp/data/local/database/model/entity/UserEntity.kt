@@ -2,10 +2,11 @@ package com.space.quizapp.data.local.database.model.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 
 @Entity(tableName = "user")
 data class UserEntity(
     @PrimaryKey
     val userId: String,
-    val username: String
+    val username: String,
 )

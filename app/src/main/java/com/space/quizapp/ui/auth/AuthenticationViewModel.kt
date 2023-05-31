@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.R
 import com.space.quizapp.common.regex.RegexPattern
-import com.space.quizapp.domain.usecase.start.AuthenticationUseCase
+import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -52,8 +52,7 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     private suspend fun sigInUser(username: String) {
-        val userId = authenticationUseCase.getUserId(username)
-        if (authenticationUseCase.signInUser(userId)) {
+        if (authenticationUseCase.signInUser(username)) {
             _userId.tryEmit(Unit)
         } else {
             _toastMessage.tryEmit(R.string.try_again)
@@ -61,8 +60,11 @@ class AuthenticationViewModel @Inject constructor(
     }
 
     private suspend fun signUpUser(username: String) {
-        authenticationUseCase.signUpUser(username)
-        sigInUser(username)
+        if (authenticationUseCase.signUpUser(username)) {
+            sigInUser(username)
+        } else {
+            _toastMessage.tryEmit(R.string.try_again)
+        }
     }
 
     private fun isStrongUserName(userName: String): Boolean {
