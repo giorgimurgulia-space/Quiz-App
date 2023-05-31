@@ -1,4 +1,4 @@
-package com.space.quizapp.common
+package com.space.quizapp.common.regex
 
 object RegexPattern {
     // regexPattern : minimum of 8 and maximum of 20 characters

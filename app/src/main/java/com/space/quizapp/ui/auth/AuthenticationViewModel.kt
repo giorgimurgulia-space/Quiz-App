@@ -1,9 +1,9 @@
-package com.space.quizapp.ui.start
+package com.space.quizapp.ui.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.R
-import com.space.quizapp.common.RegexPattern
+import com.space.quizapp.common.regex.RegexPattern
 import com.space.quizapp.domain.usecase.start.AuthenticationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow

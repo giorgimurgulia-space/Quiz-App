@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/dimen_44_dp"
-    tools:context="com.space.quizapp.ui.start.AuthenticationStartFragment">
+    tools:context="com.space.quizapp.ui.auth.AuthenticationStartFragment">
 
     <com.space.quizapp.ui.custom.StartIllustrationBackground
         android:id="@+id/illustration_bkg_view"
