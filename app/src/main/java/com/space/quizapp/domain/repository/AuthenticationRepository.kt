@@ -8,5 +8,5 @@ interface AuthenticationRepository {
 
     suspend fun signInUser(username: String): Boolean
 
-    suspend fun getCurrentUserId(): String
+    fun getCurrentUserId(): String
 }

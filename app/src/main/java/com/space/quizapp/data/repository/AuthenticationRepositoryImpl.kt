@@ -29,7 +29,7 @@ class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao)
         return userId == currentUserId.get()
     }
 
-    override suspend fun getCurrentUserId(): String {
+    override fun getCurrentUserId(): String {
         return currentUserId.get()
     }
 

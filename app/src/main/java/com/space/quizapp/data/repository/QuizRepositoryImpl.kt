@@ -1,15 +1,27 @@
 package com.space.quizapp.data.repository
 
+import com.space.quizapp.common.ApiError
+import com.space.quizapp.common.mapper.toDomainModel
 import com.space.quizapp.data.remote.api.ApiService
-import com.space.quizapp.data.remote.dto.QuizDto
+import com.space.quizapp.domain.model.QuizModel
 import com.space.quizapp.domain.repository.QuizRepository
-import retrofit2.Response
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class QuizRepositoryImpl@Inject constructor(
+class QuizRepositoryImpl @Inject constructor(
     private val apiService: ApiService
-    ):QuizRepository {
-    override suspend fun getQuiz(): Response<List<QuizDto>> {
-        return apiService.getQuiz()
+) : QuizRepository {
+    override suspend fun getAvailableQuizList(): Flow<List<QuizModel>> = flow {
+        val response = apiService.getQuiz()
+        if (response.isSuccessful) {
+            val quiz = response.body()!!.map {
+                it.toDomainModel()
+            }
+            emit(quiz)
+        } else {
+            throw ApiError(null)
+        }
     }
+
 }

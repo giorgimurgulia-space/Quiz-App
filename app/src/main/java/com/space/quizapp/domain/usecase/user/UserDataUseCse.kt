@@ -7,11 +7,21 @@ class UserDataUseCse @Inject constructor(
     private val userDataRepository: UserDataRepository
 ) {
 
-    suspend fun getCurrentUser() = userDataRepository.getCurrentUser()
+    suspend fun getUser(userId: String) = userDataRepository.getUser(userId)
 
+    suspend fun getUserGPA(userId: String): String {
+        var currentUserGPA = 0.0.toFloat()
+        val userPoints = userDataRepository.getUserPoint(userId)
 
-    suspend fun getCurrentUserGPA(): String {
-        return userDataRepository.getCurrentUserGPA()
+        if (userPoints.isEmpty()) {
+            currentUserGPA = 0.toFloat()
+        } else {
+            userPoints.forEach { point ->
+                currentUserGPA += point.point
+            }
+        }
+
+        return currentUserGPA.toString()
     }
 
 }

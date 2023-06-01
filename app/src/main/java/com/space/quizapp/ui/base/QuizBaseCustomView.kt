@@ -21,8 +21,6 @@ abstract class QuizBaseCustomView(context: Context, attrs: AttributeSet) : View(
     //Returns the height of the custom view
     protected val height get() = getHeight().toFloat()
 
-    // Draws the background of the custom view on the canvas
-    abstract fun drawBackground (canvas: Canvas)
 
     // Binds the data to the custom view and performs drawing operations on the canvas
     abstract fun onBind(canvas: Canvas)

@@ -1,9 +1,13 @@
 package com.space.quizapp
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.Toast
 import androidx.core.view.WindowCompat
 import androidx.navigation.fragment.NavHostFragment
+import com.space.quizapp.common.regex.RegexPattern
 import com.space.quizapp.databinding.ActivityQuizBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,5 +27,25 @@ class QuizActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
 
 
+        showToast("gio")
+
     }
+}
+
+fun Context.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}
+
+//დეკორატორ პატერნი
+//ექსტენშენი
+//განსხვავება შიდა ფუნქციასა და ექსთენშენსა
+// როდის უნდა აგმოვიყენო და როდის არა
+// ცუდი მხარეები
+//ინლაინ/ქროსლაინი/ნოინლაინი ფუნქციები
+//სკოუპები
+
+
+
+fun EditText.validateUsername(): Boolean {
+    return RegexPattern.usernamePattern.matches(text)
 }

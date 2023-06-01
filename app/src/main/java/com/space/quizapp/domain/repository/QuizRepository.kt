@@ -1,8 +1,8 @@
 package com.space.quizapp.domain.repository
 
-import com.space.quizapp.data.remote.dto.QuizDto
-import retrofit2.Response
+import com.space.quizapp.domain.model.QuizModel
+import kotlinx.coroutines.flow.Flow
 
 interface QuizRepository {
-    suspend fun getQuiz(): Response<List<QuizDto>>
+    suspend fun getAvailableQuizList(): Flow<List<QuizModel>>
 }

@@ -12,7 +12,7 @@ class StartIllustrationBackground(context: Context, attrs: AttributeSet) :
     QuizBaseCustomView(context, attrs) {
 
     override val paint = Paint().apply {
-        style = Paint.Style.FILL
+        style = Paint.Style.STROKE
     }
 
     private val centerX get() = width / 2
@@ -20,7 +20,7 @@ class StartIllustrationBackground(context: Context, attrs: AttributeSet) :
 
     /**[drawBackground] Draws the background of the custom view on the canvas
      */
-    override fun drawBackground(canvas: Canvas) {
+     fun drawBackground(canvas: Canvas) {
         //The height difference used to position the circles vertically.
         val heightDiff = (width / 2) - (height / 3)
         //The y-coordinate of the center for the first circle.

@@ -16,7 +16,6 @@ class AuthenticationFragment :
     private val viewModel: AuthenticationViewModel by viewModels()
 
     override fun onBind() = with(binding) {
-
         startButton.setOnClickListener {
             val username = nameEditText.text?.toString()
             viewModel.startButtonListener(username)
