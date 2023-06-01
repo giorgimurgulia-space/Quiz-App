@@ -1,6 +1,5 @@
 package com.space.quizapp.domain.repository
 
-import com.space.quizapp.domain.model.UserModel
 
 interface AuthenticationRepository {
     suspend fun checkUser(username: String): Boolean
@@ -9,5 +8,5 @@ interface AuthenticationRepository {
 
     suspend fun signInUser(username: String): Boolean
 
-    suspend fun getCurrentUser(): UserModel
+    suspend fun getCurrentUserId(): String
 }

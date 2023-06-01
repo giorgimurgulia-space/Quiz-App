@@ -1,7 +1,7 @@
 package com.space.quizapp.di
 
-import com.space.quizapp.data.local.repository.AuthenticationRepositoryImpl
-import com.space.quizapp.data.local.repository.UserDataRepositoryImpl
+import com.space.quizapp.data.repository.AuthenticationRepositoryImpl
+import com.space.quizapp.data.repository.UserDataRepositoryImpl
 import com.space.quizapp.domain.repository.AuthenticationRepository
 import com.space.quizapp.domain.repository.UserDataRepository
 import dagger.Binds

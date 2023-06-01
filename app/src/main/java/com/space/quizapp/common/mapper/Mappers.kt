@@ -10,4 +10,4 @@ fun UserEntity.toDomainModel() = UserModel(userId, username)
 fun UserPointEntity.toDomainModel() = UserPoint(userId, subjectId, point)
 
 fun UserModel.toUIModel(gpa: String, point: List<UserPoint>) =
-    UserUIModel(userId, username, gpa, point)
+    UserUIModel(userId, username, gpa)

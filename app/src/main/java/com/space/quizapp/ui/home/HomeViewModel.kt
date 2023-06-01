@@ -2,8 +2,8 @@ package com.space.quizapp.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.space.quizapp.common.mapper.toUIModel
-import com.space.quizapp.domain.model.UserPoint
+import com.space.quizapp.data.remote.api.ApiService
+import com.space.quizapp.domain.usecase.quiz.QuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
 import com.space.quizapp.ui.model.UserUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userDataUseCse: UserDataUseCse
+    private val userDataUseCse: UserDataUseCse,
+    private val quizUseCase: QuizUseCase,
+    private val apiService: ApiService
+
 ) : ViewModel() {
 
     private val _toastMessage = MutableSharedFlow<UserUIModel>(
@@ -28,6 +31,18 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            val user = userDataUseCse.getCurrentUser()
+            val userGPA = userDataUseCse.getCurrentUserGPA()
+
+            _toastMessage.tryEmit(UserUIModel(user.userId, user.username, userGPA))
+
+            val response = apiService.getQuiz()
+            if (response.isSuccessful) {
+                val quiz = response.body()
+                _toastMessage.tryEmit(UserUIModel(user.userId, quiz!![0].quizTitle, userGPA))
+
+            }
+
         }
     }
 

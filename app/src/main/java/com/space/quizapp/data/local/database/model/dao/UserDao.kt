@@ -13,10 +13,10 @@ interface UserDao {
     suspend fun insertUser(user: UserEntity)
 
     @Query("select * from user where userId = :userId")
-    suspend fun getByIdUser(userId: String): UserEntity
+    suspend fun getUserByIdUser(userId: String): UserEntity
 
     @Query("select * from user where username = :username")
-    suspend fun getByUsername(username: String): UserEntity
+    suspend fun getUserByUsername(username: String): UserEntity
 
     @Query("select exists(select * from user where userName = :username)")
     suspend fun isUsernameExist(username: String): Boolean
