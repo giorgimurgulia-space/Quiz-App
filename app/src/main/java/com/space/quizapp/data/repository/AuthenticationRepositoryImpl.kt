@@ -7,8 +7,7 @@ import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
-class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao) :
-    AuthenticationRepository {
+class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao) : AuthenticationRepository {
 
     private var currentUserId: AtomicReference<String> = AtomicReference(null)
 

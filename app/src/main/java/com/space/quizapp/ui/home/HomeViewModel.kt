@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
+import com.space.quizapp.data.local.database.model.dao.UserPointDao
+import com.space.quizapp.data.local.database.model.entity.UserPointEntity
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.QuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
@@ -19,7 +21,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val userDataUseCse: UserDataUseCse,
     private val authenticationUseCase: AuthenticationUseCase,
-    private val quizUseCase: QuizUseCase
+    private val quizUseCase: QuizUseCase,
+    private val point: UserPointDao
+
 ) : ViewModel() {
     private val currentUserId = authenticationUseCase.getCurrentUserId()
 
@@ -31,6 +35,7 @@ class HomeViewModel @Inject constructor(
 
 
     init {
+        setPoint()
         getUserData()
         getAvailableQuiz()
     }
@@ -57,6 +62,41 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+    private fun setPoint() {
+        viewModelScope.launch {
+
+            point.insertUserPoint(
+                (UserPointEntity(
+                    authenticationUseCase.getCurrentUserId(),
+                    "1",
+                    1.toFloat()
+                ))
+            )
+            point.insertUserPoint(
+                (UserPointEntity(
+                    authenticationUseCase.getCurrentUserId(),
+                    "2",
+                    1.toFloat()
+                ))
+            )
+            point.insertUserPoint(
+                (UserPointEntity(
+                    authenticationUseCase.getCurrentUserId(),
+                    "3",
+                    1.toFloat()
+                ))
+            )
+            point.insertUserPoint(
+                (UserPointEntity(
+                    authenticationUseCase.getCurrentUserId(),
+                    "4",
+                    1.toFloat()
+                ))
+            )
+
+        }
+    }
+
 
 
 }

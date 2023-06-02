@@ -86,17 +86,18 @@
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:bottomtop="parent"
+        app:layout_constraintBottom_toTopOf="@id/line_view"
         app:layout_constraintTop_toBottomOf="@id/chose_subject_text"
         tools:listitem="@layout/layout_quiz" />
 
     <View
         android:id="@+id/line_view"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginTop="@dimen/dimen_20_dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/neutral_03_light_grey"
-        app:layout_constraintTop_toBottomOf="@id/hello_title_text" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

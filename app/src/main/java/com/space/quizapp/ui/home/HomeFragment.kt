@@ -60,9 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    override fun listeners() {
-
-    }
+    override fun listeners() {}
 
     private fun setUserData(user: UserUIModel?) = with(binding) {
         if (user != null) {

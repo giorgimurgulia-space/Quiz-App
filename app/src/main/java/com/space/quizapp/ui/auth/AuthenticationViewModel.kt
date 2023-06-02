@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.R
 import com.space.quizapp.common.regex.RegexPattern
+import com.space.quizapp.data.local.database.model.dao.UserPointDao
+import com.space.quizapp.data.local.database.model.entity.UserPointEntity
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -14,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val authenticationUseCase: AuthenticationUseCase
+    private val authenticationUseCase: AuthenticationUseCase,
 ) : ViewModel() {
     private val _toastMessage = MutableSharedFlow<Int>(
         replay = 0,
@@ -32,6 +34,7 @@ class AuthenticationViewModel @Inject constructor(
 
 
     fun startButtonListener(username: String?) {
+
         if (username.isNullOrEmpty()) {
             _toastMessage.tryEmit(R.string.please_input_username)
         } else if (!isStrongUserName(username)) {
