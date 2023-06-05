@@ -1,11 +1,10 @@
 package com.space.quizapp
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.view.WindowCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.space.quizapp.common.regex.RegexPattern
 import com.space.quizapp.databinding.ActivityQuizBinding
@@ -21,7 +20,6 @@ class QuizActivity : AppCompatActivity() {
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
@@ -43,7 +41,6 @@ fun Context.showToast(message: String) {
 // ცუდი მხარეები
 //ინლაინ/ქროსლაინი/ნოინლაინი ფუნქციები
 //სკოუპები
-
 
 
 fun EditText.validateUsername(): Boolean {

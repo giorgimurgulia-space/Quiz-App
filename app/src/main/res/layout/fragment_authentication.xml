@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/dimen_44_dp"
-    tools:context="com.space.quizapp.ui.auth.AuthenticationFragment">
+    tools:context="com.space.quizapp.presentation.auth.AuthenticationFragment">
 
-    <com.space.quizapp.ui.custom.StartIllustrationBackground
+    <com.space.quizapp.presentation.custom.StartIllustrationBackground
         android:id="@+id/illustration_bkg_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0_dp"

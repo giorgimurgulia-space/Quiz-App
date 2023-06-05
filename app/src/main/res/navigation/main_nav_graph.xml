@@ -8,11 +8,11 @@
 
     <fragment
         android:id="@+id/authenticationFragment"
-        android:name="com.space.quizapp.ui.auth.AuthenticationFragment" />
+        android:name="com.space.quizapp.presentation.auth.AuthenticationFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.space.quizapp.ui.home.HomeFragment" />
+        android:name="com.space.quizapp.presentation.home.HomeFragment" />
 
     <action
         android:id="@+id/action_global_homeFragment"

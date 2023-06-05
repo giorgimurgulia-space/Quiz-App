@@ -6,8 +6,8 @@ import com.space.quizapp.data.remote.dto.QuizDto
 import com.space.quizapp.domain.model.QuizModel
 import com.space.quizapp.domain.model.UserModel
 import com.space.quizapp.domain.model.PointModel
-import com.space.quizapp.ui.model.QuizUIModel
-import com.space.quizapp.ui.model.UserUIModel
+import com.space.quizapp.presentation.model.QuizUIModel
+import com.space.quizapp.presentation.model.UserUIModel
 
 fun UserEntity.toDomainModel() = UserModel(userId, username)
 

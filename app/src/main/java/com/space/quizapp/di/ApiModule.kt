@@ -33,4 +33,5 @@ object ApiModule {
                 ).build()
             )
         )
-        .build() }
+        .build()
+}

@@ -12,5 +12,4 @@ class AuthenticationUseCase @Inject constructor(private val authenticationReposi
     suspend fun signUpUser(username: String) = authenticationRepository.signUpUser(username)
 
     fun getCurrentUserId() = authenticationRepository.getCurrentUserId()
-
 }
