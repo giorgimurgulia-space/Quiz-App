@@ -12,6 +12,9 @@ import javax.inject.Inject
 class QuizRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : QuizRepository {
+
+    //
+    //change flow
     override suspend fun getAvailableQuizList(): Flow<List<QuizModel>> = flow {
         val response = apiService.getQuiz()
         if (response.isSuccessful) {
@@ -20,6 +23,7 @@ class QuizRepositoryImpl @Inject constructor(
             }
             emit(quiz)
         } else {
+            //todo
             throw ApiError(null)
         }
     }

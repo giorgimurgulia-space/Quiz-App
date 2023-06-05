@@ -25,6 +25,7 @@ class AuthenticationViewModel @Inject constructor(
     )
     val toastMessage get() = _toastMessage.asSharedFlow()
 
+    // change name
     private val _userId = MutableSharedFlow<Unit>(
         replay = 0,
         extraBufferCapacity = 1,
@@ -34,7 +35,7 @@ class AuthenticationViewModel @Inject constructor(
 
 
     fun startButtonListener(username: String?) {
-
+        //when
         if (username.isNullOrEmpty()) {
             _toastMessage.tryEmit(R.string.please_input_username)
         } else if (!isStrongUserName(username)) {
@@ -44,6 +45,7 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
+    //name
     private fun startButtonProcess(username: String) {
         viewModelScope.launch {
             if (authenticationUseCase.checkUser(username)) {
@@ -56,6 +58,7 @@ class AuthenticationViewModel @Inject constructor(
 
     private suspend fun sigInUser(username: String) {
         if (authenticationUseCase.signInUser(username)) {
+            //try
             _userId.tryEmit(Unit)
         } else {
             _toastMessage.tryEmit(R.string.try_again)

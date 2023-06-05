@@ -4,6 +4,7 @@ import android.text.Spannable
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView.BufferType
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.space.quizapp.R
+import com.space.quizapp.common.extensions.collectFlow
 import com.space.quizapp.common.resource.onError
 import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
@@ -34,19 +36,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun observes() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect {
-                    setUserData(it)
-                }
-            }
+        collectFlow(viewModel.state){
+            setUserData(it)
         }
 
+        //extensions
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.availableQuiz.collect {
                     it.onSuccess { quiz ->
                         adapter.submitList(quiz)
+
+                        //base
                         binding.loaderProgressBarr.visibility = View.GONE
                     }
                     it.onLoading {
@@ -60,7 +61,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    override fun listeners() {}
+    //name
+    override fun listeners() {
+
+    }
 
     private fun setUserData(user: UserUIModel?) = with(binding) {
         if (user != null) {

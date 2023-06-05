@@ -23,7 +23,6 @@ class HomeViewModel @Inject constructor(
     private val authenticationUseCase: AuthenticationUseCase,
     private val quizUseCase: QuizUseCase,
     private val point: UserPointDao
-
 ) : ViewModel() {
     private val currentUserId = authenticationUseCase.getCurrentUserId()
 
@@ -58,10 +57,11 @@ class HomeViewModel @Inject constructor(
                 it.map { quiz -> quiz.toUIModel() }
             }.toResult().collectLatest {
                 _availableQuiz.tryEmit(it)
-
             }
         }
     }
+
+    //test
     private fun setPoint() {
         viewModelScope.launch {
 
@@ -96,8 +96,6 @@ class HomeViewModel @Inject constructor(
 
         }
     }
-
-
 
 }
 
