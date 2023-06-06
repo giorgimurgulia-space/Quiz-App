@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.collectFlow
@@ -15,6 +16,7 @@ import com.space.quizapp.common.resource.onError
 import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.databinding.FragmentHomeBinding
+import com.space.quizapp.presentation.auth.AuthenticationFragmentDirections
 import com.space.quizapp.presentation.base.BaseFragment
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,40 +36,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     override fun observes() {
-        collectFlow(viewModel.state){
+        collectFlow(viewModel.state) {
             setUserData(it)
         }
 
-        //extensions
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.availableQuiz.collect {
-                    it.onSuccess { quiz ->
-                        adapter.submitList(quiz)
+        collectFlow(viewModel.availableQuiz) {
+            it.onSuccess { quiz ->
+                adapter.submitList(quiz)
 
-                        //base
-                        binding.loaderProgressBarr.visibility = View.GONE
-                    }
-                    it.onLoading {
-                        binding.loaderProgressBarr.visibility = View.VISIBLE
-                    }
-                    it.onError {
-                        binding.loaderProgressBarr.visibility = View.VISIBLE
-                    }
-                }
+                //base
+                binding.loaderProgressBarr.visibility = View.GONE
+            }
+            it.onLoading {
+                binding.loaderProgressBarr.visibility = View.VISIBLE
+            }
+            it.onError {
+                binding.loaderProgressBarr.visibility = View.VISIBLE
             }
         }
+
     }
 
     //name
     override fun listeners() {
-
+        binding.logOutButton.setOnClickListener {
+            showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
+                findNavController().navigate(HomeFragmentDirections.actionGlobalLogOut())
+            })
+        }
     }
 
     private fun setUserData(user: UserUIModel?) = with(binding) {
         if (user != null) {
             val userGPA = String.format(resources.getString(R.string.user_GPA), user.userGPA)
-
 
             helloTitleText.text =
                 String.format(resources.getString(R.string.welcome_messages), user.username)
@@ -80,7 +81,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 userGPA.length,
                 Spannable.SPAN_INCLUSIVE_EXCLUSIVE
             )
-
         }
     }
 }

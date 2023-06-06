@@ -1,12 +1,19 @@
 package com.space.quizapp.presentation.base
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.space.quizapp.R
 import com.space.quizapp.common.types.Inflater
 
 abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>) : Fragment() {
@@ -42,5 +49,28 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
 
     protected fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showQuestionDialog(question: Int, onPositiveButtonClick: () -> Unit) {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_question)
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.findViewById<TextView>(R.id.question_text).text = resources.getString(question)
+
+        val yesButton = dialog.findViewById<Button>(R.id.yes_button)
+        val noButton = dialog.findViewById<Button>(R.id.no_button)
+
+        yesButton.setOnClickListener {
+            dialog.dismiss()
+            onPositiveButtonClick.invoke()
+        }
+
+        noButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

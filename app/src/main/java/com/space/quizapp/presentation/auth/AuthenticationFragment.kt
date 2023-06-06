@@ -5,6 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.space.quizapp.common.extensions.collectFlow
 import com.space.quizapp.databinding.FragmentAuthenticationBinding
 import com.space.quizapp.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,23 +25,13 @@ class AuthenticationFragment :
     }
 
     override fun observes() {
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.successNavigation.collect {
-                    findNavController().navigate(AuthenticationFragmentDirections.actionGlobalHomeFragment())
-                }
-            }
+        collectFlow(viewModel.successNavigation) {
+            findNavController().navigate(AuthenticationFragmentDirections.actionGlobalHomeFragment())
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.toastMessage.collect { messages ->
-                    toast(resources.getString(messages))
-                }
-            }
+        collectFlow(viewModel.toastMessage) { messages ->
+            toast(resources.getString(messages))
+
         }
     }
-
-
 }

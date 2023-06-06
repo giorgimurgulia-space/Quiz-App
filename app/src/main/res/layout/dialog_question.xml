@@ -8,6 +8,7 @@
     android:backgroundTint="@color/yellow_primary"
     android:maxWidth="350dp"
     android:minWidth="270dp"
+    android:layout_gravity="center"
     android:paddingHorizontal="@dimen/dimen_34_dp"
     android:paddingVertical="@dimen/dimen_29_dp">
 
