@@ -16,4 +16,6 @@
     <string name="yes">კი</string>
     <string name="no">არა</string>
     <string name="want_log_out">ნამდვილად გსურს გასვლა?</string>
+    <string name="loader_title">იტვირთება...</string>
+    <string name="error_message">დაფიქსირდა შეცდომა, კიდევ ვცადოთ?</string>
 </resources>

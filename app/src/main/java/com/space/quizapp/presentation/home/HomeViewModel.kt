@@ -43,6 +43,11 @@ class HomeViewModel @Inject constructor(
         getAvailableQuiz()
     }
 
+    fun refresh() {
+        getUserData()
+        getAvailableQuiz()
+    }
+
     private fun getUserData() {
         viewModelScope.launch {
             try {
@@ -100,6 +105,5 @@ class HomeViewModel @Inject constructor(
 
         }
     }
-
 }
 

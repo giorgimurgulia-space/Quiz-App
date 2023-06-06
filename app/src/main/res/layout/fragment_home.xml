@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/dimen_16_dp">
-
-    <ProgressBar
-        android:id="@+id/loader_progressBarr"
-        android:layout_width="@dimen/dimen_50_dp"
-        android:layout_height="@dimen/dimen_50_dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--    <ProgressBar-->
+<!--        android:id="@+id/loader_progressBarr"-->
+<!--        android:layout_width="@dimen/dimen_50_dp"-->
+<!--        android:layout_height="@dimen/dimen_50_dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <TextView

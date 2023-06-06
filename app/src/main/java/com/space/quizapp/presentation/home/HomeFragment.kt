@@ -2,7 +2,6 @@ package com.space.quizapp.presentation.home
 
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
-import android.view.View
 import android.widget.TextView.BufferType
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -23,7 +22,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private val viewModel: HomeViewModel by viewModels()
     private val adapter = QuizAdapter()
 
-
     override fun onBind() {
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
@@ -36,17 +34,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         collectFlow(viewModel.availableQuiz) {
+            //base
             it.onSuccess { quiz ->
                 adapter.submitList(quiz)
-
-                //base
-                binding.loaderProgressBarr.visibility = View.GONE
+                loader(false)
             }
             it.onLoading {
-                binding.loaderProgressBarr.visibility = View.VISIBLE
+                loader(true)
             }
             it.onError {
-                binding.loaderProgressBarr.visibility = View.VISIBLE
+                loader(true)
+                showQuestionDialog(R.string.error_message, onPositiveButtonClick = {
+                    viewModel.refresh()
+                })
             }
         }
 
@@ -60,6 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             })
         }
     }
+
 
     private fun setUserData(user: UserUIModel?) = with(binding) {
         if (user != null) {
