@@ -19,7 +19,7 @@ class AuthenticationFragment :
         illustrationBkgView.paint()
         startButton.setOnClickListener {
             val username = nameEditText.text?.toString()
-            viewModel.startButtonListener(username)
+            viewModel.authButtonListener(username)
         }
     }
 
@@ -27,8 +27,7 @@ class AuthenticationFragment :
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.userId.collect { userId ->
-                    binding.startTitleText.text = userId.toString()
+                viewModel.successNavigation.collect {
                     findNavController().navigate(AuthenticationFragmentDirections.actionGlobalHomeFragment())
                 }
             }

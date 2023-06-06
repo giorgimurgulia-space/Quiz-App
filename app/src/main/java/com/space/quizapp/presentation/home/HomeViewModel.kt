@@ -22,8 +22,10 @@ class HomeViewModel @Inject constructor(
     private val userDataUseCse: UserDataUseCse,
     private val authenticationUseCase: AuthenticationUseCase,
     private val quizUseCase: QuizUseCase,
+    //For GPA Test
     private val point: UserPointDao
 ) : ViewModel() {
+    //For GPA Test
     private val currentUserId = authenticationUseCase.getCurrentUserId()
 
     private val _state = MutableStateFlow(UserUIModel("", "", "0"))
@@ -34,7 +36,9 @@ class HomeViewModel @Inject constructor(
 
 
     init {
+        //For GPA Test
         setPoint()
+
         getUserData()
         getAvailableQuiz()
     }
@@ -61,7 +65,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    //test
+    //For GPA Test
     private fun setPoint() {
         viewModelScope.launch {
 

@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("13ed39b3-f36d-462f-a403-8ea79ce4f2b9")
+    @GET("9a2cbd2f-d77c-498a-a410-91351fe42577")
     suspend fun getQuiz(): Response<List<QuizDto>>
 }

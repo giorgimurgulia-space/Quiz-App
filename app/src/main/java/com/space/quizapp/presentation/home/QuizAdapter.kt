@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.space.quizapp.common.extensions.loadImage
 import com.space.quizapp.databinding.LayoutQuizBinding
 import com.space.quizapp.presentation.model.QuizUIModel
 
@@ -32,6 +33,8 @@ class QuizAdapter() : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizD
         fun bind(quiz: QuizUIModel) = with(binding) {
             titleText.text = quiz.quizTitle
             descriptionText.text = quiz.quizDescription
+
+            iconImage.loadImage(quiz.quizIcon)
         }
 
     }

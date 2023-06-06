@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rectangle_background"
+    android:backgroundTint="@color/yellow_primary"
+    android:maxWidth="350dp"
+    android:minWidth="270dp"
+    android:paddingHorizontal="@dimen/dimen_34_dp"
+    android:paddingVertical="@dimen/dimen_29_dp">
+
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/neutral_04_white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="ნამდვილად გსურს გასვლა?" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/yes_button"
+        style="@style/small"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_34_dp"
+        android:layout_marginTop="@dimen/dimen_44_dp"
+        android:layout_marginEnd="@dimen/dimen_5_dp"
+        android:background="@drawable/shape_rectangle_background"
+        android:backgroundTint="@color/neutral_04_white_60"
+        android:text="@string/yes"
+        app:layout_constraintEnd_toStartOf="@id/no_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_text" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/no_button"
+        style="@style/small"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_34_dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="@dimen/dimen_44_dp"
+        android:background="@drawable/shape_rectangle_background"
+        android:backgroundTint="@color/neutral_04_white_60"
+        android:text="@string/no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/yes_button"
+        app:layout_constraintTop_toBottomOf="@id/question_text" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,4 +13,6 @@
     <string name="hello">გამარჯობა,</string>
     <string name="welcome_messages">გამარჯობა, %1$s</string>
     <string name="user_GPA">GPA - %1$s</string>
+    <string name="yes">კი</string>
+    <string name="no">არა</string>
 </resources>

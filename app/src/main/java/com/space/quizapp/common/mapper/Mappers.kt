@@ -15,7 +15,7 @@ fun UserPointEntity.toDomainModel() = PointModel(userId, subjectId, point)
 
 fun UserModel.toUIModel(userGPA: String) = UserUIModel(userId, username, userGPA)
 
-fun QuizDto.toDomainModel() = QuizModel(id, quizTitle, quizDescription)
+fun QuizDto.toDomainModel() = QuizModel(id, quizTitle, quizDescription, quizIcon)
 
-fun QuizModel.toUIModel() = QuizUIModel(id, quizTitle, quizDescription)
+fun QuizModel.toUIModel() = QuizUIModel(id, quizTitle, quizDescription, quizIcon)
 
