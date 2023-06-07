@@ -34,7 +34,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         collectFlow(viewModel.availableQuiz) {
-            //base
+            //todo base
             it.onSuccess { quiz ->
                 adapter.submitList(quiz)
                 loader(false)
@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     }
 
-    //name
+    //todo name
     override fun listeners() {
         binding.logOutButton.setOnClickListener {
             showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {

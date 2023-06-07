@@ -23,6 +23,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
     private var _binding: VB? = null
     val binding get() = _binding!!
 
+    //todo better dialog
     private val dialog by lazy { Dialog(requireContext()) }
 
     abstract fun onBind()
@@ -55,6 +56,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
+    //todo better dialog
     protected fun loader(status: Boolean) {
         dialog.setContentView(R.layout.dialog_loader)
 
@@ -68,6 +70,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
             dialog.dismiss()
     }
 
+    //todo better dialog
     protected fun showQuestionDialog(question: Int, onPositiveButtonClick: () -> Unit) {
         dialog.setContentView(R.layout.dialog_question)
 

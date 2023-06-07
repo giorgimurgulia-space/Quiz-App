@@ -19,30 +19,5 @@ class QuizActivity : AppCompatActivity() {
 
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
-
-
-        showToast("gio")
-
     }
-}
-
-fun Context.showToast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-}
-
-//დეკორატორ პატერნი
-//ექსტენშენი
-//განსხვავება შიდა ფუნქციასა და ექსთენშენსა
-// როდის უნდა აგმოვიყენო და როდის არა
-// ცუდი მხარეები
-//ინლაინ/ქროსლაინი/ნოინლაინი ფუნქციები
-//სკოუპები
-
-
-fun EditText.validateUsername(): Boolean {
-    return RegexPattern.usernamePattern.matches(text)
 }

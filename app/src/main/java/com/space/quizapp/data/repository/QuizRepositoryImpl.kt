@@ -13,7 +13,7 @@ class QuizRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : QuizRepository {
 
-    //change flow
+    //change flow to list
     override suspend fun getAvailableQuizList(): Flow<List<QuizModel>> = flow {
         val response = apiService.getQuiz()
         if (response.isSuccessful) {
