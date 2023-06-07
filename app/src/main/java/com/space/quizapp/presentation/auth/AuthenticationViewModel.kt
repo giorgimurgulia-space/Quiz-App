@@ -36,7 +36,7 @@ class AuthenticationViewModel @Inject constructor(
             username.isNullOrEmpty() -> {
                 _toastMessage.tryEmit(R.string.please_input_username)
             }
-            !isStrongUserName(username) -> {
+            !isValidUsername(username) -> {
                 _toastMessage.tryEmit(R.string.invalid_username)
             }
             else -> {
@@ -72,9 +72,7 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
-    private fun isStrongUserName(userName: String): Boolean {
+    private fun isValidUsername(userName: String): Boolean {
         return RegexPattern.usernamePattern.matches(userName)
     }
-
-
 }

@@ -7,8 +7,8 @@
     android:layout_gravity="center"
     android:background="@drawable/shape_rectangle_background"
     android:backgroundTint="@color/yellow_primary"
-    android:maxWidth="350dp"
-    android:minWidth="270dp"
+    android:maxWidth="@dimen/dimen_350_dp"
+    android:minWidth="@dimen/dimen_270_dp"
     android:paddingHorizontal="@dimen/dimen_34_dp"
     android:paddingVertical="@dimen/dimen_29_dp">
 
@@ -43,7 +43,7 @@
         style="@style/small"
         android:layout_width="0dp"
         android:layout_height="@dimen/dimen_34_dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="@dimen/dimen_5_dp"
         android:layout_marginTop="@dimen/dimen_44_dp"
         android:background="@drawable/shape_rectangle_background"
         android:backgroundTint="@color/neutral_04_white_60"

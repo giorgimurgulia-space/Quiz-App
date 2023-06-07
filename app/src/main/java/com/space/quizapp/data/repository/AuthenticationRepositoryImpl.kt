@@ -12,7 +12,7 @@ class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao)
     private var currentUserId: AtomicReference<String> = AtomicReference(null)
 
     override suspend fun checkUser(username: String): Boolean {
-        return dao.isUsernameExist(username)
+        return dao.checkUsername(username)
     }
 
     override suspend fun signUpUser(username: String): Boolean {

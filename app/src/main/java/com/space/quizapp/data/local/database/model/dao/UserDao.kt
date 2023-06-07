@@ -19,5 +19,5 @@ interface UserDao {
     suspend fun getUserByUsername(username: String): UserEntity
 
     @Query("select exists(select * from user where userName = :username)")
-    suspend fun isUsernameExist(username: String): Boolean
+    suspend fun checkUsername(username: String): Boolean
 }
