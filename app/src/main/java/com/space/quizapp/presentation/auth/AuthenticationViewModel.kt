@@ -32,13 +32,16 @@ class AuthenticationViewModel @Inject constructor(
 
 
     fun authButtonListener(username: String?) {
-        //when
-        if (username.isNullOrEmpty()) {
-            _toastMessage.tryEmit(R.string.please_input_username)
-        } else if (!isStrongUserName(username)) {
-            _toastMessage.tryEmit(R.string.invalid_username)
-        } else {
-            checkAndAuthUser(username)
+        when {
+            username.isNullOrEmpty() -> {
+                _toastMessage.tryEmit(R.string.please_input_username)
+            }
+            !isStrongUserName(username) -> {
+                _toastMessage.tryEmit(R.string.invalid_username)
+            }
+            else -> {
+                checkAndAuthUser(username)
+            }
         }
     }
 
