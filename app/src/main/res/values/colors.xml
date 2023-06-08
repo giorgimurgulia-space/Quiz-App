@@ -13,6 +13,6 @@
     <color name="neutral_04_white">#FFFFFF</color>
     <color name="neutral_04_white_60">#99FFFFFF</color>
 
-    <color name="success">#4BB543</color>
-    <color name="wrong">#DB1D2A</color>
+    <color name="success_green">#4BB543</color>
+    <color name="wrong_red">#DB1D2A</color>
 </resources>

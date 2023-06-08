@@ -4,7 +4,6 @@
     <string name="my_first_quiz">ჩემი პირველი ქვიზი</string>
     <string name="input_your_name">შეიყვანე სახელი</string>
     <string name="start_quiz">ქვიზის დაწყება</string>
-
     <string name="please_input_username">გთხოვთ შეიყავნოთ სახელი</string>
     <string name="invalid_username">სახელის სტრუქტურა არასწორია</string>
     <string name="try_again">კიდევ სცადეთ</string>

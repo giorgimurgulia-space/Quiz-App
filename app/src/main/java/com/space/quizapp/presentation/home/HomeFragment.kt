@@ -12,7 +12,7 @@ import com.space.quizapp.common.resource.onError
 import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.databinding.FragmentHomeBinding
-import com.space.quizapp.presentation.base.BaseFragment
+import com.space.quizapp.presentation.base.fragment.BaseFragment
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.mainRecycler.adapter = adapter
     }
 
-    override fun observes() {
+    override fun setObserves() {
         collectFlow(viewModel.state) {
             setUserData(it)
         }
@@ -53,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     //todo name
-    override fun listeners() {
+    override fun setListeners() {
         binding.logOutButton.setOnClickListener {
             showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
                 findNavController().navigate(HomeFragmentDirections.actionGlobalLogOut())

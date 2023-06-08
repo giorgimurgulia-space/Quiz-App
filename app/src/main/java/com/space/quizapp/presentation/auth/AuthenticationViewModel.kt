@@ -30,7 +30,6 @@ class AuthenticationViewModel @Inject constructor(
     )
     val successNavigation get() = _successNavigation.asSharedFlow()
 
-
     fun authButtonListener(username: String?) {
         when {
             username.isNullOrEmpty() -> {
