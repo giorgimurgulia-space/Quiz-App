@@ -38,7 +38,7 @@
         android:lineHeight="@dimen/dimen_21_dp"
         android:paddingHorizontal="@dimen/dimen_10_dp"
         android:paddingVertical="@dimen/dimen_7_dp"
-        android:text="GPA - 2.0"
+        tools:text="GPA - 2.0"
         android:textColor="@color/neutral_04_white"
         android:textSize="@dimen/dimen_16_sp"
         app:layout_constraintBottom_toBottomOf="@id/gpa_background_view"

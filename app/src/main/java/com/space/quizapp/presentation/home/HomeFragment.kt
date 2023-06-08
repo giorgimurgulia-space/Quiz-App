@@ -51,8 +51,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
     }
-
-    //todo name
     override fun setListeners() {
         binding.logOutButton.setOnClickListener {
             showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
