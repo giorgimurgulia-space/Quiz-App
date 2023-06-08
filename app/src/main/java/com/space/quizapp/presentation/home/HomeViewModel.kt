@@ -43,9 +43,13 @@ class HomeViewModel @Inject constructor(
         getAvailableQuiz()
     }
 
-    fun refresh() {
+    fun refreshAllData() {
         getUserData()
         getAvailableQuiz()
+    }
+
+    fun logOut() {
+        authenticationUseCase.logOut()
     }
 
     private fun getUserData() {

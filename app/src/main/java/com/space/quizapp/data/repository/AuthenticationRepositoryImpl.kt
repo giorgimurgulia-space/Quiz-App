@@ -7,7 +7,8 @@ import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
-class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao) : AuthenticationRepository {
+class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao) :
+    AuthenticationRepository {
 
     private var currentUserId: AtomicReference<String> = AtomicReference(null)
 
@@ -28,10 +29,13 @@ class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao)
         return userId == currentUserId.get()
     }
 
+    override fun logOutUser() {
+        currentUserId.set(null)
+    }
+
     override fun getCurrentUserId(): String {
         return currentUserId.get()
     }
-
 
     private fun getNewId(): String {
         return UUID.randomUUID().toString()

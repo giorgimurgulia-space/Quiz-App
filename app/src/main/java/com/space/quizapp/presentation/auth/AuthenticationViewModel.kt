@@ -39,35 +39,17 @@ class AuthenticationViewModel @Inject constructor(
                 _toastMessage.tryEmit(R.string.invalid_username)
             }
             else -> {
-                checkAndAuthUser(username)
+                authentication(username)
             }
         }
     }
 
-    private fun checkAndAuthUser(username: String) {
+    private fun authentication(username: String) {
         viewModelScope.launch {
-            if (authenticationUseCase.checkUser(username)) {
-                sigInUser(username)
-            } else {
-                signUpUser(username)
-            }
-        }
-    }
-
-    private suspend fun sigInUser(username: String) {
-        if (authenticationUseCase.signInUser(username)) {
-            //try??
-            _successNavigation.tryEmit(Unit)
-        } else {
-            _toastMessage.tryEmit(R.string.try_again)
-        }
-    }
-
-    private suspend fun signUpUser(username: String) {
-        if (authenticationUseCase.signUpUser(username)) {
-            sigInUser(username)
-        } else {
-            _toastMessage.tryEmit(R.string.try_again)
+            if (authenticationUseCase.invoke(username))
+                _successNavigation.tryEmit(Unit)
+            else
+                _toastMessage.tryEmit(R.string.try_again)
         }
     }
 

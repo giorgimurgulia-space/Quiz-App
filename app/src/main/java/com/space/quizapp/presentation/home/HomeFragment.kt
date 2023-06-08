@@ -45,20 +45,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             it.onError {
                 loader(true)
                 showQuestionDialog(R.string.error_message, onPositiveButtonClick = {
-                    viewModel.refresh()
+                    viewModel.refreshAllData()
                 })
             }
         }
 
     }
+
     override fun setListeners() {
         binding.logOutButton.setOnClickListener {
             showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
+                viewModel.logOut()
                 findNavController().navigate(HomeFragmentDirections.actionGlobalLogOut())
             })
         }
     }
-
 
     private fun setUserData(user: UserUIModel?) = with(binding) {
         if (user != null) {

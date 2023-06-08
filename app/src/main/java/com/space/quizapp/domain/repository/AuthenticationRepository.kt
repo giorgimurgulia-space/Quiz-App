@@ -8,5 +8,7 @@ interface AuthenticationRepository {
 
     suspend fun signInUser(username: String): Boolean
 
+    fun logOutUser()
+
     fun getCurrentUserId(): String
 }
