@@ -38,7 +38,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         //For GPA Test
-        setPoint()
+//        setPoint()
 
         getUserData()
         getAvailableQuiz()
