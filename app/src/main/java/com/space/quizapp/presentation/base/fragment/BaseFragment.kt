@@ -11,8 +11,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.space.quizapp.R
+import com.space.quizapp.common.navigation.NavigationCommand
 import com.space.quizapp.common.types.Inflater
 
 abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>) : Fragment() {
@@ -51,6 +53,13 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
 
     protected fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun handleNavigation(navCommand: NavigationCommand) {
+        when (navCommand) {
+            is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
+            is NavigationCommand.Back -> findNavController().navigateUp()
+        }
     }
 
     //todo better dialog

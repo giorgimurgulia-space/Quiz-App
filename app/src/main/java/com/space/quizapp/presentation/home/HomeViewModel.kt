@@ -10,6 +10,7 @@ import com.space.quizapp.data.local.database.model.entity.UserPointEntity
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.QuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
+import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 import com.space.quizapp.presentation.model.QuizUIModel
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,7 @@ class HomeViewModel @Inject constructor(
     private val quizUseCase: QuizUseCase,
     //For GPA Test
     private val point: UserPointDao
-) : ViewModel() {
+) : BaseViewModel() {
     //For GPA Test
     private val currentUserId = authenticationUseCase.getCurrentUserId()
 
@@ -50,6 +51,7 @@ class HomeViewModel @Inject constructor(
 
     fun logOut() {
         authenticationUseCase.logOut()
+        navigate(HomeFragmentDirections.actionGlobalLogOut())
     }
 
     private fun getUserData() {

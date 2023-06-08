@@ -2,9 +2,11 @@ package com.space.quizapp.presentation.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import com.space.quizapp.R
 import com.space.quizapp.common.regex.RegexPattern
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
+import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -15,20 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
     private val authenticationUseCase: AuthenticationUseCase,
-) : ViewModel() {
+) : BaseViewModel() {
     private val _toastMessage = MutableSharedFlow<Int>(
         replay = 0,
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     val toastMessage get() = _toastMessage.asSharedFlow()
-
-    private val _successNavigation = MutableSharedFlow<Unit>(
-        replay = 0,
-        extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
-    )
-    val successNavigation get() = _successNavigation.asSharedFlow()
 
     fun authButtonListener(username: String?) {
         when {
@@ -47,7 +42,7 @@ class AuthenticationViewModel @Inject constructor(
     private fun authentication(username: String) {
         viewModelScope.launch {
             if (authenticationUseCase.invoke(username))
-                _successNavigation.tryEmit(Unit)
+                navigate(AuthenticationFragmentDirections.actionGlobalHomeFragment())
             else
                 _toastMessage.tryEmit(R.string.try_again)
         }

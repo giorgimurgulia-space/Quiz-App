@@ -56,7 +56,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.logOutButton.setOnClickListener {
             showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
                 viewModel.logOut()
-                findNavController().navigate(HomeFragmentDirections.actionGlobalLogOut())
             })
         }
     }
