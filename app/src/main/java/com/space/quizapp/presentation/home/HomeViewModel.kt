@@ -1,6 +1,5 @@
 package com.space.quizapp.presentation.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
@@ -14,7 +13,10 @@ import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 import com.space.quizapp.presentation.model.QuizUIModel
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,7 +40,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         //For GPA Test
-//        setPoint()
+        // setPoint()
 
         getUserData()
         getAvailableQuiz()
@@ -61,8 +63,8 @@ class HomeViewModel @Inject constructor(
                 val user = userDataUseCse.getUser(currentUserId).toUIModel(userGPA)
                 _state.tryEmit(user)
             } catch (e: Error) {
+                //todo error
             }
-
         }
     }
 

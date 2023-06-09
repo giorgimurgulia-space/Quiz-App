@@ -4,7 +4,6 @@ import android.text.Spannable
 import android.text.style.ForegroundColorSpan
 import android.widget.TextView.BufferType
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.collectFlow

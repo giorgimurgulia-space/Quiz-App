@@ -1,7 +1,6 @@
 package com.space.quizapp.presentation.auth
 
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.space.quizapp.common.extensions.collectFlow
 import com.space.quizapp.common.observeNonNull
 import com.space.quizapp.databinding.FragmentAuthenticationBinding
