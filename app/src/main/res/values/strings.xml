@@ -18,6 +18,7 @@
     <string name="loader_title">იტვირთება...</string>
     <string name="error_message">დაფიქსირდა შეცდომა, კიდევ ვცადოთ?</string>
     <string name="error_available_quiz">ქვიზები ვერ ჩაიტვირთა, კიდევ ვცადოთ?</string>
+    <string name="cancel_quiz">ნამდვილად გსურს ქვიზის შეწყვეტა?</string>
     <string name="my_points">დაგროვილი ქულები</string>
     <string name="plus_one">+1</string>
 </resources>

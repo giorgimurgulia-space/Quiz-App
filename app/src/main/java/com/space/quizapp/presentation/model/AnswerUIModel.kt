@@ -9,5 +9,5 @@ data class AnswerUIModel(
 enum class AnswerStatus {
     POSITIVE,
     NEGATIVE,
-    NEUTRAL
+    CORRECT
 }
