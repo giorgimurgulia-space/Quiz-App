@@ -22,15 +22,16 @@
         style="@style/normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/dimen_5_dp"
         android:gravity="center"
         android:text="@string/my_points"
         android:textColor="@color/neutral_01_dark_grey"
         android:textStyle="bold"
-        android:drawablePadding="@dimen/dimen_5_dp"
         app:drawableEndCompat="@drawable/ic_star"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/back_image"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"

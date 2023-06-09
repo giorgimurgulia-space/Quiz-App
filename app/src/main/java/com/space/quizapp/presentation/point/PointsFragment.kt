@@ -26,8 +26,13 @@ class PointsFragment :
     }
 
     override fun setListeners() {
-        binding.logOutButton.setOnClickListener {
+        binding.backImage.setOnClickListener {
             viewModel.navigateBack()
+        }
+        binding.logOutButton.setOnClickListener {
+            showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
+                viewModel.logOut()
+            })
         }
     }
 
@@ -36,10 +41,10 @@ class PointsFragment :
             //todo base
             it.onSuccess { quiz ->
                 adapter.submitList(quiz)
-                loader(false)
+                loader(true)
             }
             it.onLoading {
-                loader(true)
+                loader()
             }
             it.onError {
                 loader(true)

@@ -20,7 +20,10 @@ class QuizView(
             iconImage.loadImage(point.quizIcon)
             titleText.text = point.quizTitle
             descriptionText.text = point.quizDescription
-            pointText.text = point.point.toString()
+            if (point.point.toString().toIntOrNull() != null)
+                pointText.text = point.point.toInt().toString()
+            else
+                pointText.text = point.point.toString()
 
             nextImage.visibility = View.GONE
         }

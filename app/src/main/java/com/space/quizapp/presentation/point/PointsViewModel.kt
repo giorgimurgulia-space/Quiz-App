@@ -8,6 +8,7 @@ import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.QuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
 import com.space.quizapp.presentation.base.viewModel.BaseViewModel
+import com.space.quizapp.presentation.home.HomeFragmentDirections
 import com.space.quizapp.presentation.model.PointUIModel
 import com.space.quizapp.presentation.model.QuizUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,6 +36,11 @@ class PointsViewModel @Inject constructor(
 
     fun refreshAllData() {
         getPoints()
+    }
+
+    fun logOut() {
+        authenticationUseCase.logOut()
+        navigate(HomeFragmentDirections.actionGlobalLogOut())
     }
 
     private fun getPoints() {

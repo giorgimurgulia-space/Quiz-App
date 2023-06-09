@@ -37,14 +37,14 @@ class HomeFragment :
             //todo base
             it.onSuccess { quiz ->
                 adapter.submitList(quiz)
-                loader(false)
+                loader(true)
             }
             it.onLoading {
-                loader(true)
+                loader()
             }
             it.onError {
                 loader(true)
-                showQuestionDialog(R.string.error_message, onPositiveButtonClick = {
+                showQuestionDialog(R.string.error_available_quiz, onPositiveButtonClick = {
                     viewModel.refreshAllData()
                 })
             }

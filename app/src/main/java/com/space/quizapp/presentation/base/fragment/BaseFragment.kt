@@ -29,7 +29,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    //todo better dialog
     private val dialog by lazy { Dialog(requireContext()) }
 
     abstract fun onBind()
@@ -79,14 +78,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     }
 
     //todo better dialog
-    protected fun loader(status: Boolean) {
+    protected fun loader(isLoaded: Boolean = false) {
         dialog.setContentView(R.layout.dialog_loader)
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
 
-        if (status)
+        if (!isLoaded)
             dialog.show()
         else
             dialog.dismiss()
