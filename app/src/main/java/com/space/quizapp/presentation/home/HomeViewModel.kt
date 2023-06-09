@@ -40,7 +40,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         //For GPA Test
-        // setPoint()
+        setPoint()
 
         getUserData()
         getAvailableQuiz()
@@ -54,6 +54,10 @@ class HomeViewModel @Inject constructor(
     fun logOut() {
         authenticationUseCase.logOut()
         navigate(HomeFragmentDirections.actionGlobalLogOut())
+    }
+
+    fun onGPADetailClick() {
+        navigate(HomeFragmentDirections.actionGlobalPointsFragment())
     }
 
     private fun getUserData() {
@@ -86,6 +90,9 @@ class HomeViewModel @Inject constructor(
                 (UserPointEntity(
                     authenticationUseCase.getCurrentUserId(),
                     "1",
+                    "გეოგრაფია",
+                    "კითხვები გეოგრაფიიდან",
+                    "https://scontent.xx.fbcdn.net/v/t1.15752-9/343573230_204266569212395_1404329334796031022_n.png?_nc_cat=101&ccb=1-7&_nc_sid=aee45a&_nc_ohc=6D3IcI5T_84AX_iC0LA&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTC0KrDNMhIzUpGI-7fYnKg9ZtvT58AdO9rvFeskZwzGQ&oe=649DA746",
                     1.toFloat()
                 ))
             )
@@ -93,24 +100,22 @@ class HomeViewModel @Inject constructor(
                 (UserPointEntity(
                     authenticationUseCase.getCurrentUserId(),
                     "2",
-                    1.toFloat()
+                    "გეოგრაფია",
+                    "კითხვები გეოგრაფიიდან",
+                    "https://scontent.xx.fbcdn.net/v/t1.15752-9/343573230_204266569212395_1404329334796031022_n.png?_nc_cat=101&ccb=1-7&_nc_sid=aee45a&_nc_ohc=6D3IcI5T_84AX_iC0LA&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTC0KrDNMhIzUpGI-7fYnKg9ZtvT58AdO9rvFeskZwzGQ&oe=649DA746",
+                    1.1.toFloat()
                 ))
             )
             point.insertUserPoint(
                 (UserPointEntity(
                     authenticationUseCase.getCurrentUserId(),
                     "3",
-                    1.toFloat()
+                    "გეოგრაფია",
+                    "კითხვები გეოგრაფიიდან",
+                    "https://scontent.xx.fbcdn.net/v/t1.15752-9/343573230_204266569212395_1404329334796031022_n.png?_nc_cat=101&ccb=1-7&_nc_sid=aee45a&_nc_ohc=6D3IcI5T_84AX_iC0LA&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTC0KrDNMhIzUpGI-7fYnKg9ZtvT58AdO9rvFeskZwzGQ&oe=649DA746",
+                    1.5.toFloat()
                 ))
             )
-            point.insertUserPoint(
-                (UserPointEntity(
-                    authenticationUseCase.getCurrentUserId(),
-                    "4",
-                    1.toFloat()
-                ))
-            )
-
         }
     }
 }

@@ -13,7 +13,7 @@ import com.space.quizapp.data.local.database.model.entity.UserPointEntity
         UserEntity::class,
         UserPointEntity::class
     ],
-    version = 1
+    version = 2
 )
 
 abstract class QuizDatabase : RoomDatabase() {

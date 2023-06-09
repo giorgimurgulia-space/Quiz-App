@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.collectFlow
-import com.space.quizapp.common.observeNonNull
 import com.space.quizapp.common.resource.onError
 import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
@@ -18,8 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
-    private val viewModel: HomeViewModel by viewModels()
+class HomeFragment :
+    BaseFragment<FragmentHomeBinding, HomeViewModel>(FragmentHomeBinding::inflate) {
+    override val viewModel: HomeViewModel by viewModels()
     private val adapter = QuizAdapter()
 
     override fun onBind() {
@@ -49,12 +49,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 })
             }
         }
-        viewModel.navigation.observeNonNull(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { navigationCommand ->
-                handleNavigation(navigationCommand)
-            }
-        }
-
     }
 
     override fun setListeners() {
@@ -62,6 +56,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
                 viewModel.logOut()
             })
+        }
+
+        binding.gpaBackgroundView.setOnClickListener {
+            viewModel.onGPADetailClick()
         }
     }
 
