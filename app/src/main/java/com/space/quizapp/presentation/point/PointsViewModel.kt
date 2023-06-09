@@ -5,12 +5,10 @@ import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
-import com.space.quizapp.domain.usecase.quiz.QuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
 import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 import com.space.quizapp.presentation.home.HomeFragmentDirections
 import com.space.quizapp.presentation.model.PointUIModel
-import com.space.quizapp.presentation.model.QuizUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

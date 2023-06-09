@@ -7,7 +7,7 @@ import com.space.quizapp.common.resource.Result
 import com.space.quizapp.data.local.database.model.dao.UserPointDao
 import com.space.quizapp.data.local.database.model.entity.UserPointEntity
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
-import com.space.quizapp.domain.usecase.quiz.QuizUseCase
+import com.space.quizapp.domain.usecase.quiz.AvailableQuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
 import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 import com.space.quizapp.presentation.model.QuizUIModel
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val userDataUseCse: UserDataUseCse,
     private val authenticationUseCase: AuthenticationUseCase,
-    private val quizUseCase: QuizUseCase,
+    private val quizUseCase: AvailableQuizUseCase,
     //For GPA Test
     private val point: UserPointDao
 ) : BaseViewModel() {
@@ -78,7 +78,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getAvailableQuiz() {
         viewModelScope.launch {
-            quizUseCase.getQuiz().map {
+            quizUseCase.getAvailableQuiz().map {
                 it.map { quiz -> quiz.toUIModel() }
             }.toResult().collectLatest {
                 _availableQuiz.tryEmit(it)
