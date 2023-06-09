@@ -17,6 +17,14 @@
         android:id="@+id/pointsFragment"
         android:name="com.space.quizapp.presentation.point.PointsFragment" />
 
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.space.quizapp.presentation.quiz.QuizFragment" >
+        <argument
+            android:name="subjectID"
+            app:argType="string" />
+    </fragment>
+
     <action
         android:id="@+id/action_global_homeFragment"
         app:destination="@id/homeFragment" />
@@ -26,5 +34,8 @@
     <action
         android:id="@+id/action_global_pointsFragment"
         app:destination="@id/pointsFragment" />
+    <action
+        android:id="@+id/action_global_quizFragment"
+        app:destination="@id/quizFragment" />
 
 </navigation>

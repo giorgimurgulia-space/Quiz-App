@@ -26,6 +26,12 @@ class HomeFragment :
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
         binding.mainRecycler.adapter = adapter
+
+        adapter.setCallBack(object : QuizAdapter.CallBack {
+            override fun onItemClick(subjectId: String) {
+                viewModel.onQuizClick(subjectId)
+            }
+        })
     }
 
     override fun setObserves() {

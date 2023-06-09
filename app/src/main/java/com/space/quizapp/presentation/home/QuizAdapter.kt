@@ -9,6 +9,9 @@ import com.space.quizapp.databinding.LayoutQuizBinding
 import com.space.quizapp.presentation.model.QuizUIModel
 
 class QuizAdapter : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDiffUtil()) {
+
+    private var callBack: CallBack? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -18,8 +21,13 @@ class QuizAdapter : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDif
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            callBack
         )
+    }
+
+    fun setCallBack(callBack: CallBack) {
+        this.callBack = callBack
     }
 
     override fun onBindViewHolder(holder: QuizViewHolder, position: Int) {
@@ -28,6 +36,7 @@ class QuizAdapter : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDif
 
     class QuizViewHolder(
         private val binding: LayoutQuizBinding,
+        private val callBack: CallBack?
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(quiz: QuizUIModel) = with(binding) {
@@ -35,7 +44,14 @@ class QuizAdapter : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDif
             descriptionText.text = quiz.quizDescription
 
             iconImage.loadImage(quiz.quizIcon)
-        }
 
+            root.setOnClickListener {
+                callBack?.onItemClick(quiz.id)
+            }
+        }
+    }
+
+    interface CallBack {
+        fun onItemClick(subjectId: String)
     }
 }

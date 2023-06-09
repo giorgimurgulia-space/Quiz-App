@@ -20,14 +20,14 @@ class AuthIllustrationBackground(
         drawMainBackground(canvas)
     }
 
-    private val blueColor = ContextCompat.getColor(context, R.color.blue_secondary_default)
-    private val blueFadeColor = ContextCompat.getColor(context, R.color.blue_secondary_light)
+    private val blueCornerColor = ContextCompat.getColor(context, R.color.blue_secondary_default)
+    private val blueBackgroundColor = ContextCompat.getColor(context, R.color.blue_secondary_light)
 
 
     private fun drawCornerMoon(canvas: Canvas) {
         path.apply {
             reset()
-            paint.color = blueColor
+            paint.color = blueCornerColor
             moveTo(0f, height / 2)
             moveTo(0f, 0f)
             arcTo(
@@ -42,7 +42,7 @@ class AuthIllustrationBackground(
     private fun drawMainBackground(canvas: Canvas) {
         path.apply {
             reset()
-            paint.color = blueFadeColor
+            paint.color = blueBackgroundColor
             moveTo(width, 0f)
             arcTo(
                 RectF(0f, 0f, width, height),

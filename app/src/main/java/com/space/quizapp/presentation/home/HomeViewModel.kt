@@ -60,6 +60,10 @@ class HomeViewModel @Inject constructor(
         navigate(HomeFragmentDirections.actionGlobalPointsFragment())
     }
 
+    fun onQuizClick(subjectId: String) {
+        navigate(HomeFragmentDirections.actionGlobalQuizFragment(subjectId))
+    }
+
     private fun getUserData() {
         viewModelScope.launch {
             try {
