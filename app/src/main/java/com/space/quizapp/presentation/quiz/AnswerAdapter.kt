@@ -43,7 +43,8 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
             root.setContent(answer)
 
             root.setOnClickListener {
-                onItemClick()
+                if (answer.answerStatus == null)
+                    onItemClick()
             }
         }
 

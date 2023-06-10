@@ -5,6 +5,6 @@ import com.space.quizapp.common.AnswerStatus
 data class AnswerModel(
     val answerId: String,
     val answerTitle: String,
-    val answerStatus: AnswerStatus?
+    var answerStatus: AnswerStatus?
 )
 

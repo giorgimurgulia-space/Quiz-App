@@ -35,11 +35,11 @@ class CurrentQuizRepositoryImpl @Inject constructor(
                     )
                 })
             }
-            quiz.filter {
+            val filteredQuizList = quiz.filter {
                 it.id == subjectId
             }
 
-            currentQuiz.set(quiz.firstOrNull())
+            currentQuiz.set(filteredQuizList.firstOrNull())
         } else {
             //todo
             throw ApiError(null)
@@ -51,30 +51,41 @@ class CurrentQuizRepositoryImpl @Inject constructor(
     }
 
     override fun getNextQuestion(): QuestionModel {
-        return currentQuiz.get().questions[currentUserAnswer.get().size + 1]
+//        return if (currentUserAnswer.get().isEmpty())
+//            currentQuiz.get().questions[currentUserAnswer.get().size]
+//        else
+//            currentQuiz.get().questions[currentUserAnswer.get().size + 1]
+
+        return currentQuiz.get().questions[currentUserAnswer.get().size]
+
     }
 
     override fun getNextAnswers(): List<AnswerModel> {
-        return currentQuiz.get().questions[currentUserAnswer.get().size + 1].answers
+//        return if (currentUserAnswer.get().isEmpty())
+//            currentQuiz.get().questions[currentUserAnswer.get().size].answers
+//        else
+//            currentQuiz.get().questions[currentUserAnswer.get().size + 1].answers
+
+        return currentQuiz.get().questions[currentUserAnswer.get().size].answers
+
     }
 
     override fun setUserAnswer(userAnswer: Int): List<AnswerModel> {
         val correctAnswer =
             currentQuiz.get().questions[currentUserAnswer.get().size].correctAnswerIndex
-        val uiAnswers = currentQuiz.get().questions[currentUserAnswer.get().size].answers
+
+        val uiAnswers = currentQuiz.get().questions[currentUserAnswer.get().size].answers.map {
+            it.copy(answerStatus = AnswerStatus.NEUTRAL)
+        }
 
         if (currentUserAnswer.equals(userAnswer)) {
-            uiAnswers[userAnswer].copy(
-                answerStatus = AnswerStatus.CORRECT
-            )
+            uiAnswers[userAnswer].answerStatus = AnswerStatus.CORRECT
         } else {
-            uiAnswers[userAnswer].copy(
-                answerStatus = AnswerStatus.NEGATIVE
-            )
-            uiAnswers[correctAnswer].copy(
-                answerStatus = AnswerStatus.POSITIVE
-            )
+            uiAnswers[userAnswer].answerStatus = AnswerStatus.NEGATIVE
+            uiAnswers[correctAnswer].answerStatus = AnswerStatus.POSITIVE
         }
+
+        insertUserAnswer(userAnswer)
 
         return uiAnswers
     }
@@ -90,11 +101,21 @@ class CurrentQuizRepositoryImpl @Inject constructor(
             if (correctAnswers[index].equals(item))
                 userPoint += 1
         }
+
+        currentQuiz.set(null)
+        currentUserAnswer.set(null)
+
         return userPoint.toFloat()
     }
 
     private fun getNewId(): String {
         return UUID.randomUUID().toString()
+    }
+
+    private fun insertUserAnswer(answer: Int) {
+        val answers = currentUserAnswer.get() + answer
+
+        currentUserAnswer.set(answers)
     }
 
 }

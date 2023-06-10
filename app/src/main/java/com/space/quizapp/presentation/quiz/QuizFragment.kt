@@ -41,7 +41,7 @@ class QuizFragment :
         })
 
         collectFlow(viewModel.quiz) {
-            binding.questionText.text = it.quizTitle
+            binding.titleText.text = it.quizTitle
         }
 
         collectFlow(viewModel.question) {
@@ -64,6 +64,10 @@ class QuizFragment :
                 })
             }
         }
+
+        collectFlow(viewModel.point) {
+            toast(it.toString())
+        }
     }
 
     override fun setListeners() {
@@ -74,7 +78,7 @@ class QuizFragment :
         }
 
         binding.submitButton.setOnClickListener {
-
+            viewModel.onSubmitButtonClick()
         }
     }
 
