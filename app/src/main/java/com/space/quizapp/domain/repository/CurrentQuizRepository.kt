@@ -10,8 +10,9 @@ interface CurrentQuizRepository {
 
     fun startQuiz(): QuizModel
 
-    fun getQuestion(): String
+    fun getNextQuestion(): String
 
-    fun getAnswers(): List<AnswerModel>
+    fun getNextAnswers(): List<AnswerModel>
 
+    fun setUserAnswer(userAnswer: Int): List<AnswerModel>
 }

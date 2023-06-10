@@ -1,5 +1,6 @@
 package com.space.quizapp.data.repository
 
+import com.space.quizapp.common.AnswerStatus
 import com.space.quizapp.common.ApiError
 import com.space.quizapp.data.remote.api.ApiService
 import com.space.quizapp.domain.model.AnswerModel
@@ -29,7 +30,7 @@ class CurrentQuizRepositoryImpl @Inject constructor(
                         question.answers.map { answer ->
                             AnswerModel(getNewId(), answer, null)
                         },
-                        question.correctAnswer,
+                        question.answers.indexOf(question.correctAnswer),
                         question.questionIndex
                     )
                 })
@@ -50,12 +51,33 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         return currentQuiz.get()
     }
 
-    override fun getQuestion(): String {
+    override fun getNextQuestion(): String {
         return currentQuiz.get().questions[currentUserAnswer.get().size + 1].questionTitle
     }
 
-    override fun getAnswers(): List<AnswerModel> {
+    override fun getNextAnswers(): List<AnswerModel> {
         return currentQuiz.get().questions[currentUserAnswer.get().size + 1].answers
+    }
+
+    override fun setUserAnswer(userAnswer: Int): List<AnswerModel> {
+        val correctAnswer =
+            currentQuiz.get().questions[currentUserAnswer.get().size].correctAnswerIndex
+        val uiAnswers = currentQuiz.get().questions[currentUserAnswer.get().size].answers
+
+        if (currentUserAnswer.equals(userAnswer)) {
+            uiAnswers[userAnswer].copy(
+                answerStatus = AnswerStatus.CORRECT
+            )
+        } else {
+            uiAnswers[userAnswer].copy(
+                answerStatus = AnswerStatus.NEGATIVE
+            )
+            uiAnswers[correctAnswer].copy(
+                answerStatus = AnswerStatus.POSITIVE
+            )
+        }
+
+        return uiAnswers
     }
 
     private fun getNewId(): String {
