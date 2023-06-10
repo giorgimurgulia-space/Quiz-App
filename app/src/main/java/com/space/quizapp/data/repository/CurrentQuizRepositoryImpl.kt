@@ -47,12 +47,11 @@ class CurrentQuizRepositoryImpl @Inject constructor(
     }
 
     override fun startQuiz(): QuizModel {
-
         return currentQuiz.get()
     }
 
-    override fun getNextQuestion(): String {
-        return currentQuiz.get().questions[currentUserAnswer.get().size + 1].questionTitle
+    override fun getNextQuestion(): QuestionModel {
+        return currentQuiz.get().questions[currentUserAnswer.get().size + 1]
     }
 
     override fun getNextAnswers(): List<AnswerModel> {
@@ -78,6 +77,20 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         }
 
         return uiAnswers
+    }
+
+    override fun finishQuiz(): Float {
+        val correctAnswers = currentQuiz.get().questions.map {
+            it.answers
+        }
+
+        var userPoint = 0
+
+        currentUserAnswer.get().forEachIndexed { index, item ->
+            if (correctAnswers[index].equals(item))
+                userPoint += 1
+        }
+        return userPoint.toFloat()
     }
 
     private fun getNewId(): String {

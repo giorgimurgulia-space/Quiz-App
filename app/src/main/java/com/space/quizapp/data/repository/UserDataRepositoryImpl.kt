@@ -24,4 +24,8 @@ class UserDataRepositoryImpl @Inject constructor(
         }
         return (userPoints)
     }
+
+    override suspend fun setUserPoint(userId: String, point: Float): List<PointModel> {
+        TODO("Not yet implemented")
+    }
 }

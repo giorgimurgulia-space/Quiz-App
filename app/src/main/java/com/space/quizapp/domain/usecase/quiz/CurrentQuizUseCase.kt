@@ -1,16 +1,17 @@
 package com.space.quizapp.domain.usecase.quiz
 
-import com.space.quizapp.domain.model.QuizModel
 import com.space.quizapp.domain.repository.CurrentQuizRepository
+import com.space.quizapp.presentation.model.QuizUIModel
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class CurrentQuizUseCase @Inject constructor(
     private val currentQuizRepository: CurrentQuizRepository
 ) {
-    suspend fun startQuiz(subjectId: String): QuizModel {
+    suspend fun startQuiz(subjectId: String): QuizUIModel {
         currentQuizRepository.getQuizById(subjectId)
-        return currentQuizRepository.startQuiz()
+        val quiz = currentQuizRepository.startQuiz()
+        return QuizUIModel(quiz.id, quiz.quizTitle, quiz.questionsCount)
     }
 
     fun getNextQuestion() = currentQuizRepository.getNextQuestion()
@@ -19,5 +20,9 @@ class CurrentQuizUseCase @Inject constructor(
         emit(currentQuizRepository.getNextAnswers())
     }
 
-    fun setUserAnswer(userAnswer: Int) = currentQuizRepository.setUserAnswer(userAnswer)
+    fun setUserAnswer(userAnswer: Int) = flow {
+        emit(currentQuizRepository.setUserAnswer(userAnswer))
+    }
+
+    fun finishQuiz() = currentQuizRepository.finishQuiz()
 }
