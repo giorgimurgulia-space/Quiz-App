@@ -29,6 +29,7 @@ class AuthenticationViewModel @Inject constructor(
                 _toastMessage.tryEmit(R.string.please_input_username)
             }
             !isValidUsername(username) -> {
+                //transfer to dialog
                 _toastMessage.tryEmit(R.string.invalid_username)
             }
             else -> {
