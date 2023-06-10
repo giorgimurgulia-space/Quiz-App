@@ -3,7 +3,7 @@ package com.space.quizapp.data.repository
 import com.space.quizapp.common.ApiError
 import com.space.quizapp.common.mapper.toDomainModel
 import com.space.quizapp.data.remote.api.ApiService
-import com.space.quizapp.domain.model.QuizModel
+import com.space.quizapp.domain.model.AvailableQuizModel
 import com.space.quizapp.domain.repository.AvailableQuizRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,7 +14,7 @@ class AvailableQuizRepositoryImpl @Inject constructor(
 ) : AvailableQuizRepository {
 
     //change flow to list
-    override suspend fun getAvailableQuizList(): Flow<List<QuizModel>> = flow {
+    override suspend fun getAvailableQuizList(): Flow<List<AvailableQuizModel>> = flow {
         val response = apiService.getQuiz()
         if (response.isSuccessful) {
             val quiz = response.body()!!.map {

@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.space.quizapp.common.extensions.loadImage
 import com.space.quizapp.databinding.LayoutQuizBinding
-import com.space.quizapp.presentation.model.QuizUIModel
+import com.space.quizapp.presentation.model.AvailableQuizUIModel
 
-class QuizAdapter : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDiffUtil()) {
+class QuizAdapter : ListAdapter<AvailableQuizUIModel, QuizAdapter.QuizViewHolder>(QuizDiffUtil()) {
 
     private var callBack: CallBack? = null
 
@@ -39,7 +39,7 @@ class QuizAdapter : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDif
         private val callBack: CallBack?
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(quiz: QuizUIModel) = with(binding) {
+        fun bind(quiz: AvailableQuizUIModel) = with(binding) {
             titleText.text = quiz.quizTitle
             descriptionText.text = quiz.quizDescription
 

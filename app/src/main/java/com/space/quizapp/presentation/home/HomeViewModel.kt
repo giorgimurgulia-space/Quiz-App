@@ -10,7 +10,7 @@ import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.AvailableQuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
 import com.space.quizapp.presentation.base.viewModel.BaseViewModel
-import com.space.quizapp.presentation.model.QuizUIModel
+import com.space.quizapp.presentation.model.AvailableQuizUIModel
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
     private val _state = MutableStateFlow(UserUIModel("", "", "0"))
     val state get() = _state.asStateFlow()
 
-    private val _availableQuiz = MutableStateFlow<Result<List<QuizUIModel>>>(Result.Loading)
+    private val _availableQuiz = MutableStateFlow<Result<List<AvailableQuizUIModel>>>(Result.Loading)
     val availableQuiz get() = _availableQuiz.asStateFlow()
 
 
