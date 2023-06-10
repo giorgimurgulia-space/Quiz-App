@@ -24,3 +24,5 @@ fun QuizDto.toDomainModel() = AvailableQuizModel(id, quizTitle, quizDescription,
 
 fun AvailableQuizModel.toUIModel() = AvailableQuizUIModel(id, quizTitle, quizDescription, quizIcon)
 
+
+

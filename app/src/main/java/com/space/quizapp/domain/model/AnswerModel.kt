@@ -1,9 +1,10 @@
-package com.space.quizapp.presentation.model
+package com.space.quizapp.domain.model
 
 import com.space.quizapp.common.AnswerStatus
 
-data class AnswerUIModel(
+data class AnswerModel(
     val answerId: String,
     val answerTitle: String,
     val answerStatus: AnswerStatus?
 )
+
