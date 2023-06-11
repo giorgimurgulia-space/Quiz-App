@@ -1,5 +1,10 @@
 package com.space.quizapp.presentation.quiz
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
@@ -22,6 +27,14 @@ class QuizFragment :
     override val viewModel: QuizViewModel by viewModels()
     private val adapter = AnswerAdapter()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(),R.color.blue_secondary_lightest)
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onBind() {
         //todo
@@ -31,6 +44,8 @@ class QuizFragment :
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
         binding.mainRecycler.adapter = adapter
+
+
     }
 
     override fun setObserves() {
@@ -89,4 +104,7 @@ class QuizFragment :
             binding.submitButton.text = "შემდეგი"
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }

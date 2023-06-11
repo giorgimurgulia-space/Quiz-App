@@ -23,25 +23,26 @@ class AnswerView(
         with(binding) {
             answerText.text = answer.answerTitle
 
-            if (answer.answerStatus == AnswerStatus.CORRECT) {
-                plusPintText.visibility = View.VISIBLE
-            } else {
-                plusPintText.visibility = View.GONE
-            }
-
             when (answer.answerStatus) {
                 AnswerStatus.CORRECT -> {
-                    ColorStateList.valueOf(resources.getColor(R.color.success_green))
+                    root.backgroundTintList =
+                        ColorStateList.valueOf(resources.getColor(R.color.success_green))
+                    plusPintText.visibility = View.VISIBLE
                 }
                 AnswerStatus.NEGATIVE -> {
-                    ColorStateList.valueOf(resources.getColor(R.color.wrong_red))
+                    root.backgroundTintList =
+                        ColorStateList.valueOf(resources.getColor(R.color.wrong_red))
+                    plusPintText.visibility = View.GONE
                 }
                 AnswerStatus.POSITIVE -> {
-                    ColorStateList.valueOf(resources.getColor(R.color.success_green))
-
+                    root.backgroundTintList =
+                        ColorStateList.valueOf(resources.getColor(R.color.success_green))
+                    plusPintText.visibility = View.GONE
                 }
                 else -> {
-
+                    root.backgroundTintList =
+                        ColorStateList.valueOf(resources.getColor(R.color.neutral_04_light_grey))
+                    plusPintText.visibility = View.GONE
                 }
             }
         }
