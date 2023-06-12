@@ -5,6 +5,7 @@ import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.resource.Result
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.CurrentQuizUseCase
+import com.space.quizapp.domain.usecase.user.UserDataUseCse
 import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 import com.space.quizapp.presentation.model.AnswerUIModel
 import com.space.quizapp.presentation.model.QuestionUIModel
@@ -19,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     private val authenticationUseCase: AuthenticationUseCase,
+    private val userDataUseCse: UserDataUseCse,
     private val currentQuizUseCase: CurrentQuizUseCase,
 ) : BaseViewModel() {
 
@@ -64,9 +66,11 @@ class QuizViewModel @Inject constructor(
     }
 
     fun onSubmitButtonClick() {
-        if (questionCount == currentQuestionIndex)
-            _point.tryEmit(currentQuizUseCase.finishQuiz())
-        else
+        if (questionCount == currentQuestionIndex) {
+            val point = currentQuizUseCase.finishQuiz()
+            insertQuizPoint(point)
+            _point.tryEmit(point)
+        } else
             getNewQuestion()
     }
 
@@ -92,5 +96,13 @@ class QuizViewModel @Inject constructor(
         }
     }
 
+    private fun insertQuizPoint(point: Float) {
+        viewModelScope.launch {
+            userDataUseCse.setUserPoint(
+                authenticationUseCase.getCurrentUserId(),
+                "", "", "", "", point
+            )
+        }
+    }
 
 }

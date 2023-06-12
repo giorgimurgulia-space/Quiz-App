@@ -31,4 +31,20 @@ class UserDataUseCse @Inject constructor(
         val userPoints = userDataRepository.getUserPoint(userId)
         emit(userPoints)
     }
+
+    suspend fun setUserPoint(
+        userId: String,
+        subjectId: String,
+        quizTitle: String,
+        quizDescription: String,
+        quizIcon: String,
+        point: Float
+    ) = userDataRepository.setUserPoint(
+        userId,
+        subjectId,
+        quizTitle,
+        quizDescription,
+        quizIcon,
+        point
+    )
 }

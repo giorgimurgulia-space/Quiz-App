@@ -51,23 +51,11 @@ class CurrentQuizRepositoryImpl @Inject constructor(
     }
 
     override fun getNextQuestion(): QuestionModel {
-//        return if (currentUserAnswer.get().isEmpty())
-//            currentQuiz.get().questions[currentUserAnswer.get().size]
-//        else
-//            currentQuiz.get().questions[currentUserAnswer.get().size + 1]
-
         return currentQuiz.get().questions[currentUserAnswer.get().size]
-
     }
 
     override fun getNextAnswers(): List<AnswerModel> {
-//        return if (currentUserAnswer.get().isEmpty())
-//            currentQuiz.get().questions[currentUserAnswer.get().size].answers
-//        else
-//            currentQuiz.get().questions[currentUserAnswer.get().size + 1].answers
-
         return currentQuiz.get().questions[currentUserAnswer.get().size].answers
-
     }
 
     override fun setUserAnswer(userAnswer: Int): List<AnswerModel> {
@@ -92,13 +80,12 @@ class CurrentQuizRepositoryImpl @Inject constructor(
 
     override fun finishQuiz(): Float {
         val correctAnswers = currentQuiz.get().questions.map {
-            it.answers
+            it.correctAnswerIndex
         }
-
         var userPoint = 0
 
         currentUserAnswer.get().forEachIndexed { index, item ->
-            if (correctAnswers[index].equals(item))
+            if (correctAnswers[index] == item)
                 userPoint += 1
         }
 
