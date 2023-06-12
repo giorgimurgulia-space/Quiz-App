@@ -124,15 +124,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         dialog.setCanceledOnTouchOutside(false)
 
 //        dialog.findViewById<TextView>(R.id.question_text).text = resources.getString(question)
-        dialog.findViewById<TextView>(R.id.question_text).text = question
+        dialog.findViewById<TextView>(R.id.message_text).text = question
 
-        val closeButton = dialog.findViewById<Button>(R.id.close_button)
+        val closeButton = dialog.findViewById<TextView>(R.id.close_button)
 
         closeButton.setOnClickListener {
             dialog.dismiss()
             onCloseButtonClick.invoke()
         }
-
-
+        dialog.show()
     }
 }

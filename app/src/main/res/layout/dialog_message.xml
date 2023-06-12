@@ -11,7 +11,7 @@
     android:minWidth="@dimen/dimen_270_dp">
 
     <TextView
-        android:id="@+id/question_text"
+        android:id="@+id/message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_34_dp"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@id/close_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_text" />
+        app:layout_constraintTop_toBottomOf="@id/message_text" />
 
     <TextView
         android:id="@+id/close_button"
