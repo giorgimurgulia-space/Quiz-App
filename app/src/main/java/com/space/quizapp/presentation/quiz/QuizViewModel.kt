@@ -2,7 +2,9 @@ package com.space.quizapp.presentation.quiz
 
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
+import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
+import com.space.quizapp.domain.model.QuizModel
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.CurrentQuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
@@ -24,31 +26,16 @@ class QuizViewModel @Inject constructor(
     private val currentQuizUseCase: CurrentQuizUseCase,
 ) : BaseViewModel() {
 
-    private var questionCount = 0
-    private var currentQuestionIndex = 0
+    private lateinit var currentQuiz: QuizUIModel
 
-    private val _quiz = MutableStateFlow(QuizUIModel("", "", 0))
-    val quiz get() = _quiz.asStateFlow()
-
-    private val _question = MutableStateFlow(QuestionUIModel("", false))
-    val question get() = _question.asStateFlow()
-
-    private val _answers = MutableStateFlow<Result<List<AnswerUIModel>>>(Result.Loading)
-    val answers get() = _answers.asStateFlow()
-
-    private val _point = MutableSharedFlow<Float>(
-        replay = 0,
-        extraBufferCapacity = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
-    )
-    val point get() = _point.asSharedFlow()
+    private val _quizState = MutableStateFlow(QuizPagePayLoad("", "", Result.Loading, false, null))
+    val quizState get() = _quizState.asStateFlow()
 
     fun startQuiz(subjectId: String) {
         viewModelScope.launch {
-            val quiz = currentQuizUseCase.startQuiz(subjectId)
-            questionCount = quiz.questionsCount - 1
-            _quiz.tryEmit(quiz)
-
+            val quiz = currentQuizUseCase.startQuiz(subjectId).toUIModel()
+            currentQuiz = quiz
+            _quizState.tryEmit(_quizState.value.copy(quizTitle = quiz.quizTitle))
             getNewQuestion()
         }
     }
@@ -57,19 +44,19 @@ class QuizViewModel @Inject constructor(
         viewModelScope.launch {
             currentQuizUseCase.setUserAnswer(answerIndex).map {
                 it.map { answer ->
-                    AnswerUIModel(answer.answerId, answer.answerTitle, answer.answerStatus)
+                    answer.toUIModel()
                 }
             }.toResult().collect {
-                _answers.tryEmit(it)
+                _quizState.tryEmit(_quizState.value.copy(answers = it))
             }
         }
     }
 
     fun onSubmitButtonClick() {
-        if (questionCount == currentQuestionIndex) {
+        if (_quizState.value.isLastQuestion) {
             val point = currentQuizUseCase.finishQuiz()
             insertQuizPoint(point)
-            _point.tryEmit(point)
+            _quizState.tryEmit(_quizState.value.copy(point = point))
         } else
             getNewQuestion()
     }
@@ -77,21 +64,20 @@ class QuizViewModel @Inject constructor(
     private fun getNewQuestion() {
         val newQuestion = currentQuizUseCase.getNextQuestion()
 
-        _question.tryEmit(
-            QuestionUIModel(
-                newQuestion.questionTitle,
-                newQuestion.questionIndex == questionCount
+        _quizState.tryEmit(
+            _quizState.value.copy(
+                question = newQuestion.questionTitle,
+                isLastQuestion = newQuestion.questionIndex == currentQuiz.questionsCount - 1
             )
         )
-        currentQuestionIndex = newQuestion.questionIndex
 
         viewModelScope.launch {
             currentQuizUseCase.getNextAnswer().map {
                 it.map { answer ->
-                    AnswerUIModel(answer.answerId, answer.answerTitle, answer.answerStatus)
+                    answer.toUIModel()
                 }
             }.toResult().collectLatest {
-                _answers.tryEmit(it)
+                _quizState.tryEmit(_quizState.value.copy(answers = it))
             }
         }
     }
@@ -100,7 +86,11 @@ class QuizViewModel @Inject constructor(
         viewModelScope.launch {
             userDataUseCse.setUserPoint(
                 authenticationUseCase.getCurrentUserId(),
-                "", "", "", "", point
+                currentQuiz.id,
+                currentQuiz.quizTitle,
+                currentQuiz.quizDescription,
+                currentQuiz.quizIcon,
+                point
             )
         }
     }

@@ -18,5 +18,5 @@ interface UserPointDao {
     suspend fun getUserPoints(userId: String): List<UserPointEntity>
 
     @Query("select * from user_point where userId = :userId AND subjectId = :subjectId")
-    suspend fun getUserSubjectPoint(userId: String, subjectId: String): UserPointEntity
+    suspend fun getUserSubjectPoint(userId: String, subjectId: String): List<UserPointEntity>
 }
