@@ -19,8 +19,8 @@ class CurrentQuizUseCase @Inject constructor(
         emit(currentQuizRepository.getNextAnswers())
     }
 
-    fun setUserAnswer(userAnswer: Int) = flow {
-        emit(currentQuizRepository.setUserAnswer(userAnswer))
+    fun setUserAnswer(userAnswerIndex: Int) = flow {
+        emit(currentQuizRepository.setUserAnswer(userAnswerIndex))
     }
 
     fun finishQuiz() = currentQuizRepository.finishQuiz()

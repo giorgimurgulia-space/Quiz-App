@@ -15,7 +15,7 @@ interface CurrentQuizRepository {
 
     fun getNextAnswers(): List<AnswerModel>
 
-    fun setUserAnswer(userAnswer: Int): List<AnswerModel>
+    fun setUserAnswer(userAnswerIndex: Int): List<AnswerModel>
 
     fun finishQuiz(): Float
 }

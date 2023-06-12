@@ -53,23 +53,23 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         return currentQuiz.get().questions[currentUserAnswer.get().size].answers.map { it.toAnswer() }
     }
 
-    override fun setUserAnswer(userAnswer: Int): List<AnswerModel> {
-        val correctAnswer =
+    override fun setUserAnswer(userAnswerIndex: Int): List<AnswerModel> {
+        val correctAnswerIndex =
             currentQuiz.get().questions[currentUserAnswer.get().size].toDomainModel().correctAnswerIndex
 
         val uiAnswers = currentQuiz.get().questions[currentUserAnswer.get().size].answers.map {
             it.toAnswer().copy(answerStatus = AnswerStatus.NEUTRAL)
         }.toMutableList()
 
-        if (currentUserAnswer.equals(userAnswer)) {
-            uiAnswers[userAnswer] = uiAnswers[userAnswer].copy(answerStatus = AnswerStatus.CORRECT)
+        if (correctAnswerIndex == userAnswerIndex) {
+            uiAnswers[userAnswerIndex] = uiAnswers[userAnswerIndex].copy(answerStatus = AnswerStatus.CORRECT)
         } else {
-            uiAnswers[userAnswer] = uiAnswers[userAnswer].copy(answerStatus = AnswerStatus.NEGATIVE)
-            uiAnswers[correctAnswer] = uiAnswers[userAnswer].copy(answerStatus = AnswerStatus.POSITIVE)
+            uiAnswers[userAnswerIndex] = uiAnswers[userAnswerIndex].copy(answerStatus = AnswerStatus.NEGATIVE)
+            uiAnswers[correctAnswerIndex] = uiAnswers[correctAnswerIndex].copy(answerStatus = AnswerStatus.POSITIVE)
 
         }
 
-        insertUserAnswer(userAnswer)
+        insertUserAnswer(userAnswerIndex)
 
         return uiAnswers
     }
@@ -78,7 +78,7 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         var userPoint = 0
 
         val correctAnswers = currentQuiz.get().questions.map {
-            it.answers.indexOf(it.correctAnswer)
+            it.toDomainModel().correctAnswerIndex
         }
 
         currentUserAnswer.get().forEachIndexed { index, item ->
