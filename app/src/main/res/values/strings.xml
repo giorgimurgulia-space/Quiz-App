@@ -14,6 +14,7 @@
     <string name="user_GPA">GPA - %1$s</string>
     <string name="yes">კი</string>
     <string name="no">არა</string>
+    <string name="close">დახურვა</string>
     <string name="want_log_out">ნამდვილად გსურს გასვლა?</string>
     <string name="loader_title">იტვირთება...</string>
     <string name="error_message">დაფიქსირდა შეცდომა, კიდევ ვცადოთ?</string>

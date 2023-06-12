@@ -62,6 +62,9 @@ class QuizFragment :
 
             if (it.point != null) {
                 toast(it.point.toString())
+                showMessageDialog(it.point.toString(), onCloseButtonClick = {
+                    viewModel.navigateBack()
+                })
             }
         }
     }

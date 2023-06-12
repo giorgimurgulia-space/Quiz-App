@@ -115,4 +115,24 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
 
         dialog.show()
     }
+
+    protected fun showMessageDialog(question: String, onCloseButtonClick: () -> Unit) {
+        dialog.setContentView(R.layout.dialog_message)
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+
+//        dialog.findViewById<TextView>(R.id.question_text).text = resources.getString(question)
+        dialog.findViewById<TextView>(R.id.question_text).text = question
+
+        val closeButton = dialog.findViewById<Button>(R.id.close_button)
+
+        closeButton.setOnClickListener {
+            dialog.dismiss()
+            onCloseButtonClick.invoke()
+        }
+
+
+    }
 }
