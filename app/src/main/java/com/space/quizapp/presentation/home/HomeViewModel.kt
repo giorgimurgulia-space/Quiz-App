@@ -35,8 +35,7 @@ class HomeViewModel @Inject constructor(
 
 
     init {
-        getUserData()
-        getAvailableQuiz()
+
     }
 
     fun refreshAllData() {

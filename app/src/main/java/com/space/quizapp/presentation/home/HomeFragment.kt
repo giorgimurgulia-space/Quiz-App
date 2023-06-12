@@ -23,6 +23,8 @@ class HomeFragment :
     private val adapter = QuizAdapter()
 
     override fun onBind() {
+        viewModel.refreshAllData()
+
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
         binding.mainRecycler.adapter = adapter

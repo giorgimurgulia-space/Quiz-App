@@ -69,7 +69,7 @@ class QuizFragment :
     override fun setListeners() {
         binding.cancelImage.setOnClickListener {
             showQuestionDialog(R.string.cancel_quiz, onPositiveButtonClick = {
-                viewModel.navigateBack()
+                viewModel.cancelQuiz()
             })
         }
 
