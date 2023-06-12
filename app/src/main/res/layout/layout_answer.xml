@@ -8,7 +8,7 @@
     android:background="@drawable/shape_rectangle_background"
     android:backgroundTint="@color/neutral_04_light_grey"
     android:paddingHorizontal="@dimen/dimen_30_dp"
-    android:paddingVertical="@dimen/dimen_10_dp">
+    android:paddingVertical="@dimen/dimen_22_dp">
 
     <TextView
         android:id="@+id/answer_text"
