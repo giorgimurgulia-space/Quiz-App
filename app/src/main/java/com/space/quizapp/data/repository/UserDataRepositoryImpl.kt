@@ -34,8 +34,12 @@ class UserDataRepositoryImpl @Inject constructor(
         quizIcon: String,
         point: Float
     ) {
-        userPointDao.insertUserPoint(
-            UserPointEntity(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
-        )
+        val oldPoint = userPointDao.getUserSubjectPoint(userId, subjectId).point
+
+        if (point > oldPoint) {
+            userPointDao.insertUserPoint(
+                UserPointEntity(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
+            )
+        }
     }
 }

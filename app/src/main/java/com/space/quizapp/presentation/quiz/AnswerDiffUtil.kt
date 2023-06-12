@@ -7,10 +7,10 @@ import com.space.quizapp.presentation.model.PointUIModel
 class AnswerDiffUtil : DiffUtil.ItemCallback<AnswerUIModel>() {
 
     override fun areItemsTheSame(oldItem: AnswerUIModel, newItem: AnswerUIModel): Boolean {
-        return false
+        return oldItem.answerId == newItem.answerId
     }
 
     override fun areContentsTheSame(oldItem: AnswerUIModel, newItem: AnswerUIModel): Boolean {
-        return false
+        return oldItem.answerStatus == newItem.answerStatus
     }
 }
