@@ -59,13 +59,14 @@ class CurrentQuizRepositoryImpl @Inject constructor(
 
         val uiAnswers = currentQuiz.get().questions[currentUserAnswer.get().size].answers.map {
             it.toAnswer().copy(answerStatus = AnswerStatus.NEUTRAL)
-        }
+        }.toMutableList()
 
         if (currentUserAnswer.equals(userAnswer)) {
-            uiAnswers[userAnswer].answerStatus = AnswerStatus.CORRECT
+            uiAnswers[userAnswer] = uiAnswers[userAnswer].copy(answerStatus = AnswerStatus.CORRECT)
         } else {
-            uiAnswers[userAnswer].answerStatus = AnswerStatus.NEGATIVE
-            uiAnswers[correctAnswer].answerStatus = AnswerStatus.POSITIVE
+            uiAnswers[userAnswer] = uiAnswers[userAnswer].copy(answerStatus = AnswerStatus.NEGATIVE)
+            uiAnswers[correctAnswer] = uiAnswers[userAnswer].copy(answerStatus = AnswerStatus.POSITIVE)
+
         }
 
         insertUserAnswer(userAnswer)
