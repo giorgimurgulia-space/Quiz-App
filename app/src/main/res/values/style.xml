@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="normal">
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
+        <item name="lineHeight">@dimen/dimen_16_sp</item>
+    </style>
+    <style name="medium">
+        <item name="android:textSize">@dimen/dimen_21_sp</item>
+        <item name="lineHeight">@dimen/dimen_21_sp</item>
+    </style>
+
+    <style name="small">
+        <item name="android:textSize">@dimen/dimen_12_sp</item>
+        <item name="lineHeight">@dimen/dimen_16_sp</item>
+    </style>
+
+</resources>

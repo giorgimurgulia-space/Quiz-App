@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Quiz App</string>
+
+    <string name="my_first_quiz">ჩემი პირველი ქვიზი</string>
+    <string name="input_your_name">შეიყვანე სახელი</string>
+    <string name="start_quiz">ქვიზის დაწყება</string>
+    <string name="please_input_username">გთხოვთ შეიყავნოთ სახელი</string>
+    <string name="invalid_username">სახელის სტრუქტურა არასწორია</string>
+    <string name="try_again">კიდევ სცადეთ</string>
+    <string name="detail">დეტალირად</string>
+    <string name="chose_subject">აირჩიე საგანი</string>
+    <string name="hello">გამარჯობა,</string>
+    <string name="welcome_messages">გამარჯობა, %1$s</string>
+    <string name="user_GPA">GPA - %1$s</string>
+    <string name="yes">კი</string>
+    <string name="no">არა</string>
+    <string name="want_log_out">ნამდვილად გსურს გასვლა?</string>
+    <string name="loader_title">იტვირთება...</string>
+    <string name="error_message">დაფიქსირდა შეცდომა, კიდევ ვცადოთ?</string>
 </resources>
