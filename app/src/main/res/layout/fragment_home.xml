@@ -1,104 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/dimen_16_dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/hello_title_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_16_dp"
-        android:lineHeight="@dimen/dimen_21_dp"
-        android:textColor="@color/yellow_primary"
-        android:textSize="@dimen/dimen_16_sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="გამარჯობა, გიორგი" />
-
-    <View
-        android:id="@+id/gpa_background_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_100_dp"
-        android:layout_marginTop="@dimen/dimen_20_dp"
-        android:background="@drawable/shape_rectangle_background"
-        android:backgroundTint="@color/blue_secondary_default"
-        app:layout_constraintTop_toBottomOf="@id/hello_title_text" />
-
-    <TextView
-        android:id="@+id/user_gpa_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_18_dp"
-        android:background="@drawable/shape_rectangle_background"
-        android:backgroundTint="@color/blue_secondary_lighter"
-        android:lineHeight="@dimen/dimen_21_dp"
-        android:paddingHorizontal="@dimen/dimen_10_dp"
-        android:paddingVertical="@dimen/dimen_7_dp"
-        tools:text="GPA - 2.0"
-        android:textColor="@color/neutral_04_white"
-        android:textSize="@dimen/dimen_16_sp"
-        app:layout_constraintBottom_toBottomOf="@id/gpa_background_view"
-        app:layout_constraintStart_toStartOf="@id/gpa_background_view"
-        app:layout_constraintTop_toTopOf="@id/gpa_background_view" />
-
-    <TextView
-        android:id="@+id/gpa_detail_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dimen_34_dp"
-        android:drawableEnd="@drawable/ic_next"
-        android:drawablePadding="@dimen/dimen_6_dp"
-        android:lineHeight="@dimen/dimen_18_dp"
-        android:text="@string/detail"
-        android:textColor="@color/neutral_04_white"
-        android:textSize="@dimen/dimen_16_sp"
-        app:layout_constraintBottom_toBottomOf="@id/gpa_background_view"
-        app:layout_constraintEnd_toEndOf="@id/gpa_background_view"
-        app:layout_constraintTop_toTopOf="@id/gpa_background_view" />
-
-    <TextView
-        android:id="@+id/chose_subject_text"
-        style="@style/medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_32_dp"
-        android:text="@string/chose_subject"
-        android:textColor="@color/neutral_01_dark_grey"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gpa_background_view" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/line_view"
-        app:layout_constraintTop_toBottomOf="@id/chose_subject_text"
-        tools:listitem="@layout/layout_quiz" />
-
-    <View
-        android:id="@+id/line_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_2_dp"
-        android:backgroundTint="@color/neutral_02_grey"
-        app:layout_constraintBottom_toTopOf="@id/log_out_button"
-        app:layout_constraintTop_toBottomOf="@id/main_recycler" />
-
-    <ImageView
-        android:id="@+id/log_out_button"
-        android:layout_width="@dimen/dimen_45_dp"
-        android:layout_height="@dimen/dimen_45_dp"
-        android:layout_marginVertical="@dimen/dimen_10_dp"
-        android:background="@drawable/shape_oval"
-        android:backgroundTint="@color/yellow_primary"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_log_out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line_view" />
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/dimen_16_dp">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/hello_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_16_dp"
+            android:lineHeight="@dimen/dimen_21_dp"
+            android:textColor="@color/yellow_primary"
+            android:textSize="@dimen/dimen_16_sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="გამარჯობა, გიორგი" />
+
+        <View
+            android:id="@+id/gpa_background_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_100_dp"
+            android:layout_marginTop="@dimen/dimen_20_dp"
+            android:background="@drawable/shape_rectangle_background"
+            android:backgroundTint="@color/blue_secondary_default"
+            app:layout_constraintTop_toBottomOf="@id/hello_title_text" />
+
+        <TextView
+            android:id="@+id/user_gpa_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_18_dp"
+            android:background="@drawable/shape_rectangle_background"
+            android:backgroundTint="@color/blue_secondary_lighter"
+            android:lineHeight="@dimen/dimen_21_dp"
+            android:paddingHorizontal="@dimen/dimen_10_dp"
+            android:paddingVertical="@dimen/dimen_7_dp"
+            android:textColor="@color/neutral_04_white"
+            android:textSize="@dimen/dimen_16_sp"
+            app:layout_constraintBottom_toBottomOf="@id/gpa_background_view"
+            app:layout_constraintStart_toStartOf="@id/gpa_background_view"
+            app:layout_constraintTop_toTopOf="@id/gpa_background_view"
+            tools:text="GPA - 2.0" />
+
+        <TextView
+            android:id="@+id/gpa_detail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_34_dp"
+            android:drawableEnd="@drawable/ic_next"
+            android:drawablePadding="@dimen/dimen_6_dp"
+            android:lineHeight="@dimen/dimen_18_dp"
+            android:text="@string/detail"
+            android:textColor="@color/neutral_04_white"
+            android:textSize="@dimen/dimen_16_sp"
+            app:layout_constraintBottom_toBottomOf="@id/gpa_background_view"
+            app:layout_constraintEnd_toEndOf="@id/gpa_background_view"
+            app:layout_constraintTop_toTopOf="@id/gpa_background_view" />
+
+        <TextView
+            android:id="@+id/chose_subject_text"
+            style="@style/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_32_dp"
+            android:text="@string/chose_subject"
+            android:textColor="@color/neutral_01_dark_grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gpa_background_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/line_view"
+            app:layout_constraintTop_toBottomOf="@id/chose_subject_text"
+            tools:listitem="@layout/layout_quiz" />
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2_dp"
+            android:backgroundTint="@color/neutral_02_grey"
+            app:layout_constraintBottom_toTopOf="@id/log_out_button"
+            app:layout_constraintTop_toBottomOf="@id/main_recycler" />
+
+        <ImageView
+            android:id="@+id/log_out_button"
+            android:layout_width="@dimen/dimen_45_dp"
+            android:layout_height="@dimen/dimen_45_dp"
+            android:layout_marginVertical="@dimen/dimen_10_dp"
+            android:background="@drawable/shape_oval"
+            android:backgroundTint="@color/yellow_primary"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_log_out"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_view" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

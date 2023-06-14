@@ -23,7 +23,6 @@ class HomeFragment :
     private val adapter = QuizAdapter()
 
     override fun onBind() {
-        viewModel.refreshAllData()
 
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
@@ -68,6 +67,11 @@ class HomeFragment :
 
         binding.gpaBackgroundView.setOnClickListener {
             viewModel.onGPADetailClick()
+        }
+
+        binding.root.setOnRefreshListener {
+            viewModel.refreshAllData()
+            binding.root.isRefreshing = false
         }
     }
 

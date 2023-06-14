@@ -35,12 +35,13 @@ class HomeViewModel @Inject constructor(
 
 
     init {
-
+        getUserData()
+        getAvailableQuiz()
     }
 
     fun refreshAllData() {
         getUserData()
-        getAvailableQuiz()
+        getAvailableQuiz(true)
     }
 
     fun logOut() {
@@ -68,9 +69,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getAvailableQuiz() {
+    private fun getAvailableQuiz(isRefreshed: Boolean = false) {
         viewModelScope.launch {
-            availableQuizUseCase.getAvailableQuiz().map {
+            availableQuizUseCase.getAvailableQuiz(isRefreshed).map {
                 it.map { quiz -> quiz.toUIModel() }
             }.toResult().collectLatest {
                 _availableQuiz.tryEmit(it)

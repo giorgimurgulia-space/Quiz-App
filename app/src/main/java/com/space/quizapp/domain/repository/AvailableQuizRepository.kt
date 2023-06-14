@@ -4,5 +4,5 @@ import com.space.quizapp.domain.model.AvailableQuizModel
 import kotlinx.coroutines.flow.Flow
 
 interface AvailableQuizRepository {
-    suspend fun getAvailableQuizList(): Flow<List<AvailableQuizModel>>
+    suspend fun getAvailableQuizList(isRefreshed: Boolean): Flow<List<AvailableQuizModel>>
 }
