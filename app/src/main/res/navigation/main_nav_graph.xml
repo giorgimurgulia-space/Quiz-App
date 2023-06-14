@@ -27,10 +27,14 @@
 
     <action
         android:id="@+id/action_global_homeFragment"
-        app:destination="@id/homeFragment" />
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true"/>
     <action
         android:id="@+id/action_global_logOut"
-        app:destination="@id/authenticationFragment" />
+        app:destination="@id/authenticationFragment"
+        app:popUpTo="@id/main_nav_graph"
+        app:popUpToInclusive="true"/>
     <action
         android:id="@+id/action_global_pointsFragment"
         app:destination="@id/pointsFragment" />

@@ -43,6 +43,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     ): View? {
         _binding = inflate.invoke(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,12 +52,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         setObserves()
         setListeners()
         observeNavigation()
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 
     protected fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

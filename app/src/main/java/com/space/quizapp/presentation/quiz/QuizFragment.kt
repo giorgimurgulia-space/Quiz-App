@@ -1,5 +1,6 @@
 package com.space.quizapp.presentation.quiz
 
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ class QuizFragment :
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
         binding.mainRecycler.adapter = adapter
+
     }
 
     override fun setObserves() {
@@ -90,4 +92,5 @@ class QuizFragment :
     override fun onDestroyView() {
         super.onDestroyView()
     }
+
 }
