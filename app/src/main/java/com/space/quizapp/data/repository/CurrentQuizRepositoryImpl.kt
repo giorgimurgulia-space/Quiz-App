@@ -22,6 +22,7 @@ class CurrentQuizRepositoryImpl @Inject constructor(
     private var currentUserAnswer: AtomicReference<List<Int>> = AtomicReference(emptyList())
 
     override suspend fun getQuizById(subjectId: String) {
+        // todo
         clearCurrentQuizData()
 
         val response = apiService.getQuiz()
@@ -53,6 +54,7 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         return currentQuiz.get().questions[currentUserAnswer.get().size].answers.map { it.toAnswer() }
     }
 
+    // todo transfer to useCase
     override fun setUserAnswer(userAnswerIndex: Int): List<AnswerModel> {
         val correctAnswerIndex =
             currentQuiz.get().questions[currentUserAnswer.get().size].toDomainModel().correctAnswerIndex
@@ -74,6 +76,7 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         return uiAnswers
     }
 
+    // todo transfer to useCase
     override fun finishQuiz(): Float {
         var userPoint = 0
 

@@ -1,4 +1,4 @@
-package com.space.quizapp.presentation.home
+package com.space.quizapp.presentation.home.ui
 
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
