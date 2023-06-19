@@ -59,7 +59,7 @@ class HomeFragment :
         }
 
         binding.gpaBackgroundView.setOnClickListener {
-            viewModel.onGPADetailClick()
+            viewModel.navigatePointsPage()
         }
     }
 
