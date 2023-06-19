@@ -70,7 +70,7 @@ class HomeFragment :
         }
 
         binding.gpaBackgroundView.setOnClickListener {
-            viewModel.onGPADetailClick()
+            viewModel.navigatePointsPage()
         }
 
         binding.root.setOnRefreshListener {

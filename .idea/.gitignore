@@ -1,12 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.idea/**
 
 # Built application files
 *.ap_
