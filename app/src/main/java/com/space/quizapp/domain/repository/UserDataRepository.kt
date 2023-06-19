@@ -2,6 +2,7 @@ package com.space.quizapp.domain.repository
 
 import com.space.quizapp.domain.model.UserModel
 import com.space.quizapp.domain.model.PointModel
+import kotlinx.coroutines.flow.Flow
 
 
 interface UserDataRepository {

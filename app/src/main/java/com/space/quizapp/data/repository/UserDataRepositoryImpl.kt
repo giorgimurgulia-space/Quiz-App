@@ -6,6 +6,8 @@ import com.space.quizapp.data.local.database.model.dao.UserPointDao
 import com.space.quizapp.domain.model.PointModel
 import com.space.quizapp.domain.model.UserModel
 import com.space.quizapp.domain.repository.UserDataRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class UserDataRepositoryImpl @Inject constructor(
@@ -20,7 +22,6 @@ class UserDataRepositoryImpl @Inject constructor(
         val userPoints = userPointDao.getUserPoints(userId).map {
             it.toDomainModel()
         }
-
-        return userPoints
+        return (userPoints)
     }
 }

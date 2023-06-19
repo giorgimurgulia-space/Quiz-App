@@ -8,7 +8,7 @@ import com.space.quizapp.common.extensions.loadImage
 import com.space.quizapp.databinding.LayoutQuizBinding
 import com.space.quizapp.presentation.model.QuizUIModel
 
-class QuizAdapter() : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDiffUtil()) {
+class QuizAdapter : ListAdapter<QuizUIModel, QuizAdapter.QuizViewHolder>(QuizDiffUtil()) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

@@ -15,14 +15,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.space.quizapp.R
 import com.space.quizapp.common.navigation.NavigationCommand
+import com.space.quizapp.common.observeNonNull
 import com.space.quizapp.common.types.Inflater
+import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 
-abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>) : Fragment() {
+
+abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
+    Fragment() {
+
+    //TODO
+    abstract val viewModel: VM
 
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    //todo better dialog
     private val dialog by lazy { Dialog(requireContext()) }
 
     abstract fun onBind()
@@ -44,6 +50,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
         onBind()
         setObserves()
         setListeners()
+        observeNavigation()
     }
 
     override fun onDestroyView() {
@@ -55,7 +62,15 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    protected fun handleNavigation(navCommand: NavigationCommand) {
+    private fun observeNavigation() {
+        viewModel.navigation.observeNonNull(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { navigationCommand ->
+                handleNavigation(navigationCommand)
+            }
+        }
+    }
+
+    private fun handleNavigation(navCommand: NavigationCommand) {
         when (navCommand) {
             is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
             is NavigationCommand.Back -> findNavController().navigateUp()
@@ -63,14 +78,14 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflater<VB>)
     }
 
     //todo better dialog
-    protected fun loader(status: Boolean) {
+    protected fun loader(isLoaded: Boolean = false) {
         dialog.setContentView(R.layout.dialog_loader)
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
 
-        if (status)
+        if (!isLoaded)
             dialog.show()
         else
             dialog.dismiss()

@@ -1,8 +1,6 @@
 package com.space.quizapp.presentation.auth
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.space.quizapp.R
 import com.space.quizapp.common.regex.RegexPattern
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase

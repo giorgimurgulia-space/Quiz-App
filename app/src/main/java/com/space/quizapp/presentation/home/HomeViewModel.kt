@@ -1,6 +1,5 @@
 package com.space.quizapp.presentation.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
@@ -14,7 +13,10 @@ import com.space.quizapp.presentation.base.viewModel.BaseViewModel
 import com.space.quizapp.presentation.model.QuizUIModel
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,7 +40,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         //For GPA Test
-//        setPoint()
+        setPoint()
 
         getUserData()
         getAvailableQuiz()
@@ -54,6 +56,10 @@ class HomeViewModel @Inject constructor(
         navigate(HomeFragmentDirections.actionGlobalLogOut())
     }
 
+    fun navigateToPointsPage() {
+        navigate(HomeFragmentDirections.actionGlobalPointsFragment())
+    }
+
     private fun getUserData() {
         viewModelScope.launch {
             try {
@@ -61,8 +67,8 @@ class HomeViewModel @Inject constructor(
                 val user = userDataUseCse.getUser(currentUserId).toUIModel(userGPA)
                 _state.tryEmit(user)
             } catch (e: Error) {
+                //todo error
             }
-
         }
     }
 
@@ -84,6 +90,9 @@ class HomeViewModel @Inject constructor(
                 (UserPointEntity(
                     authenticationUseCase.getCurrentUserId(),
                     "1",
+                    "გეოგრაფია",
+                    "კითხვები გეოგრაფიიდან",
+                    "https://scontent.xx.fbcdn.net/v/t1.15752-9/343573230_204266569212395_1404329334796031022_n.png?_nc_cat=101&ccb=1-7&_nc_sid=aee45a&_nc_ohc=6D3IcI5T_84AX_iC0LA&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTC0KrDNMhIzUpGI-7fYnKg9ZtvT58AdO9rvFeskZwzGQ&oe=649DA746",
                     1.toFloat()
                 ))
             )
@@ -91,24 +100,22 @@ class HomeViewModel @Inject constructor(
                 (UserPointEntity(
                     authenticationUseCase.getCurrentUserId(),
                     "2",
-                    1.toFloat()
+                    "გეოგრაფია",
+                    "კითხვები გეოგრაფიიდან",
+                    "https://scontent.xx.fbcdn.net/v/t1.15752-9/343573230_204266569212395_1404329334796031022_n.png?_nc_cat=101&ccb=1-7&_nc_sid=aee45a&_nc_ohc=6D3IcI5T_84AX_iC0LA&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTC0KrDNMhIzUpGI-7fYnKg9ZtvT58AdO9rvFeskZwzGQ&oe=649DA746",
+                    1.1.toFloat()
                 ))
             )
             point.insertUserPoint(
                 (UserPointEntity(
                     authenticationUseCase.getCurrentUserId(),
                     "3",
-                    1.toFloat()
+                    "გეოგრაფია",
+                    "კითხვები გეოგრაფიიდან",
+                    "https://scontent.xx.fbcdn.net/v/t1.15752-9/343573230_204266569212395_1404329334796031022_n.png?_nc_cat=101&ccb=1-7&_nc_sid=aee45a&_nc_ohc=6D3IcI5T_84AX_iC0LA&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdTC0KrDNMhIzUpGI-7fYnKg9ZtvT58AdO9rvFeskZwzGQ&oe=649DA746",
+                    1.5.toFloat()
                 ))
             )
-            point.insertUserPoint(
-                (UserPointEntity(
-                    authenticationUseCase.getCurrentUserId(),
-                    "4",
-                    1.toFloat()
-                ))
-            )
-
         }
     }
 }
