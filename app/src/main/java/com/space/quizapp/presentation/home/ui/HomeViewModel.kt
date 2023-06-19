@@ -34,14 +34,9 @@ class HomeViewModel @Inject constructor(
     val availableQuiz get() = _availableQuiz.asStateFlow()
 
 
-    init {
+    fun refreshAllData(isRefreshed:Boolean = false) {
         getUserData()
-        getAvailableQuiz()
-    }
-
-    fun refreshAllData() {
-        getUserData()
-        getAvailableQuiz(true)
+        getAvailableQuiz(isRefreshed)
     }
 
     fun logOut() {
@@ -49,7 +44,7 @@ class HomeViewModel @Inject constructor(
         navigate(HomeFragmentDirections.actionGlobalLogOut())
     }
 
-    fun onGPADetailClick() {
+    fun navigateToPointsPage() {
         navigate(HomeFragmentDirections.actionGlobalPointsFragment())
     }
 
