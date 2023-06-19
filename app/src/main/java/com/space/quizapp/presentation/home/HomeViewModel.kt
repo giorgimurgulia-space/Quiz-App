@@ -56,7 +56,7 @@ class HomeViewModel @Inject constructor(
         navigate(HomeFragmentDirections.actionGlobalLogOut())
     }
 
-    fun navigatePointsPage() {
+    fun navigateToPointsPage() {
         navigate(HomeFragmentDirections.actionGlobalPointsFragment())
     }
 
