@@ -85,13 +85,9 @@ class QuizFragment :
 
     private fun changeSubmitButtonText(isLastQuestion: Boolean) {
         if (isLastQuestion)
-            binding.submitButton.text = "დასრულება"
+            binding.submitButton.text = resources.getString(R.string.next)
         else
-            binding.submitButton.text = "შემდეგი"
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+            binding.submitButton.text = resources.getString((R.string.finish))
     }
 
 }

@@ -23,5 +23,7 @@
     <string name="my_points">დაგროვილი ქულები</string>
     <string name="plus_one">+1</string>
     <string name="your_point">შენ დააგროვე %1$s ქულა</string>
+    <string name="next">შემდეგი</string>
+    <string name="finish">დასრულება</string>
 
 </resources>
