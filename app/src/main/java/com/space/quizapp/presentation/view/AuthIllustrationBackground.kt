@@ -9,7 +9,6 @@ import com.space.quizapp.R
 import com.space.quizapp.presentation.base.view.BaseCustomView
 
 
-//todo transfer color
 class AuthIllustrationBackground(
     context: Context,
     attributeSet: AttributeSet
