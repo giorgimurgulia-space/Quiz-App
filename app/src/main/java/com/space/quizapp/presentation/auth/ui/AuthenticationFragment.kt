@@ -1,8 +1,9 @@
-package com.space.quizapp.presentation.auth
+package com.space.quizapp.presentation.auth.ui
 
 import androidx.fragment.app.viewModels
 import com.space.quizapp.common.extensions.collectFlow
 import com.space.quizapp.databinding.FragmentAuthenticationBinding
+import com.space.quizapp.presentation.auth.vm.AuthenticationViewModel
 import com.space.quizapp.presentation.base.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,4 +1,4 @@
-package com.space.quizapp.presentation.point
+package com.space.quizapp.presentation.point.ui
 
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +9,8 @@ import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.databinding.FragmentPointsBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
+import com.space.quizapp.presentation.point.adapter.PointAdapter
+import com.space.quizapp.presentation.point.vm.PointsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

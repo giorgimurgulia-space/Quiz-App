@@ -1,10 +1,11 @@
-package com.space.quizapp.presentation.auth
+package com.space.quizapp.presentation.auth.vm
 
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.R
 import com.space.quizapp.common.regex.RegexPattern
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
-import com.space.quizapp.presentation.base.viewModel.BaseViewModel
+import com.space.quizapp.presentation.auth.ui.AuthenticationFragmentDirections
+import com.space.quizapp.presentation.base.vm.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow

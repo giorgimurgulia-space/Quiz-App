@@ -1,4 +1,4 @@
-package com.space.quizapp.presentation.point
+package com.space.quizapp.presentation.point.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.space.quizapp.presentation.model.PointUIModel

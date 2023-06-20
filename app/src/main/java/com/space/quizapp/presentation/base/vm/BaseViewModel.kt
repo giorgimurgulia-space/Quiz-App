@@ -1,11 +1,11 @@
-package com.space.quizapp.presentation.base.viewModel
+package com.space.quizapp.presentation.base.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
-import com.space.quizapp.common.QuizEvent
-import com.space.quizapp.common.navigation.NavigationCommand
+import com.space.quizapp.presentation.navigation.QuizEvent
+import com.space.quizapp.presentation.navigation.NavigationCommand
 
 
 abstract class BaseViewModel : ViewModel() {

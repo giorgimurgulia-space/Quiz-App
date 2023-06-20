@@ -12,7 +12,8 @@ import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.databinding.FragmentHomeBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
-import com.space.quizapp.presentation.home.QuizAdapter
+import com.space.quizapp.presentation.home.vm.HomeViewModel
+import com.space.quizapp.presentation.home.adapter.QuizAdapter
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.AndroidEntryPoint
 

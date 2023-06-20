@@ -1,4 +1,4 @@
-package com.space.quizapp.common
+package com.space.quizapp.presentation.navigation
 
 open class QuizEvent<out T>(private val content: T) {
 

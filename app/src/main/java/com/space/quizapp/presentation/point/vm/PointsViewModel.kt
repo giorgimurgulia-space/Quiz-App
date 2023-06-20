@@ -1,4 +1,4 @@
-package com.space.quizapp.presentation.point
+package com.space.quizapp.presentation.point.vm
 
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
@@ -6,7 +6,7 @@ import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
-import com.space.quizapp.presentation.base.viewModel.BaseViewModel
+import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
 import com.space.quizapp.presentation.model.PointUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel

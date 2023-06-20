@@ -1,7 +1,7 @@
 package com.space.quizapp.data.repository
 
 import com.space.quizapp.common.AnswerStatus
-import com.space.quizapp.common.ApiError
+import com.space.quizapp.common.resource.ApiError
 import com.space.quizapp.common.mapper.toAnswer
 import com.space.quizapp.common.mapper.toDomainModel
 import com.space.quizapp.common.mapper.toQuizDomainModel

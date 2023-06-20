@@ -1,9 +1,7 @@
 package com.space.quizapp.data.repository
 
-import com.space.quizapp.common.ApiError
 import com.space.quizapp.common.mapper.toAvailableQuizModel
 import com.space.quizapp.data.remote.api.ApiService
-import com.space.quizapp.data.remote.dto.QuizDto
 import com.space.quizapp.domain.model.AvailableQuizModel
 import com.space.quizapp.domain.repository.AvailableQuizRepository
 import kotlinx.coroutines.flow.Flow

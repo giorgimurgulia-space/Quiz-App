@@ -1,4 +1,4 @@
-package com.space.quizapp.presentation.point
+package com.space.quizapp.presentation.point.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

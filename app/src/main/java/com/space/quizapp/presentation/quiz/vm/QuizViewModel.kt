@@ -1,19 +1,16 @@
-package com.space.quizapp.presentation.quiz
+package com.space.quizapp.presentation.quiz.vm
 
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
-import com.space.quizapp.domain.model.QuizModel
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.CurrentQuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
-import com.space.quizapp.presentation.base.viewModel.BaseViewModel
-import com.space.quizapp.presentation.model.AnswerUIModel
-import com.space.quizapp.presentation.model.QuestionUIModel
+import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.QuizUIModel
+import com.space.quizapp.presentation.quiz.ui.QuizPagePayLoad
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject

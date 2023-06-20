@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.space.quizapp.presentation.auth.AuthenticationFragment">
+    tools:context="com.space.quizapp.presentation.auth.ui.AuthenticationFragment">
 
 <!--    todo color transfer here-->
     <com.space.quizapp.presentation.view.AuthIllustrationBackground

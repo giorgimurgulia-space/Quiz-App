@@ -1,4 +1,4 @@
-package com.space.quizapp.presentation.home
+package com.space.quizapp.presentation.home.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.space.quizapp.presentation.model.AvailableQuizUIModel

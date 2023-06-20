@@ -1,4 +1,4 @@
-package com.space.quizapp.presentation.quiz
+package com.space.quizapp.presentation.quiz.ui
 
 import com.space.quizapp.presentation.model.AnswerUIModel
 import com.space.quizapp.common.resource.Result

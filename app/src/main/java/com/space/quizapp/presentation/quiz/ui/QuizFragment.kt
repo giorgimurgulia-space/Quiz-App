@@ -1,6 +1,5 @@
-package com.space.quizapp.presentation.quiz
+package com.space.quizapp.presentation.quiz.ui
 
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +10,8 @@ import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.databinding.FragmentQuizBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
+import com.space.quizapp.presentation.quiz.adapter.AnswerAdapter
+import com.space.quizapp.presentation.quiz.vm.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

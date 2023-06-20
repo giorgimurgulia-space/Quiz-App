@@ -1,4 +1,4 @@
-package com.space.quizapp.common.navigation
+package com.space.quizapp.presentation.navigation
 
 import androidx.navigation.NavDirections
 
