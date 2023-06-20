@@ -54,7 +54,6 @@ class HomeFragment :
                 loader()
             }
             //todo base
-            // DSL
             it.onError {
                 loader(true)
                 showQuestionDialog(R.string.error_available_quiz, onPositiveButtonClick = {

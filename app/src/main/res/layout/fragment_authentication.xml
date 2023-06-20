@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.space.quizapp.presentation.auth.ui.AuthenticationFragment">
 
-<!--    todo color transfer here-->
     <com.space.quizapp.presentation.view.AuthIllustrationBackground
         android:id="@+id/illustration_bkg_view"
         android:layout_width="match_parent"

@@ -60,7 +60,7 @@ class HomeViewModel @Inject constructor(
                 val user = userDataUseCse.getUser(currentUserId).toUIModel(userGPA)
                 _state.tryEmit(user)
             } catch (e: Error) {
-                //todo error
+                //todo base
             }
         }
     }

@@ -22,8 +22,6 @@ import com.space.quizapp.presentation.base.vm.BaseViewModel
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
     Fragment() {
-
-    //TODO
     abstract val viewModel: VM
 
     private var _binding: VB? = null
