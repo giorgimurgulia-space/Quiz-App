@@ -16,21 +16,8 @@ class AvailableQuizRepositoryImpl @Inject constructor(
     private var availableQuiz: AtomicReference<List<AvailableQuizModel>> =
         AtomicReference(emptyList())
 
-
-    //change flow to list
     override suspend fun getAvailableQuizList(isRefreshed: Boolean): Flow<List<AvailableQuizModel>> =
         flow {
-//        val response = apiService.getQuiz()
-//        if (response.isSuccessful) {
-//            val quiz = response.body()!!.map {
-//                it.toAvailableQuizModel()
-//            }
-//            emit(quiz)
-//        } else {
-//            //todo
-//            throw ApiError(null)
-//        }
-
             if (availableQuiz.get().isNullOrEmpty() || isRefreshed) {
                 makeApiCall()
                 emit(availableQuiz.get())

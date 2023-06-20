@@ -33,20 +33,5 @@ class UserDataUseCse @Inject constructor(
         emit(userPoints)
     }
 
-    // todo domain model
-    suspend fun setUserPoint(
-        userId: String,
-        subjectId: String,
-        quizTitle: String,
-        quizDescription: String,
-        quizIcon: String,
-        point: Float
-    ) = userDataRepository.setUserPoint(
-        userId,
-        subjectId,
-        quizTitle,
-        quizDescription,
-        quizIcon,
-        point
-    )
+    suspend fun setUserPoint(point: PointModel) = userDataRepository.setUserPoint(point)
 }

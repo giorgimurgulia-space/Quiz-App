@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
+import com.space.quizapp.domain.model.PointModel
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
 import com.space.quizapp.domain.usecase.quiz.CurrentQuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
@@ -92,12 +93,14 @@ class QuizViewModel @Inject constructor(
     private fun insertQuizPoint(point: Float) {
         viewModelScope.launch {
             userDataUseCse.setUserPoint(
-                authenticationUseCase.getCurrentUserId(),
-                currentQuiz.id,
-                currentQuiz.quizTitle,
-                currentQuiz.quizDescription,
-                currentQuiz.quizIcon,
-                point
+                PointModel(
+                    authenticationUseCase.getCurrentUserId(),
+                    currentQuiz.id,
+                    currentQuiz.quizTitle,
+                    currentQuiz.quizDescription,
+                    currentQuiz.quizIcon,
+                    point
+                )
             )
         }
     }

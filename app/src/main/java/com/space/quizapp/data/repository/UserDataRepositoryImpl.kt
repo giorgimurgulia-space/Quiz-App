@@ -1,6 +1,7 @@
 package com.space.quizapp.data.repository
 
 import com.space.quizapp.common.mapper.toAvailableQuizModel
+import com.space.quizapp.common.mapper.toEntity
 import com.space.quizapp.data.local.database.model.dao.UserDao
 import com.space.quizapp.data.local.database.model.dao.UserPointDao
 import com.space.quizapp.data.local.database.model.entity.UserPointEntity
@@ -25,19 +26,13 @@ class UserDataRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setUserPoint(
-        userId: String,
-        subjectId: String,
-        quizTitle: String,
-        quizDescription: String,
-        quizIcon: String,
-        point: Float
+        point: PointModel
     ) {
-        val oldPoint = userPointDao.getUserSubjectPoint(userId, subjectId).firstOrNull()?.point
+        val oldPoint =
+            userPointDao.getUserSubjectPoint(point.userId, point.subjectId).firstOrNull()?.point
 
-        if (oldPoint == null || point > oldPoint) {
-            userPointDao.insertUserPoint(
-                UserPointEntity(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
-            )
+        if (oldPoint == null || point.point > oldPoint) {
+            userPointDao.insertUserPoint(point.toEntity())
         }
     }
 }

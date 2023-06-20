@@ -22,7 +22,6 @@ class CurrentQuizRepositoryImpl @Inject constructor(
     private var currentUserAnswer: AtomicReference<List<Int>> = AtomicReference(emptyList())
 
     override suspend fun getQuizById(subjectId: String) {
-        // todo
         clearCurrentQuizData()
 
         val response = apiService.getQuiz()

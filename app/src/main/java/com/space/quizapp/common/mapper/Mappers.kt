@@ -48,6 +48,8 @@ fun AnswerModel.toUIModel() = AnswerUIModel(answerId, answerTitle, answerStatus)
 
 fun String.toAnswer() = AnswerModel(UUID.randomUUID().toString(), this, null)
 
+fun PointModel.toEntity() =
+    UserPointEntity(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
 
 
 
