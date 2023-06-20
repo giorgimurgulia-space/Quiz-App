@@ -12,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0_dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:cornerColor="@color/blue_secondary_default"
+        app:backgroundColor="@color/blue_secondary_light"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

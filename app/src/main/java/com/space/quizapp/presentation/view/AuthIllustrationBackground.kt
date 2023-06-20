@@ -1,6 +1,7 @@
 package com.space.quizapp.presentation.view
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.*
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
@@ -20,8 +21,24 @@ class AuthIllustrationBackground(
         drawMainBackground(canvas)
     }
 
-    private val blueCornerColor = ContextCompat.getColor(context, R.color.blue_secondary_default)
-    private val blueBackgroundColor = ContextCompat.getColor(context, R.color.blue_secondary_light)
+    private var attributeArray: TypedArray? = context.theme.obtainStyledAttributes(
+        attributeSet,
+        R.styleable.AuthIllustrationBackground, 0, 0
+    )
+
+    //    private val blueCornerColor = ContextCompat.getColor(context, R.color.blue_secondary_default)
+    private val blueCornerColor =
+        attributeArray?.getColor(
+            R.styleable.AuthIllustrationBackground_cornerColor,
+            ContextCompat.getColor(context, R.color.neutral_04_white)
+        ) ?: android.R.color.white
+
+    //    private val blueBackgroundColor = ContextCompat.getColor(context, R.color.blue_secondary_light)
+    private val blueBackgroundColor =
+        attributeArray?.getColor(
+            R.styleable.AuthIllustrationBackground_backgroundColor,
+            ContextCompat.getColor(context, R.color.neutral_01_dark_grey)
+        ) ?: android.R.color.black
 
 
     private fun drawCornerMoon(canvas: Canvas) {
