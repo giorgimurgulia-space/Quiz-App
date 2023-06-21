@@ -80,8 +80,8 @@ class HomeFragment :
         }
     }
 
-    private fun setUserData(user: UserUIModel?) = with(binding) {
-        if (user != null) {
+    private fun setUserData(user: UserUIModel) = with(binding) {
+        if (user.username != null) {
             val userGPA = String.format(resources.getString(R.string.user_GPA), user.userGPA)
 
             helloTitleText.text =

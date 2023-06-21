@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val currentUserId = authenticationUseCase.getCurrentUserId()
 
-    private val _state = MutableStateFlow(UserUIModel("", "", "0"))
+    private val _state = MutableStateFlow(UserUIModel())
     val state get() = _state.asStateFlow()
 
     private val _availableQuiz =
@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor(
     val availableQuiz get() = _availableQuiz.asStateFlow()
 
 
-    fun refreshAllData(isRefreshed:Boolean = false) {
+    fun refreshAllData(isRefreshed: Boolean = false) {
         getUserData()
         getAvailableQuiz(isRefreshed)
     }
