@@ -30,13 +30,13 @@
         android:layout_height="@dimen/dimen_1_dp"
         android:layout_marginTop="@dimen/dimen_34_dp"
         android:background="@color/neutral_04_white"
-        app:layout_constraintBottom_toTopOf="@id/close_button"
+        app:layout_constraintBottom_toTopOf="@id/closeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/message_text" />
 
     <TextView
-        android:id="@+id/close_button"
+        android:id="@+id/closeButton"
         style="@style/normal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

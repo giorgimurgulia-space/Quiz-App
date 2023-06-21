@@ -44,7 +44,6 @@ class HomeFragment :
         }
 
         collectFlow(viewModel.availableQuiz) {
-
             it.onSuccess { quiz ->
                 adapter.submitList(quiz)
                 loader(true)
