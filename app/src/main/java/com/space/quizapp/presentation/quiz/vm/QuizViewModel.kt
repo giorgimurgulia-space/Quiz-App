@@ -29,12 +29,16 @@ class QuizViewModel @Inject constructor(
     private val _quizState = MutableStateFlow(QuizPagePayLoad("", "", Result.Loading, false, null))
     val quizState get() = _quizState.asStateFlow()
 
-    fun startQuiz(subjectId: String) {
-        viewModelScope.launch {
-            val quiz = currentQuizUseCase.startQuiz(subjectId).toUIModel()
-            currentQuiz = quiz
-            _quizState.tryEmit(_quizState.value.copy(quizTitle = quiz.quizTitle))
-            getNewQuestion()
+    fun startQuiz(subjectId: String?) {
+        if (subjectId.isNullOrEmpty()) {
+            _quizState.tryEmit(_quizState.value.copy(answers = Result.Error(Throwable())))
+        } else {
+            viewModelScope.launch {
+                val quiz = currentQuizUseCase.startQuiz(subjectId).toUIModel()
+                currentQuiz = quiz
+                _quizState.tryEmit(_quizState.value.copy(quizTitle = quiz.quizTitle))
+                getNewQuestion()
+            }
         }
     }
 

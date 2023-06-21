@@ -8,9 +8,9 @@ import com.space.quizapp.domain.model.*
 import com.space.quizapp.presentation.model.*
 import java.util.*
 
-fun UserEntity.toAvailableQuizModel() = UserModel(userId, username)
+fun UserEntity.toDomainModel() = UserModel(userId, username)
 
-fun UserPointEntity.toAvailableQuizModel() =
+fun UserPointEntity.toDomainModel() =
     PointModel(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
 
 fun PointModel.toUIModel() =
@@ -18,7 +18,7 @@ fun PointModel.toUIModel() =
 
 fun UserModel.toUIModel(userGPA: String) = UserUIModel(userId, username, userGPA)
 
-fun QuizDto.toAvailableQuizModel() = AvailableQuizModel(id, quizTitle, quizDescription, quizIcon)
+fun QuizDto.toDomainModel() = AvailableQuizModel(id, quizTitle, quizDescription, quizIcon)
 
 fun AvailableQuizModel.toUIModel() = AvailableQuizUIModel(id, quizTitle, quizDescription, quizIcon)
 
@@ -48,7 +48,7 @@ fun AnswerModel.toUIModel() = AnswerUIModel(answerId, answerTitle, answerStatus)
 
 fun String.toAnswer() = AnswerModel(UUID.randomUUID().toString(), this, null)
 
-fun PointModel.toEntity() =
+fun PointModel.toEntity( ) =
     UserPointEntity(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
 
 

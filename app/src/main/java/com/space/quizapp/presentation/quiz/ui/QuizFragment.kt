@@ -23,12 +23,9 @@ class QuizFragment :
     private val adapter = AnswerAdapter()
 
     override fun onBind() {
-        activity?.window?.statusBarColor =
-            ContextCompat.getColor(requireContext(), R.color.blue_secondary_lightest)
-
         //todo
         val subjectId = arguments?.getString("subjectID")
-        viewModel.startQuiz(subjectId!!)
+        viewModel.startQuiz(subjectId)
 
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
@@ -59,7 +56,7 @@ class QuizFragment :
             it.answers.onError {
                 loader(true)
                 showQuestionDialog(R.string.error_message, onPositiveButtonClick = {
-                    // todo
+                    // todo base
                 })
             }
 

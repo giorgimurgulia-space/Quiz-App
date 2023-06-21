@@ -1,6 +1,6 @@
 package com.space.quizapp.data.repository
 
-import com.space.quizapp.common.mapper.toAvailableQuizModel
+import com.space.quizapp.common.mapper.toDomainModel
 import com.space.quizapp.data.remote.api.ApiService
 import com.space.quizapp.domain.model.AvailableQuizModel
 import com.space.quizapp.domain.repository.AvailableQuizRepository
@@ -30,7 +30,7 @@ class AvailableQuizRepositoryImpl @Inject constructor(
         val response = apiService.getQuiz()
         if (response.isSuccessful)
             availableQuiz.set(response.body()!!.map {
-                it.toAvailableQuizModel()
+                it.toDomainModel()
             })
     }
 
