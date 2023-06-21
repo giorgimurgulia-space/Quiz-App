@@ -26,7 +26,7 @@ class QuizViewModel @Inject constructor(
 
     private lateinit var currentQuiz: QuizUIModel
 
-    private val _quizState = MutableStateFlow(QuizPagePayLoad("", "", Result.Loading, false, null))
+    private val _quizState = MutableStateFlow(QuizPagePayLoad())
     val quizState get() = _quizState.asStateFlow()
 
     fun startQuiz(subjectId: String?) {
