@@ -1,6 +1,7 @@
 package com.space.quizapp.di
 
 
+import com.space.quizapp.common.util.QuizConstants.BASE_URL
 import com.space.quizapp.data.remote.api.ApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -26,7 +27,7 @@ object ApiModule {
     @Provides
     @Singleton
     fun getRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://run.mocky.io/v3/").addConverterFactory(
+        .baseUrl(BASE_URL).addConverterFactory(
             MoshiConverterFactory.create(
                 Moshi.Builder().add(
                     KotlinJsonAdapterFactory()

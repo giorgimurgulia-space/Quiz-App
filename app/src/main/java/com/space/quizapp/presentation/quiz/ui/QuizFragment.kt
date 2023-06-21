@@ -1,6 +1,5 @@
 package com.space.quizapp.presentation.quiz.ui
 
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
@@ -8,6 +7,7 @@ import com.space.quizapp.common.extensions.collectFlow
 import com.space.quizapp.common.resource.onError
 import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
+import com.space.quizapp.common.util.QuizConstants.SUBJECT_ID
 import com.space.quizapp.databinding.FragmentQuizBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
 import com.space.quizapp.presentation.quiz.adapter.AnswerAdapter
@@ -23,8 +23,7 @@ class QuizFragment :
     private val adapter = AnswerAdapter()
 
     override fun onBind() {
-        //todo
-        val subjectId = arguments?.getString("subjectID")
+        val subjectId = arguments?.getString(SUBJECT_ID)
         viewModel.startQuiz(subjectId)
 
         binding.mainRecycler.layoutManager =
