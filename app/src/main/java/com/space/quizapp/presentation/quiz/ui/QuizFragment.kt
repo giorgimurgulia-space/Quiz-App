@@ -80,10 +80,8 @@ class QuizFragment :
     }
 
     private fun changeSubmitButtonText(isLastQuestion: Boolean) {
-        if (isLastQuestion)
-            binding.submitButton.text = resources.getString(R.string.next)
-        else
-            binding.submitButton.text = resources.getString((R.string.finish))
+        binding.submitButton.text =
+            resources.getString(if (isLastQuestion) R.string.finish else R.string.next)
     }
 
 }
