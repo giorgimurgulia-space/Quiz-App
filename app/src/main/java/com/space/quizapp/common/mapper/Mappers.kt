@@ -44,9 +44,9 @@ fun QuizModel.toUIModel() = QuizUIModel(id, quizTitle, quizDescription, quizIcon
 fun QuestionModel.toUIModel(isLastQuestion: Boolean) =
     QuestionUIModel(questionTitle, answers.map { it.toUIModel() }, isLastQuestion)
 
-fun AnswerModel.toUIModel() = AnswerUIModel(answerId, answerTitle, answerStatus)
+fun AnswerModel.toUIModel() = AnswerUIModel(answerId, answerTitle)
 
-fun String.toAnswer() = AnswerModel(UUID.randomUUID().toString(), this, null)
+fun String.toAnswer() = AnswerModel(UUID.randomUUID().toString(), this)
 
 fun PointModel.toEntity( ) =
     UserPointEntity(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
