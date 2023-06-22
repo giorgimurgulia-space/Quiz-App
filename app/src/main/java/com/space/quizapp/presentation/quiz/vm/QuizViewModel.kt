@@ -52,21 +52,19 @@ class QuizViewModel @Inject constructor(
 
     fun onSubmitButtonClick() {
         if (_quizState.value.isLastQuestion)
-            getQuizPoints()
+            finishQuiz()
         else
             getNewQuestion()
     }
 
-    fun cancelQuiz(): Float {
-        return getQuizPoints()
+    fun cancelQuiz() {
+        _quizState.tryEmit(_quizState.value.copy(point = getQuizPointUseCase.invoke()))
     }
 
-    private fun getQuizPoints(): Float {
+    private fun finishQuiz() {
         val point = getQuizPointUseCase.invoke()
         insertQuizPoint(point)
         _quizState.tryEmit(_quizState.value.copy(point = point))
-
-        return point
     }
 
     private fun getNewQuestion() {
