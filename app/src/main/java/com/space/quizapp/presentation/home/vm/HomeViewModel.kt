@@ -39,9 +39,9 @@ class HomeViewModel @Inject constructor(
     val availableQuiz get() = _availableQuiz.asStateFlow()
 
 
-    fun refreshAllData(isRefreshed: Boolean = false) {
+    fun refreshAllData(refresh: Boolean = false) {
         getUserData()
-        getAvailableQuiz(isRefreshed)
+        getAvailableQuiz(refresh)
     }
 
     fun logOut() {
@@ -71,7 +71,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getAvailableQuiz(isRefreshed: Boolean = false) {
         viewModelScope.launch {
-            availableQuizUseCase.getAvailableQuiz(isRefreshed).map {
+            availableQuizUseCase.invoke(isRefreshed).map {
                 it.map { quiz -> quiz.toUIModel() }
             }.toResult().collectLatest {
                 _availableQuiz.tryEmit(it)
