@@ -21,7 +21,7 @@ import javax.inject.Inject
 class QuizViewModel @Inject constructor(
     private val authenticationUseCase: AuthenticationUseCase,
     private val userDataUseCse: UserDataUseCse,
-    private val currentQuizUseCase: CurrentQuizUseCase,
+    private val currentQuizUseCase: CurrentQuizUseCase
 ) : BaseViewModel() {
 
     private lateinit var currentQuiz: QuizUIModel

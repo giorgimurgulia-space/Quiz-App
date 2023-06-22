@@ -1,5 +1,6 @@
 package com.space.quizapp.presentation.quiz.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -7,12 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.space.quizapp.databinding.ViewAnswerBinding
 import com.space.quizapp.presentation.model.AnswerUIModel
 
-class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(AnswerDiffUtil()) {
+class AnswerAdapter(private val onItemClicked: ((answerIndex: Int) -> Unit)) :
+    ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(AnswerDiffUtil()) {
 
     var correctAnswer: Int? = null
-    var userAnswer: Int? = null
-
-    private var callBack: CallBack? = null
+    private var userAnswer: Int? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,41 +23,61 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            ),
-            callBack
-        )
-    }
-
-    fun setCallBack(callBack: CallBack) {
-        this.callBack = callBack
+            )
+        ) {
+            onAnswerClick(it)
+        }
     }
 
 
     override fun onBindViewHolder(holder: PointViewHolder, position: Int) {
-        holder.bind(getItem(position), correctAnswer!!, userAnswer)
+        holder.bind(
+            getItem(position),
+            correctAnswer!!,
+            userAnswer
+        )
+    }
+
+    override fun submitList(list: List<AnswerUIModel>?) {
+        userAnswer = null
+        super.submitList(list)
     }
 
     class PointViewHolder(
         private val binding: ViewAnswerBinding,
-        private val callBack: CallBack?,
+        private val onItemClicked: (answerIndex: Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(answer: AnswerUIModel, correctAnswer: Int, userAnswer: Int?) = with(binding) {
+        fun bind(
+            answer: AnswerUIModel,
+            correctAnswer: Int,
+            userAnswer: Int?
+        ) = with(binding) {
             root.setContent(answer)
 
-            if (userAnswer != null && (correctAnswer == adapterPosition || userAnswer == adapterPosition))
+            if (userAnswer != null && (correctAnswer == adapterPosition || userAnswer == adapterPosition)) {
                 root.setStatus(userAnswer, correctAnswer, adapterPosition)
-            else
+            } else {
                 root.isNeutralL()
-
+            }
             binding.root.setOnClickListener {
-                if (userAnswer == null)
-                    callBack?.onItemClick(adapterPosition)
+                if (userAnswer == null) {
+                    onItemClicked(adapterPosition)
+                }
             }
         }
     }
 
-    interface CallBack {
-        fun onItemClick(answerIndex: Int)
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun onAnswerClick(userAnswer: Int) {
+        onItemClicked(userAnswer)
+        this.userAnswer = userAnswer
+
+        notifyItemChanged(userAnswer)
+
+        if (userAnswer != correctAnswer) {
+            notifyItemChanged(correctAnswer!!)
+        }
     }
 }

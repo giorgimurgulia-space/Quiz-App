@@ -16,14 +16,13 @@ class AvailableQuizRepositoryImpl @Inject constructor(
     private var availableQuiz: AtomicReference<List<AvailableQuizModel>> =
         AtomicReference(emptyList())
 
-    override suspend fun getAvailableQuizList(isRefreshed: Boolean): Flow<List<AvailableQuizModel>> =
+    override suspend fun getAvailableQuizList(refresh: Boolean): Flow<List<AvailableQuizModel>> =
         flow {
-            if (availableQuiz.get().isNullOrEmpty() || isRefreshed) {
+            if (availableQuiz.get().isNullOrEmpty() || refresh) {
                 makeApiCall()
                 emit(availableQuiz.get())
             } else
                 emit(availableQuiz.get())
-
         }
 
     private suspend fun makeApiCall() {

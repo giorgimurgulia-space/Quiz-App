@@ -1,6 +1,5 @@
 package com.space.quizapp.presentation.quiz.ui
 
-import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
@@ -21,7 +20,9 @@ class QuizFragment :
     BaseFragment<FragmentQuizBinding, QuizViewModel>(FragmentQuizBinding::inflate) {
 
     override val viewModel: QuizViewModel by viewModels()
-    private val adapter = AnswerAdapter()
+    private val adapter = AnswerAdapter(onItemClicked = {
+        viewModel.onAnswerClick(it)
+    })
 
     override fun onBind() {
         val subjectId = arguments?.getString(SUBJECT_ID)
@@ -34,19 +35,8 @@ class QuizFragment :
     }
 
     override fun setObserves() {
-        adapter.setCallBack(object : AnswerAdapter.CallBack {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onItemClick(answerIndex: Int) {
-                adapter.userAnswer = answerIndex
-                adapter.notifyDataSetChanged()
-
-                viewModel.onAnswerClick(answerIndex)
-            }
-        })
-
         collectFlow(viewModel.quizState) {
             adapter.correctAnswer = it.correctAnswerIndex
-            adapter.userAnswer = null
 
             binding.titleText.text = it.quizTitle
 
