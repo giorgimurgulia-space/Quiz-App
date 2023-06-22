@@ -4,11 +4,11 @@ import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
-import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
-import com.space.quizapp.domain.usecase.auth.GetCurrentUseIdUseCase
+import com.space.quizapp.domain.usecase.auth.GetCurrentUserIdUseCase
 import com.space.quizapp.domain.usecase.auth.LogOutUseCase
 import com.space.quizapp.domain.usecase.quiz.AvailableQuizUseCase
-import com.space.quizapp.domain.usecase.user.UserDataUseCse
+import com.space.quizapp.domain.usecase.user.GetUserDataUseCse
+import com.space.quizapp.domain.usecase.user.GetUserGpaUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
 import com.space.quizapp.presentation.model.AvailableQuizUIModel
@@ -23,13 +23,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val userDataUseCse: UserDataUseCse,
-    private val getCurrentUseIdUseCase: GetCurrentUseIdUseCase,
+    private val userDataUseCse: GetUserDataUseCse,
+    private val getCurrentUserIdUseCase: GetCurrentUserIdUseCase,
+    private val getUserGpaUseCse: GetUserGpaUseCse,
     private val logOutUseCase: LogOutUseCase,
-    private val authenticationUseCase: AuthenticationUseCase,
     private val availableQuizUseCase: AvailableQuizUseCase,
 ) : BaseViewModel() {
-    private val currentUserId = getCurrentUseIdUseCase.invoke()
+    private val currentUserId = getCurrentUserIdUseCase.invoke()
 
     private val _state = MutableStateFlow(UserUIModel())
     val state get() = _state.asStateFlow()
@@ -60,8 +60,8 @@ class HomeViewModel @Inject constructor(
     private fun getUserData() {
         viewModelScope.launch {
             try {
-                val userGPA = userDataUseCse.getUserGPA(currentUserId)
-                val user = userDataUseCse.getUser(currentUserId).toUIModel(userGPA)
+                val userGPA = getUserGpaUseCse.invoke(currentUserId)
+                val user = userDataUseCse.invoke(currentUserId).toUIModel(userGPA)
                 _state.tryEmit(user)
             } catch (e: Error) {
                 //todo base

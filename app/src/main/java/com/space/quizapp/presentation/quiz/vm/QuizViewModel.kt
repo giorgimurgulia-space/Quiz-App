@@ -5,10 +5,10 @@ import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
 import com.space.quizapp.domain.model.PointModel
-import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
-import com.space.quizapp.domain.usecase.auth.GetCurrentUseIdUseCase
+import com.space.quizapp.domain.usecase.auth.GetCurrentUserIdUseCase
 import com.space.quizapp.domain.usecase.quiz.CurrentQuizUseCase
-import com.space.quizapp.domain.usecase.user.UserDataUseCse
+import com.space.quizapp.domain.usecase.user.GetUserDataUseCse
+import com.space.quizapp.domain.usecase.user.InsertUserPointUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.QuizUIModel
 import com.space.quizapp.presentation.quiz.ui.QuizPagePayLoad
@@ -20,8 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
-    private val getCurrentUseIdUseCase: GetCurrentUseIdUseCase,
-    private val userDataUseCse: UserDataUseCse,
+    private val getCurrentUseIdUseCase: GetCurrentUserIdUseCase,
+    private val userDataUseCse: GetUserDataUseCse,
+    private val insertUserPointUseCse: InsertUserPointUseCse,
     private val currentQuizUseCase: CurrentQuizUseCase
 ) : BaseViewModel() {
 
@@ -90,7 +91,7 @@ class QuizViewModel @Inject constructor(
 
     private fun insertQuizPoint(point: Float) {
         viewModelScope.launch {
-            userDataUseCse.setUserPoint(
+            insertUserPointUseCse.invoke(
                 PointModel(
                     getCurrentUseIdUseCase.invoke(),
                     currentQuiz.id,
