@@ -51,12 +51,12 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         return currentQuiz.get().questions[currentUserAnswer.get().size].answers.map { it.toAnswer() }
     }
 
-    // todo transfer to useCase
     override fun setUserAnswer(userAnswerIndex: Int) {
         insertUserAnswer(userAnswerIndex)
     }
 
     // todo transfer to useCase
+    // todo each question point
     override fun finishQuiz(): Float {
         var userPoint = 0
 

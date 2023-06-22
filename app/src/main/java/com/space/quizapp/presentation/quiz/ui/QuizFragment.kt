@@ -1,5 +1,6 @@
 package com.space.quizapp.presentation.quiz.ui
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
@@ -34,6 +35,7 @@ class QuizFragment :
 
     override fun setObserves() {
         adapter.setCallBack(object : AnswerAdapter.CallBack {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onItemClick(answerIndex: Int) {
                 adapter.userAnswer = answerIndex
                 adapter.notifyDataSetChanged()
