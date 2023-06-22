@@ -11,11 +11,13 @@ interface CurrentQuizRepository {
 
     fun startQuiz(): QuizModel
 
-    fun getNextQuestion(): QuestionModel
+    fun getQuestion(questionIndex: Int): QuestionModel
 
-    fun getNextAnswers(): List<AnswerModel>
+    fun getQuizAnswers(questionIndex: Int): List<AnswerModel>
 
-    fun setUserAnswer(userAnswerIndex: Int)
+    fun insertUserAnswer(userAnswerIndex: Int)
 
-    fun finishQuiz(): Float
+    fun getCorrectAnswers(): List<Int>
+
+    fun getUserAnswers(): List<Int>
 }

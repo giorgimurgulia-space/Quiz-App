@@ -6,8 +6,7 @@ import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
 import com.space.quizapp.domain.model.PointModel
 import com.space.quizapp.domain.usecase.auth.GetCurrentUserIdUseCase
-import com.space.quizapp.domain.usecase.quiz.CurrentQuizUseCase
-import com.space.quizapp.domain.usecase.user.GetUserDataUseCse
+import com.space.quizapp.domain.usecase.quiz.*
 import com.space.quizapp.domain.usecase.user.InsertUserPointUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.QuizUIModel
@@ -20,10 +19,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
+    private val startQuizUseCase: StartQuizUseCase,
+    private val getNextQuestionUseCase: GetNextQuestionUseCase,
+    private val getNextAnswersUseCase: GetNextAnswersUseCase,
+    private val insertAnswerUseCase: InsertAnswerUseCase,
     private val getCurrentUseIdUseCase: GetCurrentUserIdUseCase,
-    private val userDataUseCse: GetUserDataUseCse,
-    private val insertUserPointUseCse: InsertUserPointUseCse,
-    private val currentQuizUseCase: CurrentQuizUseCase
+    private val getQuizPointUseCase: GetQuizPointUseCase,
+    private val insertUserPointUseCse: InsertUserPointUseCse
 ) : BaseViewModel() {
 
     private lateinit var currentQuiz: QuizUIModel
@@ -36,7 +38,7 @@ class QuizViewModel @Inject constructor(
             _quizState.tryEmit(_quizState.value.copy(answers = Result.Error(Throwable())))
         } else {
             viewModelScope.launch {
-                val quiz = currentQuizUseCase.startQuiz(subjectId).toUIModel()
+                val quiz = startQuizUseCase.invoke(subjectId).toUIModel()
                 currentQuiz = quiz
                 _quizState.tryEmit(_quizState.value.copy(quizTitle = quiz.quizTitle))
                 getNewQuestion()
@@ -45,7 +47,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun onAnswerClick(answerIndex: Int) {
-        currentQuizUseCase.setUserAnswer(answerIndex)
+        insertAnswerUseCase.invoke(answerIndex)
     }
 
     fun onSubmitButtonClick() {
@@ -60,7 +62,7 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getQuizPoints(): Float {
-        val point = currentQuizUseCase.finishQuiz()
+        val point = getQuizPointUseCase.invoke()
         insertQuizPoint(point)
         _quizState.tryEmit(_quizState.value.copy(point = point))
 
@@ -68,7 +70,7 @@ class QuizViewModel @Inject constructor(
     }
 
     private fun getNewQuestion() {
-        val newQuestion = currentQuizUseCase.getNextQuestion()
+        val newQuestion = getNextQuestionUseCase.invoke()
 
         _quizState.tryEmit(
             _quizState.value.copy(
@@ -79,7 +81,7 @@ class QuizViewModel @Inject constructor(
         )
 
         viewModelScope.launch {
-            currentQuizUseCase.getNextAnswer().map {
+            getNextAnswersUseCase.invoke().map {
                 it.map { answer ->
                     answer.toUIModel()
                 }
