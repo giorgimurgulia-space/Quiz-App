@@ -11,6 +11,7 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
 
     var correctAnswer: Int? = null
     var userAnswer: Int? = null
+
     private var callBack: CallBack? = null
 
     override fun onCreateViewHolder(
@@ -28,7 +29,8 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
     }
 
     fun setCallBack(callBack: CallBack) {
-        this.callBack = callBack
+        if (userAnswer == null)
+            this.callBack = callBack
     }
 
 
@@ -38,8 +40,14 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
 
     class PointViewHolder(
         private val binding: ViewAnswerBinding,
-        private val callBack: CallBack?,
+        private val callBack: CallBack?
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                callBack?.onItemClick(adapterPosition)
+            }
+        }
 
         fun bind(answer: AnswerUIModel, correctAnswer: Int, userAnswer: Int?) = with(binding) {
             root.setContent(answer)
@@ -48,11 +56,6 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
                 root.setStatus(userAnswer, correctAnswer, adapterPosition)
             else
                 root.isNeutralL()
-
-            root.setOnClickListener {
-                if (userAnswer == null)
-                    callBack?.onItemClick(adapterPosition)
-            }
         }
     }
 

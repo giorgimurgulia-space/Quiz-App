@@ -2,6 +2,7 @@ package com.space.quizapp.presentation.view
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -23,25 +24,21 @@ class AnswerView(
     }
 
     fun setStatus(userAnswer: Int, correctAnswer: Int, position: Int) {
+        changeTextColor(R.color.neutral_04_white)
+
         when (position) {
             userAnswer -> {
                 if (userAnswer == correctAnswer) {
-                    binding.root.backgroundTintList =
-                        ColorStateList.valueOf(resources.getColor(R.color.success_green))
-                    binding.plusPintText.visibility = View.VISIBLE
-                    binding.answerText.setTextColor(resources.getColor(R.color.neutral_04_white))
+                    changeBackgroundColor(R.color.success_green)
+                    showPoint(true)
                 } else {
-                    binding.root.backgroundTintList =
-                        ColorStateList.valueOf(resources.getColor(R.color.wrong_red))
-                    binding.plusPintText.visibility = View.GONE
-                    binding.answerText.setTextColor(resources.getColor(R.color.neutral_04_white))
+                    changeBackgroundColor(R.color.wrong_red)
+                    showPoint(false)
                 }
             }
             correctAnswer -> {
-                binding.root.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.success_green))
-                binding.plusPintText.visibility = View.GONE
-                binding.answerText.setTextColor(resources.getColor(R.color.neutral_04_white))
+                changeBackgroundColor(R.color.success_green)
+                showPoint(false)
             }
         }
 
@@ -49,10 +46,21 @@ class AnswerView(
     }
 
     fun isNeutralL() {
-        binding.root.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.neutral_04_light_grey))
+        changeBackgroundColor(R.color.neutral_04_light_grey)
+        changeTextColor(R.color.neutral_01_dark_grey)
         binding.plusPintText.visibility = View.GONE
-        binding.answerText.setTextColor(resources.getColor(R.color.neutral_01_dark_grey))
+    }
 
+    private fun changeBackgroundColor(color: Int) {
+        binding.root.backgroundTintList =
+            ColorStateList.valueOf(resources.getColor(color))
+    }
+
+    private fun showPoint(isVisible: Boolean) {
+        binding.plusPintText.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    private fun changeTextColor(color: Int) {
+        binding.answerText.setTextColor(resources.getColor(color))
     }
 }
