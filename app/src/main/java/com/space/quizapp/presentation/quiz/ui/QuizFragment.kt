@@ -45,6 +45,7 @@ class QuizFragment :
         collectFlow(viewModel.quizState) {
             adapter.correctAnswer = it.correctAnswerIndex
             adapter.userAnswer = null
+
             binding.titleText.text = it.quizTitle
 
             binding.questionText.text = it.question

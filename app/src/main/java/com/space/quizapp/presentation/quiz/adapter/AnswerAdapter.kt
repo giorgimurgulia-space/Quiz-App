@@ -11,6 +11,7 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
 
     var correctAnswer: Int? = null
     var userAnswer: Int? = null
+
     private var callBack: CallBack? = null
 
     override fun onCreateViewHolder(
@@ -49,7 +50,7 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
             else
                 root.isNeutralL()
 
-            root.setOnClickListener {
+            binding.root.setOnClickListener {
                 if (userAnswer == null)
                     callBack?.onItemClick(adapterPosition)
             }
