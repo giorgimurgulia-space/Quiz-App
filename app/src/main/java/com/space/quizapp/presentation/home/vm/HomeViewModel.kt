@@ -5,6 +5,8 @@ import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
 import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
+import com.space.quizapp.domain.usecase.auth.GetCurrentUseIdUseCase
+import com.space.quizapp.domain.usecase.auth.LogOutUseCase
 import com.space.quizapp.domain.usecase.quiz.AvailableQuizUseCase
 import com.space.quizapp.domain.usecase.user.UserDataUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
@@ -22,10 +24,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val userDataUseCse: UserDataUseCse,
+    private val getCurrentUseIdUseCase: GetCurrentUseIdUseCase,
+    private val logOutUseCase: LogOutUseCase,
     private val authenticationUseCase: AuthenticationUseCase,
     private val availableQuizUseCase: AvailableQuizUseCase,
 ) : BaseViewModel() {
-    private val currentUserId = authenticationUseCase.getCurrentUserId()
+    private val currentUserId = getCurrentUseIdUseCase.invoke()
 
     private val _state = MutableStateFlow(UserUIModel())
     val state get() = _state.asStateFlow()
@@ -41,7 +45,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun logOut() {
-        authenticationUseCase.logOut()
+        logOutUseCase.invoke()
         navigate(HomeFragmentDirections.actionGlobalLogOut())
     }
 
