@@ -43,15 +43,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun onAnswerClick(answerIndex: Int) {
-        viewModelScope.launch {
-            currentQuizUseCase.setUserAnswer(answerIndex).map {
-                it.map { answer ->
-                    answer.toUIModel()
-                }
-            }.toResult().collect {
-                _quizState.tryEmit(_quizState.value.copy(answers = it))
-            }
-        }
+        currentQuizUseCase.setUserAnswer(answerIndex)
     }
 
     fun onSubmitButtonClick() {
@@ -79,6 +71,7 @@ class QuizViewModel @Inject constructor(
         _quizState.tryEmit(
             _quizState.value.copy(
                 question = newQuestion.questionTitle,
+                correctAnswerIndex = newQuestion.correctAnswerIndex,
                 isLastQuestion = newQuestion.questionIndex == currentQuiz.questionsCount - 1
             )
         )

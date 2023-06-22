@@ -7,6 +7,7 @@ data class QuizPagePayLoad(
     val quizTitle: String? = null,
     val question: String? = null,
     val answers: Result<List<AnswerUIModel>> = Result.Loading,
+    val correctAnswerIndex: Int? = null,
     val isLastQuestion: Boolean = false,
     val point: Float? = null
 )

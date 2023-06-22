@@ -11,6 +11,6 @@ class AnswerDiffUtil : DiffUtil.ItemCallback<AnswerUIModel>() {
     }
 
     override fun areContentsTheSame(oldItem: AnswerUIModel, newItem: AnswerUIModel): Boolean {
-        return oldItem.answerStatus == newItem.answerStatus
+        return oldItem.answerTitle == newItem.answerTitle
     }
 }

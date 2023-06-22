@@ -35,11 +35,16 @@ class QuizFragment :
     override fun setObserves() {
         adapter.setCallBack(object : AnswerAdapter.CallBack {
             override fun onItemClick(answerIndex: Int) {
+                adapter.userAnswer = answerIndex
+                adapter.notifyDataSetChanged()
+
                 viewModel.onAnswerClick(answerIndex)
             }
         })
 
         collectFlow(viewModel.quizState) {
+            adapter.correctAnswer = it.correctAnswerIndex
+            adapter.userAnswer = null
             binding.titleText.text = it.quizTitle
 
             binding.questionText.text = it.question

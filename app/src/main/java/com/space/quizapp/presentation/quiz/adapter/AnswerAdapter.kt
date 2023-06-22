@@ -9,6 +9,8 @@ import com.space.quizapp.presentation.model.AnswerUIModel
 
 class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(AnswerDiffUtil()) {
 
+    var correctAnswer: Int? = null
+    var userAnswer: Int? = null
     private var callBack: CallBack? = null
 
     override fun onCreateViewHolder(
@@ -31,25 +33,26 @@ class AnswerAdapter : ListAdapter<AnswerUIModel, AnswerAdapter.PointViewHolder>(
 
 
     override fun onBindViewHolder(holder: PointViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), correctAnswer!!, userAnswer)
     }
 
     class PointViewHolder(
         private val binding: ViewAnswerBinding,
-        private val callBack: CallBack?
+        private val callBack: CallBack?,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(answer: AnswerUIModel) = with(binding) {
+        fun bind(answer: AnswerUIModel, correctAnswer: Int, userAnswer: Int?) = with(binding) {
             root.setContent(answer)
 
-            root.setOnClickListener {
-                if (answer.answerStatus == null)
-                    onItemClick()
-            }
-        }
+            if (userAnswer != null && (correctAnswer == adapterPosition || userAnswer == adapterPosition))
+                root.setStatus(userAnswer, correctAnswer, adapterPosition)
+            else
+                root.isNeutralL()
 
-        private fun onItemClick() {
-            callBack?.onItemClick(this.adapterPosition)
+            root.setOnClickListener {
+                if (userAnswer == null)
+                    callBack?.onItemClick(adapterPosition)
+            }
         }
     }
 

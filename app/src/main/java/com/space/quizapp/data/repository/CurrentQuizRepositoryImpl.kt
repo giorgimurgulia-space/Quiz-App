@@ -53,25 +53,8 @@ class CurrentQuizRepositoryImpl @Inject constructor(
     }
 
     // todo transfer to useCase
-    override fun setUserAnswer(userAnswerIndex: Int): List<AnswerModel> {
-        val correctAnswerIndex =
-            currentQuiz.get().questions[currentUserAnswer.get().size].toDomainModel().correctAnswerIndex
-
-        val uiAnswers = currentQuiz.get().questions[currentUserAnswer.get().size].answers.map {
-            it.toAnswer().copy(answerStatus = AnswerStatus.NEUTRAL)
-        }.toMutableList()
-
-        if (correctAnswerIndex == userAnswerIndex) {
-            uiAnswers[userAnswerIndex] = uiAnswers[userAnswerIndex].copy(answerStatus = AnswerStatus.CORRECT)
-        } else {
-            uiAnswers[userAnswerIndex] = uiAnswers[userAnswerIndex].copy(answerStatus = AnswerStatus.NEGATIVE)
-            uiAnswers[correctAnswerIndex] = uiAnswers[correctAnswerIndex].copy(answerStatus = AnswerStatus.POSITIVE)
-
-        }
-
+    override fun setUserAnswer(userAnswerIndex: Int) {
         insertUserAnswer(userAnswerIndex)
-
-        return uiAnswers
     }
 
     // todo transfer to useCase
