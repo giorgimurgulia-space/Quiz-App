@@ -9,7 +9,6 @@
     android:backgroundTint="@color/yellow_primary"
     android:maxWidth="@dimen/dimen_350_dp"
     android:minWidth="@dimen/dimen_270_dp"
-    android:paddingTop="@dimen/dimen_29_dp"
     tools:ignore="MissingDefaultResource">
 
     <TextView
@@ -17,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_34_dp"
+        android:layout_marginTop="@dimen/dimen_29_dp"
         android:text="@string/congratulation_icon"
         android:textSize="@dimen/dimen_30_sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -10,6 +10,7 @@ import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.common.util.QuizConstants.SUBJECT_ID
 import com.space.quizapp.databinding.FragmentQuizBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
+import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.quiz.adapter.AnswerAdapter
 import com.space.quizapp.presentation.quiz.vm.QuizViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,24 +53,41 @@ class QuizFragment :
             }
             it.answers.onError {
                 loader(true)
-                showQuestionDialog(R.string.error_message, onPositiveButtonClick = {
-                    // todo base
-                })
+                showDialog(
+                    DialogUIModel(
+                        title = R.string.error_message_close,
+                        closeButton = {
+                            viewModel.navigateBack()
+                        }
+                    )
+                )
             }
 
             if (it.point != null) {
-                showMessageDialog(it.point.toString(), onCloseButtonClick = {
-                    viewModel.navigateBack()
-                })
+                showDialog(
+                    DialogUIModel(
+                        icon = true,
+                        title = R.string.congratulation,
+                        description = String.format(
+                            resources.getString(R.string.your_point),
+                            it.point
+                        ),
+                        closeButton = {
+                            viewModel.navigateBack()
+                        }
+                    )
+                )
             }
         }
     }
 
     override fun setListeners() {
         binding.cancelImage.setOnClickListener {
-            showQuestionDialog(R.string.cancel_quiz, onPositiveButtonClick = {
-                viewModel.cancelQuiz()
-            })
+            showDialog(DialogUIModel(
+                title = R.string.cancel_quiz, yesButton = {
+                    viewModel.cancelQuiz()
+                }
+            ))
         }
 
         binding.submitButton.setOnClickListener {

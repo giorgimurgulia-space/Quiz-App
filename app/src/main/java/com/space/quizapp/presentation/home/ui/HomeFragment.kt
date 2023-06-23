@@ -14,6 +14,7 @@ import com.space.quizapp.databinding.FragmentHomeBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
 import com.space.quizapp.presentation.home.vm.HomeViewModel
 import com.space.quizapp.presentation.home.adapter.QuizAdapter
+import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,18 +56,24 @@ class HomeFragment :
             //todo base
             it.onError {
                 loader(true)
-                showQuestionDialog(R.string.error_available_quiz, onPositiveButtonClick = {
-                    viewModel.refreshAllData()
-                })
+                showDialog(
+                    DialogUIModel(
+                        title = R.string.error_available_quiz,
+                        yesButton = {
+                            viewModel.refreshAllData()
+                        }
+                    ))
             }
         }
     }
 
     override fun setListeners() {
         binding.logOutButton.setOnClickListener {
-            showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
-                viewModel.logOut()
-            })
+            showDialog(
+                DialogUIModel(title = R.string.want_log_out, yesButton = {
+                    viewModel.logOut()
+                })
+            )
         }
 
         binding.gpaBackgroundView.setOnClickListener {

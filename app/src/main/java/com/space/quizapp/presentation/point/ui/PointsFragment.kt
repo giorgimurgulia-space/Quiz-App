@@ -9,6 +9,7 @@ import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.databinding.FragmentPointsBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
+import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.point.adapter.PointAdapter
 import com.space.quizapp.presentation.point.vm.PointsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,9 +33,11 @@ class PointsFragment :
             viewModel.navigateBack()
         }
         binding.logOutButton.setOnClickListener {
-            showQuestionDialog(R.string.want_log_out, onPositiveButtonClick = {
-                viewModel.logOut()
-            })
+            showDialog(
+                DialogUIModel(title = R.string.want_log_out, yesButton = {
+                    viewModel.logOut()
+                })
+            )
         }
     }
 
@@ -50,9 +53,13 @@ class PointsFragment :
             }
             it.onError {
                 loader(true)
-                showQuestionDialog(R.string.error_message, onPositiveButtonClick = {
-                    viewModel.refreshAllData()
-                })
+                showDialog(
+                    DialogUIModel(
+                        title = R.string.error_message,
+                        yesButton = {
+                            viewModel.refreshAllData()
+                        }
+                    ))
             }
         }
     }

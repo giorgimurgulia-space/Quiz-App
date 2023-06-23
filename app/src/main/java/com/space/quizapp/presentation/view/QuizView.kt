@@ -11,8 +11,7 @@ import com.space.quizapp.presentation.model.PointUIModel
 
 class QuizView(
     context: Context,
-    attributeSet: AttributeSet
-) : FrameLayout(context, attributeSet) {
+) : FrameLayout(context) {
     private val binding = LayoutQuizBinding.inflate(LayoutInflater.from(context), this, true)
 
     fun setContent(point: PointUIModel) {
