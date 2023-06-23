@@ -1,7 +1,5 @@
 package com.space.quizapp.presentation.base.fragment
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -28,7 +26,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    private val alertDialog by lazy { Dialog(requireContext()) }
+    private val alertDialog by lazy { DialogView(requireContext()) }
 
     abstract fun onBind()
     open fun setObserves() {}
@@ -94,5 +92,8 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
 
 
     protected fun showDialog(dialog: DialogUIModel) {
+        val quizDialog = DialogView(requireContext())
+        quizDialog.setContent(dialog)
+        quizDialog.show()
     }
 }
