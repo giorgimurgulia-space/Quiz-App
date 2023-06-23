@@ -25,5 +25,6 @@
     <string name="your_point">შენ დააგროვე %1$s ქულა</string>
     <string name="next">შემდეგი</string>
     <string name="finish">დასრულება</string>
+    <string name="congratulation_icon">🎉</string>
 
 </resources>
