@@ -1,13 +1,12 @@
 package com.space.quizapp.data.repository
 
 import com.space.quizapp.common.mapper.toDomainModel
+import com.space.quizapp.common.mapper.toEntity
 import com.space.quizapp.data.local.database.model.dao.UserDao
 import com.space.quizapp.data.local.database.model.dao.UserPointDao
 import com.space.quizapp.domain.model.PointModel
 import com.space.quizapp.domain.model.UserModel
 import com.space.quizapp.domain.repository.UserDataRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class UserDataRepositoryImpl @Inject constructor(
@@ -23,5 +22,16 @@ class UserDataRepositoryImpl @Inject constructor(
             it.toDomainModel()
         }
         return (userPoints)
+    }
+
+    override suspend fun setUserPoint(
+        point: PointModel
+    ) {
+        val oldPoint =
+            userPointDao.getUserSubjectPoint(point.userId, point.subjectId).firstOrNull()?.point
+
+        if (oldPoint == null || point.point > oldPoint) {
+            userPointDao.insertUserPoint(point.toEntity())
+        }
     }
 }

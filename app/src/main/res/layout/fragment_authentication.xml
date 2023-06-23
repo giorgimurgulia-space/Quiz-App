@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.space.quizapp.presentation.auth.AuthenticationFragment">
+    tools:context="com.space.quizapp.presentation.auth.ui.AuthenticationFragment">
 
     <com.space.quizapp.presentation.view.AuthIllustrationBackground
         android:id="@+id/illustration_bkg_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0_dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:cornerColor="@color/blue_secondary_default"
+        app:backgroundColor="@color/blue_secondary_light"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

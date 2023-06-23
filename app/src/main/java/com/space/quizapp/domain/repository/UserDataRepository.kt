@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface UserDataRepository {
     suspend fun getUser(userId: String): UserModel
     suspend fun getUserPoint(userId: String): List<PointModel>
+    suspend fun setUserPoint(point:PointModel)
 }

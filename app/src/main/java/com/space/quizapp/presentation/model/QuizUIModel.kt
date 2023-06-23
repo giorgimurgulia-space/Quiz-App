@@ -5,4 +5,5 @@ data class QuizUIModel(
     val quizTitle: String,
     val quizDescription: String,
     val quizIcon: String,
+    val questionsCount: Int,
 )

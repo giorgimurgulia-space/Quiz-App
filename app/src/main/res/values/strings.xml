@@ -14,9 +14,16 @@
     <string name="user_GPA">GPA - %1$s</string>
     <string name="yes">კი</string>
     <string name="no">არა</string>
+    <string name="close">დახურვა</string>
     <string name="want_log_out">ნამდვილად გსურს გასვლა?</string>
     <string name="loader_title">იტვირთება...</string>
     <string name="error_message">დაფიქსირდა შეცდომა, კიდევ ვცადოთ?</string>
     <string name="error_available_quiz">ქვიზები ვერ ჩაიტვირთა, კიდევ ვცადოთ?</string>
+    <string name="cancel_quiz">ნამდვილად გსურს ქვიზის შეწყვეტა?</string>
     <string name="my_points">დაგროვილი ქულები</string>
+    <string name="plus_one">+1</string>
+    <string name="your_point">შენ დააგროვე %1$s ქულა</string>
+    <string name="next">შემდეგი</string>
+    <string name="finish">დასრულება</string>
+
 </resources>

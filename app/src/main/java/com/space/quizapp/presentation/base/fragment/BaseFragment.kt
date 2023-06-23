@@ -14,16 +14,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.space.quizapp.R
-import com.space.quizapp.common.navigation.NavigationCommand
+import com.space.quizapp.presentation.navigation.NavigationCommand
 import com.space.quizapp.common.observeNonNull
 import com.space.quizapp.common.types.Inflater
-import com.space.quizapp.presentation.base.viewModel.BaseViewModel
+import com.space.quizapp.presentation.base.vm.BaseViewModel
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
     Fragment() {
-
-    //TODO
     abstract val viewModel: VM
 
     private var _binding: VB? = null
@@ -43,6 +41,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     ): View? {
         _binding = inflate.invoke(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,12 +50,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         setObserves()
         setListeners()
         observeNavigation()
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 
     protected fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -113,6 +114,25 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
             dialog.dismiss()
         }
 
+        dialog.show()
+    }
+
+    protected fun showMessageDialog(question: String, onCloseButtonClick: () -> Unit) {
+        dialog.setContentView(R.layout.dialog_message)
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+
+//        dialog.findViewById<TextView>(R.id.question_text).text = resources.getString(question)
+        dialog.findViewById<TextView>(R.id.message_text).text = question
+
+        val closeButton = dialog.findViewById<TextView>(R.id.closeButton)
+
+        closeButton.setOnClickListener {
+            dialog.dismiss()
+            onCloseButtonClick.invoke()
+        }
         dialog.show()
     }
 }

@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+// todo split use case
 class UserDataUseCse @Inject constructor(
     private val userDataRepository: UserDataRepository
 ) {
@@ -31,4 +32,6 @@ class UserDataUseCse @Inject constructor(
         val userPoints = userDataRepository.getUserPoint(userId)
         emit(userPoints)
     }
+
+    suspend fun setUserPoint(point: PointModel) = userDataRepository.setUserPoint(point)
 }

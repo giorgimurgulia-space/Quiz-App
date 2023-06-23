@@ -4,5 +4,5 @@ data class QuestionDto(
     val questionTitle: String,
     val answers: List<String>,
     val correctAnswer: String,
-    val questionIndex: String
+    val questionIndex: Int
 )
