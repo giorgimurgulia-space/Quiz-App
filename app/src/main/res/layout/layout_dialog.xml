@@ -12,6 +12,7 @@
     tools:ignore="MissingDefaultResource">
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/icon_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/title_text"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
@@ -39,6 +41,7 @@
         tools:text="ნამდვილად გსურს გასვლა?" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/description_text"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
@@ -54,6 +57,7 @@
         tools:text="შენ დააგროვე 9 ქულა" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
         android:id="@+id/no_button"
         style="@style/small"
         android:layout_width="@dimen/dimen_0_dp"
@@ -70,6 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/description_text" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
         android:id="@+id/yes_button"
         style="@style/small"
         android:layout_width="@dimen/dimen_0_dp"
@@ -85,6 +90,7 @@
         app:layout_constraintTop_toBottomOf="@id/description_text" />
 
     <View
+        android:visibility="gone"
         android:id="@+id/line_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/dimen_1_dp"
@@ -95,6 +101,7 @@
         app:layout_constraintTop_toBottomOf="@id/no_button" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/closeButton"
         style="@style/normal"
         android:layout_width="0dp"

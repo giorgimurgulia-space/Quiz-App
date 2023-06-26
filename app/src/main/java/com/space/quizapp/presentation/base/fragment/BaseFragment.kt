@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.space.quizapp.R
-import com.space.quizapp.common.observeNonNull
+import com.space.quizapp.common.extensions.collectFlow
+import com.space.quizapp.common.extensions.observeNonNull
 import com.space.quizapp.common.types.Inflater
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.DialogUIModel
@@ -50,7 +51,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         setObserves()
         setListeners()
         observeNavigation()
-
+        observeDialog()
     }
 
     override fun onDestroyView() {
@@ -70,9 +71,11 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         }
     }
 
-    private fun observeDialogStatus() {
+    private fun observeDialog() {
         viewModel.dialog.observeNonNull(viewLifecycleOwner) {
-            setDialogContent(it)
+            it.getContentIfNotHandled()?.let { dialog ->
+                DialogView(requireContext()).setTitle(dialog.title)
+            }
         }
     }
 

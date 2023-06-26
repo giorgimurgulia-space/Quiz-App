@@ -27,40 +27,47 @@ class DialogView(
         setCancelable(false)
         setCanceledOnTouchOutside(false)
 
-        dialog?.let {
-            showIcon(it.icon)
-            setTitle(it.title)
-            setDescription(it.description)
-            setYesNoButton(it.yesButton)
-            setCloseButton(it.closeButton)
-            setProgressBar(it.isProgressbar)
-        }
     }
 
-    fun setContent(dialog: DialogUIModel?) {
+    fun setContent(dialog: DialogUIModel) {
         this.dialog = dialog
+        showIcon(dialog.icon)
+        setTitle(dialog.title)
+        setDescription(dialog.description)
+        setYesNoButton(dialog.yesButton)
+        setCloseButton(dialog.closeButton)
+        setProgressBar(dialog.isProgressbar)
+    }
+
+    override fun show() {
+        super.show()
+    }
+
+    override fun dismiss() {
+        super.dismiss()
     }
 
 
-    private fun showIcon(isVisible: Boolean) {
+    fun showIcon(isVisible: Boolean): DialogView {
         binding.iconText.visibility = if (isVisible) View.VISIBLE else View.GONE
+        return this
     }
 
-    private fun setTitle(title: Int?) {
+    fun setTitle(title: Int?) {
         if (title != null)
             binding.titleText.text = context.resources.getString(title)
         else
             binding.titleText.visibility = View.GONE
     }
 
-    private fun setDescription(description: String?) {
+    fun setDescription(description: String?) {
         if (description != null)
             binding.descriptionText.text = description
         else
             binding.descriptionText.visibility = View.GONE
     }
 
-    private fun setYesNoButton(onYesButton: (() -> Unit)?) {
+    fun setYesNoButton(onYesButton: (() -> Unit)?) {
         if (onYesButton != null) {
             binding.yesButton.setOnClickListener {
                 onYesButton.invoke()
@@ -74,7 +81,7 @@ class DialogView(
         }
     }
 
-    private fun setCloseButton(onCloseButton: (() -> Unit)?) {
+    fun setCloseButton(onCloseButton: (() -> Unit)?) {
         if (onCloseButton != null) {
             binding.closeButton.setOnClickListener {
                 onCloseButton()
@@ -86,7 +93,7 @@ class DialogView(
         }
     }
 
-    private fun setProgressBar(isProgressBar: Boolean) {
+    fun setProgressBar(isProgressBar: Boolean) {
         if (isProgressBar) {
             binding.loaderProgressBarr.visibility = View.GONE
             binding.loaderText.visibility = View.GONE
