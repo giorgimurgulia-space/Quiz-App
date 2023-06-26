@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.space.quizapp.R
-import com.space.quizapp.common.extensions.collectFlow
 import com.space.quizapp.common.extensions.observeNonNull
 import com.space.quizapp.common.types.Inflater
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.navigation.NavigationCommand
 import com.space.quizapp.presentation.view.DialogView
+import com.space.quizapp.presentation.view._DialogView
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
@@ -27,8 +27,9 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    private val alertDialog by lazy { DialogView(requireContext()) }
-    private val quizDialog by lazy { DialogView(requireContext()) }
+    private val alertDialog by lazy { _DialogView(requireContext()) }
+
+    private lateinit var quizDialog: DialogView
 
     abstract fun onBind()
     open fun setObserves() {}
@@ -74,7 +75,15 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private fun observeDialog() {
         viewModel.dialog.observeNonNull(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { dialog ->
-                DialogView(requireContext()).setTitle(dialog.title)
+//                quizDialog.setContent(dialog).show()
+                quizDialog = DialogView(requireContext()).setContent(dialog)
+                quizDialog.show()
+//                DialogView(requireContext()).setContent(dialog).show()
+            }
+        }
+        viewModel.closeDialog.observeNonNull(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let {
+                quizDialog.dismiss()
             }
         }
     }

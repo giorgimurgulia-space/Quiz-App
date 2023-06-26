@@ -18,6 +18,10 @@ abstract class BaseViewModel : ViewModel() {
     private val _dialog = MutableLiveData<QuizEvent<DialogUIModel>>()
     val dialog get() = _dialog
 
+    private val _closeDialog = MutableLiveData<QuizEvent<Unit>>()
+    val closeDialog get() = _closeDialog
+
+
     fun navigate(navDirections: NavDirections) {
         _navigation.value = QuizEvent(NavigationCommand.ToDirection(navDirections))
     }
@@ -28,5 +32,9 @@ abstract class BaseViewModel : ViewModel() {
 
     fun setDialog(dialog: DialogUIModel) {
         _dialog.value = QuizEvent(dialog)
+    }
+
+    fun closeDialog() {
+        _closeDialog.value = QuizEvent((Unit))
     }
 }

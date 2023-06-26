@@ -12,7 +12,6 @@
     tools:ignore="MissingDefaultResource">
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/icon_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,12 +19,12 @@
         android:layout_marginTop="@dimen/dimen_29_dp"
         android:text="@string/congratulation_icon"
         android:textSize="@dimen/dimen_30_sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/title_text"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
@@ -35,13 +34,13 @@
         android:textColor="@color/neutral_04_white"
         android:textSize="@dimen/dimen_14_sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/icon_text"
         tools:text="ნამდვილად გსურს გასვლა?" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/description_text"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
@@ -51,13 +50,13 @@
         android:textColor="@color/blue_secondary_default"
         android:textSize="@dimen/dimen_14_sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_text"
         tools:text="შენ დააგროვე 9 ქულა" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:visibility="gone"
         android:id="@+id/no_button"
         style="@style/small"
         android:layout_width="@dimen/dimen_0_dp"
@@ -68,13 +67,13 @@
         android:background="@drawable/shape_rectangle_background"
         android:backgroundTint="@color/neutral_04_white_60"
         android:text="@string/no"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/line_view"
         app:layout_constraintEnd_toStartOf="@id/yes_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/description_text" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:visibility="gone"
         android:id="@+id/yes_button"
         style="@style/small"
         android:layout_width="@dimen/dimen_0_dp"
@@ -84,24 +83,24 @@
         android:background="@drawable/shape_rectangle_background"
         android:backgroundTint="@color/neutral_04_white_60"
         android:text="@string/yes"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/line_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/no_button"
         app:layout_constraintTop_toBottomOf="@id/description_text" />
 
     <View
-        android:visibility="gone"
         android:id="@+id/line_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/dimen_1_dp"
         android:background="@color/neutral_04_white"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/closeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/no_button" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/closeButton"
         style="@style/normal"
         android:layout_width="0dp"
@@ -110,6 +109,7 @@
         android:paddingVertical="@dimen/dimen_10_dp"
         android:text="@string/close"
         android:textColor="@color/neutral_04_white"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -118,6 +118,7 @@
         android:id="@+id/loader_progressBarr"
         android:layout_width="@dimen/dimen_34_dp"
         android:layout_height="@dimen/dimen_34_dp"
+        android:layout_marginVertical="@dimen/dimen_29_dp"
         android:layout_marginEnd="@dimen/dimen_20_dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -127,9 +128,10 @@
 
     <TextView
         android:id="@+id/loader_text"
-        style="@style/small"
+        style="@style/medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dimen_29_dp"
         android:text="@string/loader_title"
         android:textColor="@color/neutral_04_white"
         android:textStyle="bold"

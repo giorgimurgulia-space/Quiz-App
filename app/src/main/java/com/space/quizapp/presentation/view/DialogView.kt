@@ -10,64 +10,57 @@ import android.view.View
 import com.space.quizapp.databinding.LayoutDialogBinding
 import com.space.quizapp.presentation.model.DialogUIModel
 
-class DialogView(
-    context: Context,
-) : Dialog(context) {
-    private val binding = LayoutDialogBinding.inflate(LayoutInflater.from(context))
+class DialogView(context: Context) : Dialog(context) {
+
+    val binding = LayoutDialogBinding.inflate(LayoutInflater.from(context))
 
     private var dialog: DialogUIModel? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(binding.root)
 
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setCancelable(false)
         setCanceledOnTouchOutside(false)
 
+        dialog?.let {
+            showIcon(it.icon)
+            setTitle(it.title)
+            setDescription(it.description)
+            setYesNoButton(it.yesButton)
+            setCloseButton(it.closeButton)
+            setProgressBar(it.isProgressbar)
+
+            setContentView(binding.root)
+        }
+
     }
 
-    fun setContent(dialog: DialogUIModel) {
+    fun setContent(dialog: DialogUIModel): DialogView {
         this.dialog = dialog
-        showIcon(dialog.icon)
-        setTitle(dialog.title)
-        setDescription(dialog.description)
-        setYesNoButton(dialog.yesButton)
-        setCloseButton(dialog.closeButton)
-        setProgressBar(dialog.isProgressbar)
-    }
-
-    override fun show() {
-        super.show()
-    }
-
-    override fun dismiss() {
-        super.dismiss()
-    }
-
-
-    fun showIcon(isVisible: Boolean): DialogView {
-        binding.iconText.visibility = if (isVisible) View.VISIBLE else View.GONE
         return this
     }
 
-    fun setTitle(title: Int?) {
+
+    private fun showIcon(isVisible: Boolean) {
+        binding.iconText.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    private fun setTitle(title: Int?) {
         if (title != null)
             binding.titleText.text = context.resources.getString(title)
         else
             binding.titleText.visibility = View.GONE
     }
 
-    fun setDescription(description: String?) {
+    private fun setDescription(description: String?) {
         if (description != null)
             binding.descriptionText.text = description
         else
             binding.descriptionText.visibility = View.GONE
     }
 
-    fun setYesNoButton(onYesButton: (() -> Unit)?) {
+    private fun setYesNoButton(onYesButton: (() -> Unit)?) {
         if (onYesButton != null) {
             binding.yesButton.setOnClickListener {
                 onYesButton.invoke()
@@ -81,7 +74,7 @@ class DialogView(
         }
     }
 
-    fun setCloseButton(onCloseButton: (() -> Unit)?) {
+    private fun setCloseButton(onCloseButton: (() -> Unit)?) {
         if (onCloseButton != null) {
             binding.closeButton.setOnClickListener {
                 onCloseButton()
@@ -93,13 +86,13 @@ class DialogView(
         }
     }
 
-    fun setProgressBar(isProgressBar: Boolean) {
+    private fun setProgressBar(isProgressBar: Boolean) {
         if (isProgressBar) {
-            binding.loaderProgressBarr.visibility = View.GONE
-            binding.loaderText.visibility = View.GONE
-        } else {
             binding.loaderProgressBarr.visibility = View.VISIBLE
             binding.loaderText.visibility = View.VISIBLE
+        } else {
+            binding.loaderProgressBarr.visibility = View.GONE
+            binding.loaderText.visibility = View.GONE
         }
     }
 }

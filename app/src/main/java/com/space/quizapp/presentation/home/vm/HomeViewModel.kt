@@ -80,6 +80,7 @@ class HomeViewModel @Inject constructor(
                 it.map { quiz -> quiz.toUIModel() }
             }.toResult().collectLatest {
                 it.onSuccess { availableQuiz ->
+                    closeDialog()
                     _availableQuiz.tryEmit(availableQuiz)
                 }
                 it.onLoading {
