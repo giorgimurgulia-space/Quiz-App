@@ -13,6 +13,9 @@ abstract class BaseViewModel : ViewModel() {
     private val _navigation = MutableLiveData<QuizEvent<NavigationCommand>>()
     val navigation: LiveData<QuizEvent<NavigationCommand>> get() = _navigation
 
+    private val _dialogStatus = MutableLiveData<Boolean>()
+    val dialogStatus: LiveData<Boolean> get() = _dialogStatus
+
     fun navigate(navDirections: NavDirections) {
         _navigation.value = QuizEvent(NavigationCommand.ToDirection(navDirections))
     }

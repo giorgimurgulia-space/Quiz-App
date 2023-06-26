@@ -53,7 +53,7 @@ class QuizFragment :
             }
             it.answers.onError {
                 loader(true)
-                showDialog(
+                setDialogContent(
                     DialogUIModel(
                         title = R.string.error_message_close,
                         closeButton = {
@@ -64,7 +64,7 @@ class QuizFragment :
             }
 
             if (it.point != null) {
-                showDialog(
+                setDialogContent(
                     DialogUIModel(
                         icon = true,
                         title = R.string.congratulation,
@@ -83,7 +83,7 @@ class QuizFragment :
 
     override fun setListeners() {
         binding.cancelImage.setOnClickListener {
-            showDialog(DialogUIModel(
+            setDialogContent(DialogUIModel(
                 title = R.string.cancel_quiz, yesButton = {
                     viewModel.cancelQuiz()
                 }

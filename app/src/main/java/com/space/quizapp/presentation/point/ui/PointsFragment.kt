@@ -33,7 +33,7 @@ class PointsFragment :
             viewModel.navigateBack()
         }
         binding.logOutButton.setOnClickListener {
-            showDialog(
+            setDialogContent(
                 DialogUIModel(title = R.string.want_log_out, yesButton = {
                     viewModel.logOut()
                 })
@@ -53,7 +53,7 @@ class PointsFragment :
             }
             it.onError {
                 loader(true)
-                showDialog(
+                setDialogContent(
                     DialogUIModel(
                         title = R.string.error_message,
                         yesButton = {

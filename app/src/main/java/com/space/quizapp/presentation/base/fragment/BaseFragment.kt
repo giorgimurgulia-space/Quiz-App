@@ -27,6 +27,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     val binding get() = _binding!!
 
     private val alertDialog by lazy { DialogView(requireContext()) }
+    private val quizDialog by lazy { DialogView(requireContext()) }
 
     abstract fun onBind()
     open fun setObserves() {}
@@ -70,6 +71,15 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         }
     }
 
+    private fun observeDialogStatus() {
+        viewModel.dialogStatus.observeNonNull(viewLifecycleOwner) {
+            if (it)
+                showDialog()
+            else
+                closeDialog()
+        }
+    }
+
     private fun handleNavigation(navCommand: NavigationCommand) {
         when (navCommand) {
             is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
@@ -91,9 +101,15 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     }
 
 
-    protected fun showDialog(dialog: DialogUIModel) {
-        val quizDialog = DialogView(requireContext())
+    protected fun setDialogContent(dialog: DialogUIModel) {
         quizDialog.setContent(dialog)
+    }
+
+    protected fun showDialog() {
         quizDialog.show()
+    }
+
+    protected fun closeDialog() {
+        quizDialog.dismiss()
     }
 }

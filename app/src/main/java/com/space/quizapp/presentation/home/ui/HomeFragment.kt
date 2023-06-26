@@ -56,7 +56,7 @@ class HomeFragment :
             //todo base
             it.onError {
                 loader(true)
-                showDialog(
+                setDialogContent(
                     DialogUIModel(
                         title = R.string.error_available_quiz,
                         yesButton = {
@@ -69,7 +69,7 @@ class HomeFragment :
 
     override fun setListeners() {
         binding.logOutButton.setOnClickListener {
-            showDialog(
+            setDialogContent(
                 DialogUIModel(title = R.string.want_log_out, yesButton = {
                     viewModel.logOut()
                 })
