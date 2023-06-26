@@ -58,7 +58,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         _binding = null
     }
 
-
     protected fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
@@ -72,11 +71,8 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     }
 
     private fun observeDialogStatus() {
-        viewModel.dialogStatus.observeNonNull(viewLifecycleOwner) {
-            if (it)
-                showDialog()
-            else
-                closeDialog()
+        viewModel.dialog.observeNonNull(viewLifecycleOwner) {
+            setDialogContent(it)
         }
     }
 
@@ -105,11 +101,11 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         quizDialog.setContent(dialog)
     }
 
-    protected fun showDialog() {
+    private fun showDialog() {
         quizDialog.show()
     }
 
-    protected fun closeDialog() {
+    private fun closeDialog() {
         quizDialog.dismiss()
     }
 }

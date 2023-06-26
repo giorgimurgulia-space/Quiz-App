@@ -5,5 +5,6 @@ data class DialogUIModel(
     val title: Int? = null,
     val description: String? = null,
     val yesButton: (() -> Unit)? = null,
-    val closeButton: (() -> Unit)? = null
+    val closeButton: (() -> Unit)? = null,
+    val isProgressbar: Boolean = false
 )

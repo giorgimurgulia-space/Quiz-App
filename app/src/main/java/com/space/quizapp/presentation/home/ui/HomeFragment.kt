@@ -45,25 +45,27 @@ class HomeFragment :
         }
 
         collectFlow(viewModel.availableQuiz) {
-            it.onSuccess { quiz ->
-                adapter.submitList(quiz)
-                loader(true)
-            }
-            //todo base
-            it.onLoading {
-                loader()
-            }
-            //todo base
-            it.onError {
-                loader(true)
-                setDialogContent(
-                    DialogUIModel(
-                        title = R.string.error_available_quiz,
-                        yesButton = {
-                            viewModel.refreshAllData()
-                        }
-                    ))
-            }
+                adapter.submitList(it)
+
+//            it.onSuccess { quiz ->
+//                adapter.submitList(quiz)
+//                loader(true)
+//            }
+//            //todo base
+//            it.onLoading {
+//                loader()
+//            }
+//            //todo base
+//            it.onError {
+//                loader(true)
+//                setDialogContent(
+//                    DialogUIModel(
+//                        title = R.string.error_available_quiz,
+//                        yesButton = {
+//                            viewModel.refreshAllData()
+//                        }
+//                    ))
+//            }
         }
     }
 

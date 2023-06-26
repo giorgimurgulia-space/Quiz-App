@@ -33,10 +33,11 @@ class DialogView(
             setDescription(it.description)
             setYesNoButton(it.yesButton)
             setCloseButton(it.closeButton)
+            setProgressBar(it.isProgressbar)
         }
     }
 
-    fun setContent(dialog: DialogUIModel) {
+    fun setContent(dialog: DialogUIModel?) {
         this.dialog = dialog
     }
 
@@ -85,5 +86,13 @@ class DialogView(
         }
     }
 
-
+    private fun setProgressBar(isProgressBar: Boolean) {
+        if (isProgressBar) {
+            binding.loaderProgressBarr.visibility = View.GONE
+            binding.loaderText.visibility = View.GONE
+        } else {
+            binding.loaderProgressBarr.visibility = View.VISIBLE
+            binding.loaderText.visibility = View.VISIBLE
+        }
+    }
 }
