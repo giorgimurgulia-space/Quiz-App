@@ -16,10 +16,8 @@ class AuthenticationRepositoryImpl @Inject constructor(private val dao: UserDao)
         return dao.checkUsername(username)
     }
 
-    override suspend fun signUpUser(username: String): Boolean {
+    override suspend fun signUpUser(username: String) {
         dao.insertUser(UserEntity(getNewId(), username))
-
-        return checkUser(username)
     }
 
     override suspend fun signInUser(username: String): Boolean {

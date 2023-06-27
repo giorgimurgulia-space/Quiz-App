@@ -4,8 +4,10 @@ import androidx.lifecycle.viewModelScope
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
-import com.space.quizapp.domain.usecase.auth.AuthenticationUseCase
-import com.space.quizapp.domain.usecase.user.UserDataUseCse
+import com.space.quizapp.domain.usecase.auth.GetCurrentUserIdUseCase
+import com.space.quizapp.domain.usecase.auth.LogOutUseCase
+import com.space.quizapp.domain.usecase.user.GetUserDataUseCse
+import com.space.quizapp.domain.usecase.user.GetUserPointsUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
 import com.space.quizapp.presentation.model.PointUIModel
@@ -19,11 +21,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PointsViewModel @Inject constructor(
-    private val authenticationUseCase: AuthenticationUseCase,
-    private val userDataUseCse: UserDataUseCse,
+    private val getCurrentUseIdUseCase: GetCurrentUserIdUseCase,
+    private val logOutUseCase: LogOutUseCase,
+    private val getUserPointsUseCse: GetUserPointsUseCse
 ) : BaseViewModel() {
 
-    private val currentUserId = authenticationUseCase.getCurrentUserId()
+    private val currentUserId = getCurrentUseIdUseCase.invoke()
 
     private val _points = MutableStateFlow<Result<List<PointUIModel>>>(Result.Loading)
     val points get() = _points.asStateFlow()
@@ -37,13 +40,13 @@ class PointsViewModel @Inject constructor(
     }
 
     fun logOut() {
-        authenticationUseCase.logOut()
+        logOutUseCase.invoke()
         navigate(HomeFragmentDirections.actionGlobalLogOut())
     }
 
     private fun getPoints() {
         viewModelScope.launch {
-            userDataUseCse.getUserPoints(currentUserId).map {
+            getUserPointsUseCse.invoke(currentUserId).map {
                 it.map { point -> point.toUIModel() }
             }.toResult().collectLatest {
                 _points.tryEmit(it)

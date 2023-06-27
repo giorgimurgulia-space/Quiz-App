@@ -6,6 +6,6 @@ import javax.inject.Inject
 class AvailableQuizUseCase @Inject constructor(
     private val quizRepository: AvailableQuizRepository
 ) {
-    suspend fun getAvailableQuiz(isRefreshed: Boolean = false) =
-        quizRepository.getAvailableQuizList(isRefreshed)
+    suspend fun invoke(refresh: Boolean = false) =
+        quizRepository.getAvailableQuizList(refresh)
 }

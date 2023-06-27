@@ -43,36 +43,29 @@ class CurrentQuizRepositoryImpl @Inject constructor(
         return currentQuiz.get().toQuizDomainModel()
     }
 
-    override fun getNextQuestion(): QuestionModel {
-        return currentQuiz.get().questions[currentUserAnswer.get().size].toDomainModel()
+    override fun getQuestion(questionIndex: Int): QuestionModel {
+        return currentQuiz.get().questions[questionIndex].toDomainModel()
     }
 
-    override fun getNextAnswers(): List<AnswerModel> {
-        return currentQuiz.get().questions[currentUserAnswer.get().size].answers.map { it.toAnswer() }
+    override fun getUserAnswers(): List<Int> {
+        return currentUserAnswer.get()
     }
 
-    override fun setUserAnswer(userAnswerIndex: Int) {
-        insertUserAnswer(userAnswerIndex)
+    override fun getQuizAnswers(questionIndex: Int): List<AnswerModel> {
+        return currentQuiz.get().questions[questionIndex].answers.map { it.toAnswer() }
     }
 
-    // todo transfer to useCase
-    // todo each question point
-    override fun finishQuiz(): Float {
-        var userPoint = 0
+    override fun insertUserAnswer(userAnswerIndex: Int) {
+        addAnswerToList(userAnswerIndex)
+    }
 
-        val correctAnswers = currentQuiz.get().questions.map {
+    override fun getCorrectAnswers(): List<Int> {
+        return currentQuiz.get().questions.map {
             it.toDomainModel().correctAnswerIndex
         }
-
-        currentUserAnswer.get().forEachIndexed { index, item ->
-            if (correctAnswers[index] == item)
-                userPoint += 1
-        }
-
-        return userPoint.toFloat()
     }
 
-    private fun insertUserAnswer(answer: Int) {
+    private fun addAnswerToList(answer: Int) {
         val answers = currentUserAnswer.get() + answer
         currentUserAnswer.set(answers)
     }

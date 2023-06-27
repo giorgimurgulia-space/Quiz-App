@@ -6,17 +6,13 @@ import javax.inject.Inject
 class AuthenticationUseCase @Inject constructor(private val authenticationRepository: AuthenticationRepository) {
 
     suspend fun invoke(username: String): Boolean {
-        if (checkUser(username)) {
-            return signInUser(username)
+        return if (checkUser(username)) {
+            signInUser(username)
         } else {
             signUpUser(username)
-            return signInUser(username)
+            signInUser(username)
         }
     }
-
-    fun getCurrentUserId() = authenticationRepository.getCurrentUserId()
-
-    fun logOut() = authenticationRepository.logOutUser()
 
     private suspend fun checkUser(username: String) = authenticationRepository.checkUser(username)
 
