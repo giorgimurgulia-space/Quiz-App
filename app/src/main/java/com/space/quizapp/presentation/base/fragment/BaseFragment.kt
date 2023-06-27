@@ -29,7 +29,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
 
     private val alertDialog by lazy { _DialogView(requireContext()) }
 
-    private lateinit var quizDialog: DialogView
+    private val quizDialog by lazy { DialogView(requireContext()) }
 
     abstract fun onBind()
     open fun setObserves() {}
@@ -76,7 +76,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         viewModel.dialog.observeNonNull(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { dialog ->
 //                quizDialog.setContent(dialog).show()
-                quizDialog = DialogView(requireContext()).setContent(dialog)
+                quizDialog.setContent(dialog)
                 quizDialog.show()
 //                DialogView(requireContext()).setContent(dialog).show()
             }
