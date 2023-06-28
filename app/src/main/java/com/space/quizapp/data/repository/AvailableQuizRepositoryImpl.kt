@@ -26,7 +26,7 @@ class AvailableQuizRepositoryImpl @Inject constructor(
         }
 
     private suspend fun makeApiCall() {
-        val response = apiService.getQuiz()
+        val response = apiService.getAvailableQuiz()
         if (response.isSuccessful)
             availableQuiz.set(response.body()!!.map {
                 it.toDomainModel()

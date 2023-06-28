@@ -3,7 +3,6 @@ package com.space.quizapp.data.repository
 import com.space.quizapp.common.resource.ApiError
 import com.space.quizapp.common.mapper.toAnswer
 import com.space.quizapp.common.mapper.toDomainModel
-import com.space.quizapp.common.mapper.toQuizDomainModel
 import com.space.quizapp.data.remote.api.ApiService
 import com.space.quizapp.data.remote.dto.QuizDto
 import com.space.quizapp.domain.model.AnswerModel
@@ -40,7 +39,7 @@ class CurrentQuizRepositoryImpl @Inject constructor(
     }
 
     override fun startQuiz(): QuizModel {
-        return currentQuiz.get().toQuizDomainModel()
+        return currentQuiz.get().toDomainModel()
     }
 
     override fun getQuestion(questionIndex: Int): QuestionModel {

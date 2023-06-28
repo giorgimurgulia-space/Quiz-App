@@ -73,11 +73,12 @@ class AnswerAdapter(private val onItemClicked: ((answerIndex: Int) -> Unit)) :
     fun onAnswerClick(userAnswer: Int) {
         onItemClicked(userAnswer)
         this.userAnswer = userAnswer
+        notifyDataSetChanged()
 
-        notifyItemChanged(userAnswer)
-
-        if (userAnswer != correctAnswer) {
-            notifyItemChanged(correctAnswer!!)
-        }
+//        notifyItemChanged(userAnswer)
+//
+//        if (userAnswer != correctAnswer) {
+//            notifyItemChanged(correctAnswer!!)
+//        }
     }
 }
