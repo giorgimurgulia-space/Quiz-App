@@ -14,31 +14,22 @@ class DialogView(context: Context) : Dialog(context) {
 
     val binding = LayoutDialogBinding.inflate(LayoutInflater.from(context))
 
-    private var dialog: DialogUIModel? = null
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    init {
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setCancelable(false)
         setCanceledOnTouchOutside(false)
-
-        dialog?.let {
-            showIcon(it.icon)
-            setTitle(it.title)
-            setDescription(it.description)
-            setYesNoButton(it.yesButton)
-            setCloseButton(it.closeButton)
-            setProgressBar(it.isProgressbar)
-        }
-        setContentView(binding.root)
-
     }
 
-
     fun setContent(dialog: DialogUIModel): DialogView {
-        this.dialog = dialog
+        showIcon(dialog.icon)
+        setTitle(dialog.title)
+        setDescription(dialog.description)
+        setYesNoButton(dialog.yesButton)
+        setCloseButton(dialog.closeButton)
+        setProgressBar(dialog.isProgressbar)
+
+        setContentView(binding.root)
+
         return this
     }
 
