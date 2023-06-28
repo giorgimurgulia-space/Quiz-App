@@ -3,6 +3,7 @@ package com.space.quizapp.presentation.home.ui
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
 import android.widget.TextView.BufferType
+import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
@@ -16,12 +17,16 @@ import com.space.quizapp.presentation.home.vm.HomeViewModel
 import com.space.quizapp.presentation.home.adapter.QuizAdapter
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.UserUIModel
+import com.space.quizapp.presentation.view.DialogView
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(FragmentHomeBinding::inflate) {
+
+    private val alertDialog by lazy { DialogView(requireContext()) }
+
     override val viewModel: HomeViewModel by viewModels()
     private val adapter = QuizAdapter()
 

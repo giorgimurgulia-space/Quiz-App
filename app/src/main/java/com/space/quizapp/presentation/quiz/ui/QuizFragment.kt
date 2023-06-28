@@ -46,48 +46,47 @@ class QuizFragment :
 
             it.answers.onSuccess { answers ->
                 adapter.submitList(answers)
-                loader(true)
             }
-            it.answers.onLoading {
-                loader()
-            }
-            it.answers.onError {
-                loader(true)
-                setDialogContent(
-                    DialogUIModel(
-                        title = R.string.error_message_close,
-                        closeButton = {
-                            viewModel.navigateBack()
-                        }
-                    )
-                )
-            }
+//            it.answers.onLoading {
+//                loader()
+//            }
+//            it.answers.onError {
+//                loader(true)
+//                setDialogContent(
+//                    DialogUIModel(
+//                        title = R.string.error_message_close,
+//                        closeButton = {
+//                            viewModel.navigateBack()
+//                        }
+//                    )
+//                )
+//            }
 
             if (it.point != null) {
-                setDialogContent(
-                    DialogUIModel(
-                        icon = true,
-                        title = R.string.congratulation,
-                        description = String.format(
-                            resources.getString(R.string.your_point),
-                            it.point
-                        ),
-                        closeButton = {
-                            viewModel.navigateBack()
-                        }
-                    )
-                )
+//                setDialogContent(
+//                    DialogUIModel(
+//                        icon = true,
+//                        title = R.string.congratulation,
+//                        description = String.format(
+//                            resources.getString(R.string.your_point),
+//                            it.point
+//                        ),
+//                        closeButton = {
+//                            viewModel.navigateBack()
+//                        }
+//                    )
+//                )
             }
         }
     }
 
     override fun setListeners() {
         binding.cancelImage.setOnClickListener {
-            setDialogContent(DialogUIModel(
-                title = R.string.cancel_quiz, yesButton = {
-                    viewModel.cancelQuiz()
-                }
-            ))
+//            setDialogContent(DialogUIModel(
+//                title = R.string.cancel_quiz, yesButton = {
+//                    viewModel.cancelQuiz()
+//                }
+//            ))
         }
 
         binding.submitButton.setOnClickListener {

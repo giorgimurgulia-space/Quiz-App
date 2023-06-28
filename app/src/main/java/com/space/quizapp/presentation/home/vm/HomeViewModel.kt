@@ -1,5 +1,6 @@
 package com.space.quizapp.presentation.home.vm
 
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.toResult
@@ -18,6 +19,7 @@ import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
 import com.space.quizapp.presentation.model.AvailableQuizUIModel
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.UserUIModel
+import com.space.quizapp.presentation.view.DialogView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

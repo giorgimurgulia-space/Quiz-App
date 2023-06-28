@@ -7,7 +7,6 @@ import androidx.navigation.NavDirections
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.navigation.QuizEvent
 import com.space.quizapp.presentation.navigation.NavigationCommand
-import kotlinx.coroutines.flow.MutableSharedFlow
 
 
 abstract class BaseViewModel : ViewModel() {

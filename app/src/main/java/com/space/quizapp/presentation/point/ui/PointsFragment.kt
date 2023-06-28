@@ -33,11 +33,11 @@ class PointsFragment :
             viewModel.navigateBack()
         }
         binding.logOutButton.setOnClickListener {
-            setDialogContent(
-                DialogUIModel(title = R.string.want_log_out, yesButton = {
-                    viewModel.logOut()
-                })
-            )
+//            setDialogContent(
+//                DialogUIModel(title = R.string.want_log_out, yesButton = {
+//                    viewModel.logOut()
+//                })
+//            )
         }
     }
 
@@ -46,21 +46,20 @@ class PointsFragment :
             //todo base
             it.onSuccess { quiz ->
                 adapter.submitList(quiz)
-                loader(true)
             }
-            it.onLoading {
-                loader()
-            }
-            it.onError {
-                loader(true)
-                setDialogContent(
-                    DialogUIModel(
-                        title = R.string.error_message,
-                        yesButton = {
-                            viewModel.refreshAllData()
-                        }
-                    ))
-            }
+//            it.onLoading {
+//                loader()
+//            }
+//            it.onError {
+//                loader(true)
+//                setDialogContent(
+//                    DialogUIModel(
+//                        title = R.string.error_message,
+//                        yesButton = {
+//                            viewModel.refreshAllData()
+//                        }
+//                    ))
+//            }
         }
     }
 }

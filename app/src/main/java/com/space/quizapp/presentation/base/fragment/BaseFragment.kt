@@ -1,7 +1,5 @@
 package com.space.quizapp.presentation.base.fragment
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,6 @@ import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.navigation.NavigationCommand
 import com.space.quizapp.presentation.view.DialogView
-import com.space.quizapp.presentation.view._DialogView
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
@@ -26,8 +23,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
 
     private var _binding: VB? = null
     val binding get() = _binding!!
-
-    private val alertDialog by lazy { _DialogView(requireContext()) }
 
     private val quizDialog by lazy { DialogView(requireContext()) }
 
@@ -55,35 +50,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         observeDialog()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    protected fun toast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
     private fun observeNavigation() {
         viewModel.navigation.observeNonNull(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { navigationCommand ->
                 handleNavigation(navigationCommand)
-            }
-        }
-    }
-
-    private fun observeDialog() {
-        viewModel.dialog.observeNonNull(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let { dialog ->
-//                quizDialog.setContent(dialog).show()
-                quizDialog.setContent(dialog)
-                quizDialog.show()
-//                DialogView(requireContext()).setContent(dialog).show()
-            }
-        }
-        viewModel.closeDialog.observeNonNull(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let {
-                quizDialog.dismiss()
             }
         }
     }
@@ -95,29 +65,27 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
         }
     }
 
-    protected fun loader(isLoaded: Boolean = false) {
-        alertDialog.setContentView(R.layout.layout_dialog)
-
-        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        alertDialog.setCancelable(false)
-        alertDialog.setCanceledOnTouchOutside(false)
-
-        if (!isLoaded)
-            alertDialog.show()
-        else
-            alertDialog.dismiss()
+    private fun observeDialog() {
+        viewModel.dialog.observeNonNull(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { dialog ->
+                quizDialog.setContent(DialogUIModel(title = R.string.want_log_out, yesButton = {
+                    quizDialog.dismiss()
+                })).show()
+            }
+        }
+        viewModel.closeDialog.observeNonNull(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let {
+                quizDialog.dismiss()
+            }
+        }
     }
 
-
-    protected fun setDialogContent(dialog: DialogUIModel) {
-        quizDialog.setContent(dialog)
+    protected fun toast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun showDialog() {
-        quizDialog.show()
-    }
-
-    private fun closeDialog() {
-        quizDialog.dismiss()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
