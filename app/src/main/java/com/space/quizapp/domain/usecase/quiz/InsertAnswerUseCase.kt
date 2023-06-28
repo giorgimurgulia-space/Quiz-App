@@ -9,5 +9,4 @@ class InsertAnswerUseCase @Inject constructor(
 
     fun invoke(userAnswerIndex: Int) =
         currentQuizRepository.insertUserAnswer(userAnswerIndex)
-
 }
