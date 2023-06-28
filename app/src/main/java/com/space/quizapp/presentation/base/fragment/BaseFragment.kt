@@ -68,9 +68,11 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private fun observeDialog() {
         viewModel.dialog.observeNonNull(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { dialog ->
-                quizDialog.setContent(DialogUIModel(title = R.string.want_log_out, yesButton = {
-                    quizDialog.dismiss()
-                })).show()
+                if (dialog.isProgressbar) {
+                    quizDialog.setContent(dialog).show()
+                } else {
+                    DialogView(requireContext()).setContent(dialog).show()
+                }
             }
         }
         viewModel.closeDialog.observeNonNull(viewLifecycleOwner) {

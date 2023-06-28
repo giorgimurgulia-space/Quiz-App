@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import com.space.quizapp.R
 import com.space.quizapp.databinding.LayoutDialogBinding
 import com.space.quizapp.presentation.model.DialogUIModel
 
@@ -40,21 +41,23 @@ class DialogView(context: Context) : Dialog(context) {
 
     private fun setTitle(title: Int?) {
         if (title != null)
-            binding.titleText.text = context.resources.getString(title)
+            binding.titleText.text = context.getString(title)
         else
             binding.titleText.visibility = View.GONE
     }
 
     private fun setDescription(description: String?) {
-        if (description != null)
-            binding.descriptionText.text = description
-        else
+        if (description != null) {
+            binding.descriptionText.text =
+                String.format(context.getString(R.string.your_point), description)
+        } else
             binding.descriptionText.visibility = View.GONE
     }
 
     private fun setYesNoButton(onYesButton: (() -> Unit)?) {
         if (onYesButton != null) {
             binding.yesButton.setOnClickListener {
+                dismiss()
                 onYesButton.invoke()
             }
             binding.noButton.setOnClickListener {

@@ -1,11 +1,9 @@
 package com.space.quizapp.presentation.home.vm
 
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.viewModelScope
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
-import com.space.quizapp.common.resource.Result
 import com.space.quizapp.common.resource.onError
 import com.space.quizapp.common.resource.onLoading
 import com.space.quizapp.common.resource.onSuccess
@@ -19,7 +17,6 @@ import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
 import com.space.quizapp.presentation.model.AvailableQuizUIModel
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.UserUIModel
-import com.space.quizapp.presentation.view.DialogView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,10 +48,6 @@ class HomeViewModel @Inject constructor(
         getAvailableQuiz(refresh)
     }
 
-    fun logOut() {
-        logOutUseCase.invoke()
-        navigate(HomeFragmentDirections.actionGlobalLogOut())
-    }
 
     fun navigateToPointsPage() {
         navigate(HomeFragmentDirections.actionGlobalPointsFragment())
@@ -71,7 +64,12 @@ class HomeViewModel @Inject constructor(
                 val user = userDataUseCse.invoke(currentUserId).toUIModel(userGPA)
                 _state.tryEmit(user)
             } catch (e: Error) {
-                //todo base
+                setDialog(
+                    DialogUIModel(
+                        title = R.string.error_message,
+                        closeButton = { navigateBack() },
+                    )
+                )
             }
         }
     }
@@ -82,7 +80,7 @@ class HomeViewModel @Inject constructor(
                 it.map { quiz -> quiz.toUIModel() }
             }.toResult().collectLatest {
                 it.onSuccess { availableQuiz ->
-                    closeDialog()
+                    closeLoaderDialog()
                     _availableQuiz.tryEmit(availableQuiz)
                 }
                 it.onLoading {

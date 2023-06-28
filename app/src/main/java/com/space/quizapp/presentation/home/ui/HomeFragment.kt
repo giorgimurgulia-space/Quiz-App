@@ -25,8 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment :
     BaseFragment<FragmentHomeBinding, HomeViewModel>(FragmentHomeBinding::inflate) {
 
-    private val alertDialog by lazy { DialogView(requireContext()) }
-
     override val viewModel: HomeViewModel by viewModels()
     private val adapter = QuizAdapter()
 
@@ -56,11 +54,7 @@ class HomeFragment :
 
     override fun setListeners() {
         binding.logOutButton.setOnClickListener {
-            viewModel.setDialog(
-                DialogUIModel(title = R.string.want_log_out, yesButton = {
-                    viewModel.logOut()
-                })
-            )
+            viewModel.logOut()
         }
 
         binding.gpaBackgroundView.setOnClickListener {

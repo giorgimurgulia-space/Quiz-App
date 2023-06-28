@@ -75,7 +75,7 @@
         android:layout_marginHorizontal="@dimen/dimen_16_dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_recycler"
-        tools:text="შემდეგი" />
+        android:text="შემდეგი" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

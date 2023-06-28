@@ -33,33 +33,13 @@ class PointsFragment :
             viewModel.navigateBack()
         }
         binding.logOutButton.setOnClickListener {
-//            setDialogContent(
-//                DialogUIModel(title = R.string.want_log_out, yesButton = {
-//                    viewModel.logOut()
-//                })
-//            )
+            viewModel.logOut()
         }
     }
 
     override fun setObserves() {
         collectFlow(viewModel.points) {
-            //todo base
-            it.onSuccess { quiz ->
-                adapter.submitList(quiz)
-            }
-//            it.onLoading {
-//                loader()
-//            }
-//            it.onError {
-//                loader(true)
-//                setDialogContent(
-//                    DialogUIModel(
-//                        title = R.string.error_message,
-//                        yesButton = {
-//                            viewModel.refreshAllData()
-//                        }
-//                    ))
-//            }
+                adapter.submitList(it)
         }
     }
 }

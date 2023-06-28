@@ -1,14 +1,19 @@
 package com.space.quizapp.presentation.quiz.vm
 
 import androidx.lifecycle.viewModelScope
+import com.space.quizapp.R
 import com.space.quizapp.common.extensions.toResult
 import com.space.quizapp.common.mapper.toUIModel
 import com.space.quizapp.common.resource.Result
+import com.space.quizapp.common.resource.onError
+import com.space.quizapp.common.resource.onLoading
+import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.domain.model.PointModel
 import com.space.quizapp.domain.usecase.auth.GetCurrentUserIdUseCase
 import com.space.quizapp.domain.usecase.quiz.*
 import com.space.quizapp.domain.usecase.user.InsertUserPointUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
+import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.QuizUIModel
 import com.space.quizapp.presentation.quiz.ui.QuizPagePayLoad
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +40,12 @@ class QuizViewModel @Inject constructor(
 
     fun startQuiz(subjectId: String?) {
         if (subjectId.isNullOrEmpty()) {
-            _quizState.tryEmit(_quizState.value.copy(answers = Result.Error(Throwable())))
+            setDialog(
+                DialogUIModel(
+                    title = R.string.error_message_close,
+                    closeButton = { navigateBack() },
+                )
+            )
         } else {
             viewModelScope.launch {
                 val quiz = startQuizUseCase.invoke(subjectId).toUIModel()
@@ -58,13 +68,25 @@ class QuizViewModel @Inject constructor(
     }
 
     fun cancelQuiz() {
-        _quizState.tryEmit(_quizState.value.copy(point = getQuizPointUseCase.invoke()))
+        setDialog(
+            DialogUIModel(
+                title = R.string.cancel_quiz,
+                yesButton = { finishQuiz() }
+            )
+        )
     }
 
     private fun finishQuiz() {
         val point = getQuizPointUseCase.invoke()
-        insertQuizPoint(point)
-        _quizState.tryEmit(_quizState.value.copy(point = point))
+        if (point >= 1)
+            insertQuizPoint(point)
+        setDialog(
+            DialogUIModel(
+                icon = true,
+                title = R.string.congratulation,
+                description = point.toString(),
+                closeButton = { navigateBack() }
+            ))
     }
 
     private fun getNewQuestion() {
@@ -84,7 +106,21 @@ class QuizViewModel @Inject constructor(
                     answer.toUIModel()
                 }
             }.toResult().collectLatest {
-                _quizState.tryEmit(_quizState.value.copy(answers = it))
+                it.onSuccess { answers ->
+                    closeLoaderDialog()
+                    _quizState.tryEmit(_quizState.value.copy(answers = answers))
+                }
+                it.onLoading {
+                    setDialog(DialogUIModel(isProgressbar = true))
+                }
+                it.onError {
+                    setDialog(
+                        DialogUIModel(
+                            title = R.string.error_message,
+                            yesButton = { cancelQuiz() },
+                        )
+                    )
+                }
             }
         }
     }

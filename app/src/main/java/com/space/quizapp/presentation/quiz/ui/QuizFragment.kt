@@ -42,51 +42,17 @@ class QuizFragment :
             binding.titleText.text = it.quizTitle
 
             binding.questionText.text = it.question
-            changeSubmitButtonText(it.isLastQuestion)
 
-            it.answers.onSuccess { answers ->
-                adapter.submitList(answers)
-            }
-//            it.answers.onLoading {
-//                loader()
-//            }
-//            it.answers.onError {
-//                loader(true)
-//                setDialogContent(
-//                    DialogUIModel(
-//                        title = R.string.error_message_close,
-//                        closeButton = {
-//                            viewModel.navigateBack()
-//                        }
-//                    )
-//                )
-//            }
+            if (it.isLastQuestion)
+                changeSubmitButtonToFinish()
 
-            if (it.point != null) {
-//                setDialogContent(
-//                    DialogUIModel(
-//                        icon = true,
-//                        title = R.string.congratulation,
-//                        description = String.format(
-//                            resources.getString(R.string.your_point),
-//                            it.point
-//                        ),
-//                        closeButton = {
-//                            viewModel.navigateBack()
-//                        }
-//                    )
-//                )
-            }
+            adapter.submitList(it.answers)
         }
     }
 
     override fun setListeners() {
         binding.cancelImage.setOnClickListener {
-//            setDialogContent(DialogUIModel(
-//                title = R.string.cancel_quiz, yesButton = {
-//                    viewModel.cancelQuiz()
-//                }
-//            ))
+            viewModel.cancelQuiz()
         }
 
         binding.submitButton.setOnClickListener {
@@ -94,9 +60,9 @@ class QuizFragment :
         }
     }
 
-    private fun changeSubmitButtonText(isLastQuestion: Boolean) {
+    private fun changeSubmitButtonToFinish() {
         binding.submitButton.text =
-            resources.getString(if (isLastQuestion) R.string.finish else R.string.next)
+            resources.getString(R.string.finish)
     }
 
 }

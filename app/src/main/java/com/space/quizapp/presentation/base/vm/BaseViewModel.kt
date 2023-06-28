@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
+import com.space.quizapp.R
+import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.navigation.QuizEvent
 import com.space.quizapp.presentation.navigation.NavigationCommand
@@ -33,7 +35,13 @@ abstract class BaseViewModel : ViewModel() {
         _dialog.value = QuizEvent(dialog)
     }
 
-    fun closeDialog() {
+    fun closeLoaderDialog() {
         _closeDialog.value = QuizEvent((Unit))
+    }
+
+    open fun logOut() {
+        setDialog(DialogUIModel(title = R.string.want_log_out, yesButton = {
+            navigate(HomeFragmentDirections.actionGlobalLogOut())
+        }))
     }
 }
