@@ -1,136 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:background="@drawable/shape_rectangle_background"
     android:backgroundTint="@color/yellow_primary"
-    android:maxWidth="@dimen/dimen_350_dp"
-    android:minWidth="@dimen/dimen_270_dp"
-    tools:ignore="MissingDefaultResource">
+    android:maxWidth="@dimen/dimen_300_dp"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/dimen_18_dp">
 
     <TextView
         android:id="@+id/icon_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_34_dp"
-        android:layout_marginTop="@dimen/dimen_29_dp"
         android:text="@string/congratulation_icon"
-        android:textSize="@dimen/dimen_30_sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textAlignment="center"
+        android:textSize="@dimen/dimen_30_sp" />
 
     <TextView
         android:id="@+id/title_text"
-        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_34_dp"
-        android:layout_marginTop="@dimen/dimen_17_dp"
+        android:paddingTop="@dimen/dimen_10_dp"
         android:textAlignment="center"
         android:textColor="@color/neutral_04_white"
         android:textSize="@dimen/dimen_14_sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon_text"
         tools:text="ნამდვილად გსურს გასვლა?" />
 
     <TextView
         android:id="@+id/description_text"
-        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_34_dp"
-        android:paddingVertical="@dimen/dimen_20_dp"
-        android:layout_marginTop="@dimen/dimen_4_dp"
-        android:gravity="center"
+        android:textAlignment="center"
         android:textColor="@color/blue_secondary_default"
         android:textSize="@dimen/dimen_14_sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_text"
         tools:text="შენ დააგროვე 9 ქულა" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/no_button"
-        style="@style/small"
-        android:layout_width="@dimen/dimen_0_dp"
-        android:layout_height="@dimen/dimen_34_dp"
-        android:layout_marginVertical="@dimen/dimen_20_dp"
-        android:layout_marginStart="@dimen/dimen_34_dp"
-        android:layout_marginEnd="@dimen/dimen_5_dp"
-        android:background="@drawable/shape_rectangle_background"
-        android:backgroundTint="@color/neutral_04_white_60"
-        android:text="@string/no"
-        app:layout_constraintBottom_toTopOf="@id/line_view"
-        app:layout_constraintEnd_toStartOf="@id/yes_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description_text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/dimen_34_dp"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimen_10_dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/yes_button"
-        style="@style/small"
-        android:layout_width="@dimen/dimen_0_dp"
-        android:layout_height="@dimen/dimen_34_dp"
-        android:layout_marginVertical="@dimen/dimen_20_dp"
-        android:layout_marginEnd="@dimen/dimen_34_dp"
-        android:background="@drawable/shape_rectangle_background"
-        android:backgroundTint="@color/neutral_04_white_60"
-        android:text="@string/yes"
-        app:layout_constraintBottom_toTopOf="@id/line_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/no_button"
-        app:layout_constraintTop_toBottomOf="@id/description_text" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/no_button"
+            style="@style/small"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_34_dp"
+            android:layout_marginEnd="@dimen/dimen_5_dp"
+            android:background="@drawable/shape_rectangle_background"
+            android:backgroundTint="@color/neutral_04_white_60"
+            android:text="@string/no" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/yes_button"
+            style="@style/small"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_34_dp"
+            android:background="@drawable/shape_rectangle_background"
+            android:backgroundTint="@color/neutral_04_white_60"
+            android:text="@string/yes" />
+    </LinearLayout>
 
     <View
         android:id="@+id/line_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_1_dp"
-        android:background="@color/neutral_04_white"
-        app:layout_constraintBottom_toTopOf="@id/closeButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/no_button" />
+        android:layout_marginTop="@dimen/dimen_18_dp"
+        android:background="@color/neutral_04_white" />
 
     <TextView
         android:id="@+id/closeButton"
         style="@style/normal"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingVertical="@dimen/dimen_10_dp"
+        android:paddingTop="@dimen/dimen_10_dp"
         android:text="@string/close"
-        android:textColor="@color/neutral_04_white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@color/neutral_04_white" />
 
-    <ProgressBar
-        android:id="@+id/loader_progressBarr"
-        android:layout_width="@dimen/dimen_34_dp"
-        android:layout_height="@dimen/dimen_34_dp"
-        android:layout_marginVertical="@dimen/dimen_29_dp"
-        android:layout_marginEnd="@dimen/dimen_20_dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/loader_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:paddingHorizontal="@dimen/dimen_55_dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/loader_text"
-        style="@style/medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/dimen_29_dp"
-        android:text="@string/loader_title"
-        android:textColor="@color/neutral_04_white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/loader_progressBarr"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ProgressBar
+            android:id="@+id/loader_progressBarr"
+            android:layout_width="@dimen/dimen_29_dp"
+            android:layout_height="@dimen/dimen_29_dp"
+            android:layout_marginEnd="@dimen/dimen_20_dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/loader_text"
+            style="@style/normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loader_title"
+            android:textColor="@color/neutral_04_white" />
+    </LinearLayout>
+
+</LinearLayout>

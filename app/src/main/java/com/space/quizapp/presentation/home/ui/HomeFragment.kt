@@ -29,7 +29,7 @@ class HomeFragment :
     private val adapter = QuizAdapter()
 
     override fun onBind() {
-        viewModel.refreshAllData(true)
+        viewModel.refreshAllData(false)
 
         binding.mainRecycler.layoutManager =
             LinearLayoutManager(requireContext())
@@ -62,7 +62,7 @@ class HomeFragment :
         }
 
         binding.root.setOnRefreshListener {
-            viewModel.refreshAllData()
+            viewModel.refreshAllData(true)
             binding.root.isRefreshing = false
         }
     }

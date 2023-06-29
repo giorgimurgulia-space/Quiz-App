@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
             } catch (e: Error) {
                 setDialog(
                     DialogUIModel(
-                        title = R.string.error_message,
+                        title = R.string.error_message_close,
                         closeButton = { navigateBack() },
                     )
                 )

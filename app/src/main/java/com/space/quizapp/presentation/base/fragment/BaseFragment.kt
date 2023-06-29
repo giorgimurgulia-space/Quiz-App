@@ -15,6 +15,7 @@ import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.navigation.NavigationCommand
 import com.space.quizapp.presentation.view.DialogView
+import kotlinx.coroutines.delay
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :

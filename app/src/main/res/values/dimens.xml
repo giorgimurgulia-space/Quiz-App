@@ -41,4 +41,5 @@
     <dimen name="dimen_270_dp">270dp</dimen>
     <dimen name="dimen_30_dp">30dp</dimen>
     <dimen name="dimen_1_dp">1dp</dimen>
+    <dimen name="dimen_300_dp">300dp</dimen>
 </resources>
