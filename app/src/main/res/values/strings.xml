@@ -6,7 +6,7 @@
     <string name="please_input_username">გთხოვთ შეიყავნოთ სახელი</string>
     <string name="invalid_username">სახელის სტრუქტურა არასწორია</string>
     <string name="try_again">კიდევ სცადეთ</string>
-    <string name="detail">დეტალირად</string>
+    <string name="detail">დეტალურად</string>
     <string name="chose_subject">აირჩიე საგანი</string>
     <string name="hello">გამარჯობა,</string>
     <string name="welcome_messages">გამარჯობა, %1$s</string>

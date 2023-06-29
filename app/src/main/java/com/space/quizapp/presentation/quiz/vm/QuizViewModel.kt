@@ -156,7 +156,8 @@ class QuizViewModel @Inject constructor(
                     currentQuiz.quizTitle,
                     currentQuiz.quizDescription,
                     currentQuiz.quizIcon,
-                    point
+                    point,
+                    currentQuiz.questionsCount
                 )
             )
         }

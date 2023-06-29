@@ -9,16 +9,19 @@ class GetUserGpaUseCse @Inject constructor(
 
     suspend fun invoke(userId: String): String {
         var currentUserGPA = 0.0.toFloat()
+        var questionCount = 0
+
         val userPoints = userDataRepository.getUserPoint(userId)
 
         if (userPoints.isEmpty()) {
-            currentUserGPA = 0.toFloat()
+            return currentUserGPA.toString()
         } else {
             userPoints.forEach { point ->
                 currentUserGPA += point.point
+                questionCount += point.questionCount
             }
         }
 
-        return currentUserGPA.toString()
+        return (currentUserGPA / questionCount * 4).toString()
     }
 }
