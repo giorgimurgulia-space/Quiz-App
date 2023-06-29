@@ -1,5 +1,6 @@
 package com.space.quizapp.presentation.point.ui
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
@@ -39,7 +40,12 @@ class PointsFragment :
 
     override fun setObserves() {
         collectFlow(viewModel.points) {
+            if (it.isEmpty()) {
+                binding.noPointsText.visibility = View.VISIBLE
+            } else {
+                binding.noPointsText.visibility = View.GONE
                 adapter.submitList(it)
+            }
         }
     }
 }
