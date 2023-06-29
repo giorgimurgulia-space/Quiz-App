@@ -20,6 +20,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
 
@@ -52,7 +53,12 @@ class QuizViewModel @Inject constructor(
                 try {
                     val quiz = startQuizUseCase.invoke(subjectId).toUIModel()
                     currentQuiz = quiz
-                    _quizState.tryEmit(_quizState.value.copy(quizTitle = quiz.quizTitle))
+                    _quizState.tryEmit(
+                        _quizState.value.copy(
+                            quizTitle = quiz.quizTitle,
+                            questionCount = quiz.questionsCount
+                        )
+                    )
                     getQuestion()
                 } catch (e: Exception) {
                     setDialog(
@@ -71,7 +77,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun onSubmitButtonClick() {
-        if (_quizState.value.isLastQuestion)
+        if (_quizState.value.questionIndex == _quizState.value.questionCount)
             finishQuiz()
         else
             getQuestion()
@@ -118,7 +124,7 @@ class QuizViewModel @Inject constructor(
             _quizState.value.copy(
                 question = newQuestion.questionTitle,
                 correctAnswerIndex = newQuestion.correctAnswerIndex,
-                isLastQuestion = newQuestion.questionIndex == currentQuiz.questionsCount - 1
+                questionIndex = newQuestion.questionIndex
             )
         )
 

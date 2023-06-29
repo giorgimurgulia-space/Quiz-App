@@ -38,7 +38,7 @@ class QuizFragment :
 
             binding.questionText.text = it.question
 
-            if (it.isLastQuestion)
+            if (it.questionIndex == it.questionCount)
                 changeSubmitButtonToFinish()
 
             adapter.submitList(it.answers)
