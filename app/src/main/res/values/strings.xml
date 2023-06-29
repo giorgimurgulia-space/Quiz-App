@@ -22,6 +22,8 @@
     <string name="cancel_quiz">ნამდვილად გსურს ქვიზის შეწყვეტა?</string>
     <string name="my_points">დაგროვილი ქულები</string>
     <string name="plus_one">+1</string>
+    <string name="current_point">მიმდინარე ქულა: %1$s</string>
+    <string name="question_progress">%1$s/%2$s</string>
     <string name="congratulation">გილოცავ!</string>
     <string name="your_point">შენ დააგროვე %1$s ქულა</string>
     <string name="next">შემდეგი</string>

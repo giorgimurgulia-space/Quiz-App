@@ -44,4 +44,5 @@
     <dimen name="dimen_350_dp">350dp</dimen>
     <dimen name="dimen_270_dp">270dp</dimen>
     <dimen name="dimen_300_dp">300dp</dimen>
+    <dimen name="dimen_9_dp">9dp</dimen>
 </resources>

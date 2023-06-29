@@ -74,6 +74,12 @@ class QuizViewModel @Inject constructor(
 
     fun onAnswerClick(answerIndex: Int) {
         insertAnswerUseCase.invoke(answerIndex)
+
+        _quizState.tryEmit(
+            _quizState.value.copy(
+                currentPoint = getQuizPointUseCase.invoke()
+            )
+        )
     }
 
     fun onSubmitButtonClick() {
@@ -90,6 +96,44 @@ class QuizViewModel @Inject constructor(
                 yesButton = { cancelQuiz() }
             )
         )
+    }
+
+    private fun getQuestion() {
+        val newQuestion = getNextQuestionUseCase.invoke()
+
+        _quizState.tryEmit(
+            _quizState.value.copy(
+                question = newQuestion.questionTitle,
+                correctAnswerIndex = newQuestion.correctAnswerIndex,
+                questionIndex = newQuestion.questionIndex,
+                isLastQuestion = newQuestion.questionIndex == currentQuiz.questionsCount
+            )
+        )
+
+
+        viewModelScope.launch {
+            getNextAnswersUseCase.invoke().map {
+                it.map { answer ->
+                    answer.toUIModel()
+                }
+            }.toResult().collectLatest {
+                it.onSuccess { answers ->
+                    closeLoaderDialog()
+                    _quizState.tryEmit(_quizState.value.copy(answers = answers))
+                }
+                it.onLoading {
+                    setDialog(DialogUIModel(isProgressbar = true))
+                }
+                it.onError {
+                    setDialog(
+                        DialogUIModel(
+                            title = R.string.error_message_close,
+                            yesButton = { navigateBack() },
+                        )
+                    )
+                }
+            }
+        }
     }
 
     private fun cancelQuiz() {
@@ -117,41 +161,6 @@ class QuizViewModel @Inject constructor(
             ))
     }
 
-    private fun getQuestion() {
-        val newQuestion = getNextQuestionUseCase.invoke()
-
-        _quizState.tryEmit(
-            _quizState.value.copy(
-                question = newQuestion.questionTitle,
-                correctAnswerIndex = newQuestion.correctAnswerIndex,
-                questionIndex = newQuestion.questionIndex
-            )
-        )
-
-        viewModelScope.launch {
-            getNextAnswersUseCase.invoke().map {
-                it.map { answer ->
-                    answer.toUIModel()
-                }
-            }.toResult().collectLatest {
-                it.onSuccess { answers ->
-                    closeLoaderDialog()
-                    _quizState.tryEmit(_quizState.value.copy(answers = answers))
-                }
-                it.onLoading {
-                    setDialog(DialogUIModel(isProgressbar = true))
-                }
-                it.onError {
-                    setDialog(
-                        DialogUIModel(
-                            title = R.string.error_message_close,
-                            yesButton = { navigateBack() },
-                        )
-                    )
-                }
-            }
-        }
-    }
 
     private fun insertQuizPoint(point: Float) {
         viewModelScope.launch {

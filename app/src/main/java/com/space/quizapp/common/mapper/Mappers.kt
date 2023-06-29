@@ -12,7 +12,7 @@ import java.util.*
 fun UserEntity.toDomainModel() = UserModel(userId, username)
 
 fun UserPointEntity.toDomainModel() =
-    PointModel(userId, subjectId, quizTitle, quizDescription, quizIcon, point,questionCount)
+    PointModel(userId, subjectId, quizTitle, quizDescription, quizIcon, point, questionCount)
 
 fun PointModel.toUIModel() =
     PointUIModel(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
@@ -37,7 +37,7 @@ fun QuestionDto.toDomainModel() =
         questionTitle,
         answers.map { it.toAnswer() },
         answers.indexOf(correctAnswer),
-        questionIndex
+        questionIndex + 1
     )
 
 fun QuizModel.toUIModel() = QuizUIModel(id, quizTitle, quizDescription, quizIcon, questionsCount)
