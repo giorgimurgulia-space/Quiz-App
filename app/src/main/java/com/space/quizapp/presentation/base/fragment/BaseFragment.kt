@@ -1,5 +1,6 @@
 package com.space.quizapp.presentation.base.fragment
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,12 @@ import androidx.viewbinding.ViewBinding
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.observeNonNull
 import com.space.quizapp.common.types.Inflater
+import com.space.quizapp.presentation.base.view.BaseDialogView
 import com.space.quizapp.presentation.base.vm.BaseViewModel
-import com.space.quizapp.presentation.model.DialogUIModel
+import com.space.quizapp.presentation.model.DialogItem
 import com.space.quizapp.presentation.navigation.NavigationCommand
-import com.space.quizapp.presentation.view.DialogView
-import kotlinx.coroutines.delay
+import com.space.quizapp.presentation.view.DialogNotificationView
+import com.space.quizapp.presentation.view.DialogQuestionView
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
@@ -25,12 +27,11 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    private val quizDialog by lazy { DialogView(requireContext()) }
+    protected lateinit var quizDialog: Dialog
 
     abstract fun onBind()
     open fun setObserves() {}
     open fun setListeners() {}
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,16 +70,26 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private fun observeDialog() {
         viewModel.dialog.observeNonNull(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { dialog ->
-                if (dialog.isProgressbar) {
-                    quizDialog.setContent(dialog).show()
-                } else {
-                    DialogView(requireContext()).setContent(dialog).show()
+                when (dialog.viewType) {
+                    DialogItem.ViewType.LOADER -> {
+                        dialog as DialogItem.LoaderDialog
+                        if (dialog.isProgressbar) {
+                            quizDialog = Dialog(requireContext())
+                            quizDialog.setContentView(R.layout.layout_loader_dialog)
+                            quizDialog.show()
+                        } else
+                            quizDialog.dismiss()
+                    }
+                    DialogItem.ViewType.QUESTION -> {
+                        dialog as DialogItem.QuestionDialog
+                        DialogQuestionView(requireContext()).setContent(dialog).show()
+                    }
+                    DialogItem.ViewType.NOTIFICATION -> {
+                        dialog as DialogItem.NotificationDialog
+                        DialogNotificationView(requireContext()).setContent(dialog)
+                            .show()
+                    }
                 }
-            }
-        }
-        viewModel.closeDialog.observeNonNull(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let {
-                quizDialog.dismiss()
             }
         }
     }

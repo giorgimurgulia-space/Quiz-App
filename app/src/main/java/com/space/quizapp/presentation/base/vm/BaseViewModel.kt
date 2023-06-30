@@ -1,26 +1,29 @@
 package com.space.quizapp.presentation.base.vm
 
+import android.app.Dialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import com.space.quizapp.R
 import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
+import com.space.quizapp.presentation.model.DialogItem
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.navigation.QuizEvent
 import com.space.quizapp.presentation.navigation.NavigationCommand
+import com.space.quizapp.presentation.view.DialogNotificationView
 
 
 abstract class BaseViewModel : ViewModel() {
 
+    private lateinit var quizDialog: Dialog
+
     private val _navigation = MutableLiveData<QuizEvent<NavigationCommand>>()
     val navigation: LiveData<QuizEvent<NavigationCommand>> get() = _navigation
 
-    private val _dialog = MutableLiveData<QuizEvent<DialogUIModel>>()
+    private val _dialog = MutableLiveData<QuizEvent<DialogItem>>()
     val dialog get() = _dialog
 
-    private val _closeDialog = MutableLiveData<QuizEvent<Unit>>()
-    val closeDialog get() = _closeDialog
 
 
     fun navigate(navDirections: NavDirections) {
@@ -31,16 +34,16 @@ abstract class BaseViewModel : ViewModel() {
         _navigation.value = QuizEvent(NavigationCommand.Back)
     }
 
-    fun setDialog(dialog: DialogUIModel) {
+    fun setDialog(dialog: DialogItem) {
         _dialog.value = QuizEvent(dialog)
     }
 
     fun closeLoaderDialog() {
-        _closeDialog.value = QuizEvent((Unit))
+        _dialog.value = QuizEvent(DialogItem.LoaderDialog(false))
     }
 
     open fun logOut() {
-        setDialog(DialogUIModel(title = R.string.want_log_out, yesButton = {
+        setDialog(DialogItem.QuestionDialog(title = R.string.want_log_out, onYesButton = {
             navigate(HomeFragmentDirections.actionGlobalLogOut())
         }))
     }

@@ -13,6 +13,7 @@ import com.space.quizapp.domain.usecase.auth.GetCurrentUserIdUseCase
 import com.space.quizapp.domain.usecase.quiz.*
 import com.space.quizapp.domain.usecase.user.InsertUserPointUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
+import com.space.quizapp.presentation.model.DialogItem
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.QuizUIModel
 import com.space.quizapp.presentation.quiz.ui.QuizPagePayLoad
@@ -42,9 +43,9 @@ class QuizViewModel @Inject constructor(
     fun startQuiz(subjectId: String?) {
         if (subjectId.isNullOrEmpty()) {
             setDialog(
-                DialogUIModel(
+                DialogItem.NotificationDialog(
                     title = R.string.error_message_close,
-                    closeButton = { navigateBack() },
+                    onCloseButton = { navigateBack() },
                 )
             )
         } else {
@@ -56,9 +57,9 @@ class QuizViewModel @Inject constructor(
                     getQuestion()
                 } catch (e: Exception) {
                     setDialog(
-                        DialogUIModel(
+                        DialogItem.NotificationDialog(
                             title = R.string.error_message_close,
-                            closeButton = { navigateBack() },
+                            onCloseButton = { navigateBack() },
                         )
                     )
                 }
@@ -79,9 +80,9 @@ class QuizViewModel @Inject constructor(
 
     fun onCancelClick() {
         setDialog(
-            DialogUIModel(
+            DialogItem.QuestionDialog(
                 title = R.string.cancel_quiz,
-                yesButton = { cancelQuiz() }
+                onYesButton = { cancelQuiz() }
             )
         )
     }
@@ -93,9 +94,9 @@ class QuizViewModel @Inject constructor(
             finishQuiz()
         else
             setDialog(
-                DialogUIModel(
+                DialogItem.NotificationDialog(
                     description = point.toPointString(),
-                    closeButton = { navigateBack() }
+                    onCloseButton = { navigateBack() }
                 ))
     }
 
@@ -103,11 +104,11 @@ class QuizViewModel @Inject constructor(
         val point = getQuizPointUseCase.invoke()
         insertQuizPoint(point)
         setDialog(
-            DialogUIModel(
+            DialogItem.NotificationDialog(
                 icon = true,
                 title = R.string.congratulation,
                 description = point.toPointString(),
-                closeButton = { navigateBack() }
+                onCloseButton = { navigateBack() }
             ))
     }
 
@@ -133,13 +134,13 @@ class QuizViewModel @Inject constructor(
                     _quizState.tryEmit(_quizState.value.copy(answers = answers))
                 }
                 it.onLoading {
-                    setDialog(DialogUIModel(isProgressbar = true))
+                    setDialog(DialogItem.LoaderDialog())
                 }
                 it.onError {
                     setDialog(
-                        DialogUIModel(
+                        DialogItem.NotificationDialog(
                             title = R.string.error_message_close,
-                            yesButton = { navigateBack() },
+                            onCloseButton = { navigateBack() },
                         )
                     )
                 }
