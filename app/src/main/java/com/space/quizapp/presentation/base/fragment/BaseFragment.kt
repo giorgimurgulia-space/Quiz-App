@@ -18,6 +18,7 @@ import com.space.quizapp.presentation.model.DialogItem
 import com.space.quizapp.presentation.navigation.NavigationCommand
 import com.space.quizapp.presentation.view.DialogNotificationView
 import com.space.quizapp.presentation.view.DialogQuestionView
+import kotlinx.coroutines.delay
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
@@ -27,7 +28,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private var _binding: VB? = null
     val binding get() = _binding!!
 
-    protected lateinit var quizDialog: Dialog
+    private lateinit var quizDialog: Dialog
 
     abstract fun onBind()
     open fun setObserves() {}
@@ -74,7 +75,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
                     DialogItem.ViewType.LOADER -> {
                         dialog as DialogItem.LoaderDialog
                         if (dialog.isProgressbar) {
-                            quizDialog = Dialog(requireContext())
+                            quizDialog = DialogNotificationView(requireContext())
                             quizDialog.setContentView(R.layout.layout_loader_dialog)
                             quizDialog.show()
                         } else

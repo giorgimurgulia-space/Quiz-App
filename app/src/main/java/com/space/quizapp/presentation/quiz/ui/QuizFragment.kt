@@ -74,5 +74,4 @@ class QuizFragment :
         binding.submitButton.text =
             resources.getString(R.string.finish)
     }
-
 }

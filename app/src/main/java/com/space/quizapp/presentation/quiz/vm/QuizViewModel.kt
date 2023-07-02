@@ -13,14 +13,13 @@ import com.space.quizapp.domain.usecase.auth.GetCurrentUserIdUseCase
 import com.space.quizapp.domain.usecase.quiz.*
 import com.space.quizapp.domain.usecase.user.InsertUserPointUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
-import com.space.quizapp.presentation.model.DialogUIModel
+import com.space.quizapp.presentation.model.DialogItem
 import com.space.quizapp.presentation.model.QuizUIModel
 import com.space.quizapp.presentation.quiz.ui.QuizPagePayLoad
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
 
@@ -93,31 +92,6 @@ class QuizViewModel @Inject constructor(
         )
     }
 
-    private fun cancelQuiz() {
-        val point = getQuizPointUseCase.invoke()
-
-        if (point >= 1)
-            finishQuiz()
-        else
-            setDialog(
-                DialogUIModel(
-                    description = point.toPointString(),
-                    closeButton = { navigateBack() }
-                ))
-    }
-
-    private fun finishQuiz() {
-        val point = getQuizPointUseCase.invoke()
-        insertQuizPoint(point)
-        setDialog(
-            DialogUIModel(
-                icon = true,
-                title = R.string.congratulation,
-                description = point.toPointString(),
-                closeButton = { navigateBack() }
-            ))
-    }
-
     private fun getQuestion() {
         val newQuestion = getNextQuestionUseCase.invoke()
 
@@ -160,23 +134,24 @@ class QuizViewModel @Inject constructor(
 
         if (point >= 1)
             finishQuiz()
-        else
+        else {
             setDialog(
-                DialogUIModel(
+                DialogItem.NotificationDialog(
                     description = point.toPointString(),
-                    closeButton = { navigateBack() }
+                    onCloseButton = { navigateBack() }
                 ))
+        }
     }
 
     private fun finishQuiz() {
         val point = getQuizPointUseCase.invoke()
         insertQuizPoint(point)
         setDialog(
-            DialogUIModel(
+            DialogItem.NotificationDialog(
                 icon = true,
                 title = R.string.congratulation,
                 description = point.toPointString(),
-                closeButton = { navigateBack() }
+                onCloseButton = { navigateBack() }
             ))
     }
 
