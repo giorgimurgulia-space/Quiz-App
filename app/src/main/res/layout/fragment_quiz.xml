@@ -47,15 +47,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="მიმდინარე ქულა: 1" />
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/quiz_progress_bar"
-        style="@style/MyProgressBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_9_dp"
         android:layout_marginTop="@dimen/dimen_44_dp"
+        app:indicatorColor="@color/blue_secondary_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_text" />
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        app:trackColor="@color/neutral_04_light_grey"
+        app:trackCornerRadius="@dimen/dimen_5_dp"
+        app:trackThickness="@dimen/dimen_10_dp" />
 
     <ImageView
         android:id="@+id/cancel_image"

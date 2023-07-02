@@ -2,6 +2,7 @@ package com.space.quizapp.domain.usecase.user
 
 import com.space.quizapp.domain.repository.UserDataRepository
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 class GetUserGpaUseCse @Inject constructor(
     private val userDataRepository: UserDataRepository
@@ -22,6 +23,9 @@ class GetUserGpaUseCse @Inject constructor(
             }
         }
 
-        return (currentUserGPA / questionCount * 4).toString()
+        return number2digits((currentUserGPA / questionCount * 4)).toString()
     }
+
+    private fun number2digits(number: Float): Double = (number * 100.0).roundToInt() / 100.0
+
 }
