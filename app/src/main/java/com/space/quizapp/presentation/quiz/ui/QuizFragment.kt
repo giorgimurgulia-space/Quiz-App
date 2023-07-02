@@ -34,6 +34,9 @@ class QuizFragment :
 
     override fun setObserves() {
         collectFlow(viewModel.quizState) {
+            binding.questionText.text = it.question
+            adapter.submitList(it.answers)
+
             binding.currentPointText.text =
                 format(resources.getString(R.string.current_point), it.currentPoint.toPointString())
 
@@ -48,15 +51,10 @@ class QuizFragment :
             binding.quizProgressBar.max = it.questionCount
 
             adapter.correctAnswer = it.correctAnswerIndex
-
             binding.titleText.text = it.quizTitle
-
-            binding.questionText.text = it.question
 
             if (it.isLastQuestion)
                 changeSubmitButtonToFinish()
-
-            adapter.submitList(it.answers)
         }
     }
 

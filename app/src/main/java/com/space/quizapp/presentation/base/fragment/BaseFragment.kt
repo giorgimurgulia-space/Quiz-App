@@ -1,6 +1,8 @@
 package com.space.quizapp.presentation.base.fragment
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -75,11 +77,13 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
                     DialogItem.ViewType.LOADER -> {
                         dialog as DialogItem.LoaderDialog
                         if (dialog.isProgressbar) {
-                            quizDialog = DialogNotificationView(requireContext())
+                            quizDialog = Dialog(requireContext())
+                            quizDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                             quizDialog.setContentView(R.layout.layout_loader_dialog)
                             quizDialog.show()
-                        } else
-                            quizDialog.dismiss()
+                        } else {
+//                            quizDialog.dismiss()
+                        }
                     }
                     DialogItem.ViewType.QUESTION -> {
                         dialog as DialogItem.QuestionDialog

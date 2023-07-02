@@ -52,7 +52,12 @@ class QuizViewModel @Inject constructor(
                 try {
                     val quiz = startQuizUseCase.invoke(subjectId).toUIModel()
                     currentQuiz = quiz
-                    _quizState.tryEmit(_quizState.value.copy(quizTitle = quiz.quizTitle))
+                    _quizState.tryEmit(
+                        _quizState.value.copy(
+                            quizTitle = quiz.quizTitle,
+                            questionCount = quiz.questionsCount
+                        )
+                    )
                     getQuestion()
                 } catch (e: Exception) {
                     setDialog(
