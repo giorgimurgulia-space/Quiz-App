@@ -13,7 +13,7 @@ import com.space.quizapp.presentation.model.AnswerUIModel
 
 class AnswerView(
     context: Context,
-    attributeSet: AttributeSet
+    attributeSet: AttributeSet? = null
 ) : FrameLayout(context, attributeSet) {
     private val binding = LayoutAnswerBinding.inflate(LayoutInflater.from(context), this, true)
 

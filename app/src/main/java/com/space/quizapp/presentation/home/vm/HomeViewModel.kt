@@ -15,6 +15,7 @@ import com.space.quizapp.domain.usecase.user.GetUserGpaUseCse
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.home.ui.HomeFragmentDirections
 import com.space.quizapp.presentation.model.AvailableQuizUIModel
+import com.space.quizapp.presentation.model.DialogItem
 import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.UserUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -65,9 +66,9 @@ class HomeViewModel @Inject constructor(
                 _state.tryEmit(user)
             } catch (e: Error) {
                 setDialog(
-                    DialogUIModel(
+                    DialogItem.NotificationDialog(
                         title = R.string.error_message_close,
-                        closeButton = { navigateBack() },
+                        onCloseButton = { navigateBack() }
                     )
                 )
             }
@@ -84,13 +85,13 @@ class HomeViewModel @Inject constructor(
                     _availableQuiz.tryEmit(availableQuiz)
                 }
                 it.onLoading {
-                    setDialog(DialogUIModel(isProgressbar = true))
+                    setDialog(DialogItem.LoaderDialog())
                 }
                 it.onError {
                     setDialog(
-                        DialogUIModel(
+                        DialogItem.QuestionDialog(
                             title = R.string.error_available_quiz,
-                            yesButton = { refreshAllData() },
+                            onYesButton = { refreshAllData() },
                         )
                     )
                 }

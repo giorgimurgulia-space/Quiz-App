@@ -3,21 +3,15 @@ package com.space.quizapp.presentation.home.ui
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
 import android.widget.TextView.BufferType
-import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.collectFlow
-import com.space.quizapp.common.resource.onError
-import com.space.quizapp.common.resource.onLoading
-import com.space.quizapp.common.resource.onSuccess
 import com.space.quizapp.databinding.FragmentHomeBinding
 import com.space.quizapp.presentation.base.fragment.BaseFragment
 import com.space.quizapp.presentation.home.vm.HomeViewModel
 import com.space.quizapp.presentation.home.adapter.QuizAdapter
-import com.space.quizapp.presentation.model.DialogUIModel
 import com.space.quizapp.presentation.model.UserUIModel
-import com.space.quizapp.presentation.view.DialogView
 import dagger.hilt.android.AndroidEntryPoint
 
 

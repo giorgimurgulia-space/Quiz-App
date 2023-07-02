@@ -43,9 +43,9 @@ class QuizViewModel @Inject constructor(
     fun startQuiz(subjectId: String?) {
         if (subjectId.isNullOrEmpty()) {
             setDialog(
-                DialogUIModel(
+                DialogItem.NotificationDialog(
                     title = R.string.error_message_close,
-                    closeButton = { navigateBack() },
+                    onCloseButton = { navigateBack() },
                 )
             )
         } else {
@@ -53,18 +53,13 @@ class QuizViewModel @Inject constructor(
                 try {
                     val quiz = startQuizUseCase.invoke(subjectId).toUIModel()
                     currentQuiz = quiz
-                    _quizState.tryEmit(
-                        _quizState.value.copy(
-                            quizTitle = quiz.quizTitle,
-                            questionCount = quiz.questionsCount
-                        )
-                    )
+                    _quizState.tryEmit(_quizState.value.copy(quizTitle = quiz.quizTitle))
                     getQuestion()
                 } catch (e: Exception) {
                     setDialog(
-                        DialogUIModel(
+                        DialogItem.NotificationDialog(
                             title = R.string.error_message_close,
-                            closeButton = { navigateBack() },
+                            onCloseButton = { navigateBack() },
                         )
                     )
                 }
@@ -83,7 +78,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun onSubmitButtonClick() {
-        if (_quizState.value.questionIndex == _quizState.value.questionCount)
+        if (_quizState.value.isLastQuestion)
             finishQuiz()
         else
             getQuestion()
@@ -91,11 +86,36 @@ class QuizViewModel @Inject constructor(
 
     fun onCancelClick() {
         setDialog(
-            DialogUIModel(
+            DialogItem.QuestionDialog(
                 title = R.string.cancel_quiz,
-                yesButton = { cancelQuiz() }
+                onYesButton = { cancelQuiz() }
             )
         )
+    }
+
+    private fun cancelQuiz() {
+        val point = getQuizPointUseCase.invoke()
+
+        if (point >= 1)
+            finishQuiz()
+        else
+            setDialog(
+                DialogUIModel(
+                    description = point.toPointString(),
+                    closeButton = { navigateBack() }
+                ))
+    }
+
+    private fun finishQuiz() {
+        val point = getQuizPointUseCase.invoke()
+        insertQuizPoint(point)
+        setDialog(
+            DialogUIModel(
+                icon = true,
+                title = R.string.congratulation,
+                description = point.toPointString(),
+                closeButton = { navigateBack() }
+            ))
     }
 
     private fun getQuestion() {
@@ -110,7 +130,6 @@ class QuizViewModel @Inject constructor(
             )
         )
 
-
         viewModelScope.launch {
             getNextAnswersUseCase.invoke().map {
                 it.map { answer ->
@@ -122,13 +141,13 @@ class QuizViewModel @Inject constructor(
                     _quizState.tryEmit(_quizState.value.copy(answers = answers))
                 }
                 it.onLoading {
-                    setDialog(DialogUIModel(isProgressbar = true))
+                    setDialog(DialogItem.LoaderDialog())
                 }
                 it.onError {
                     setDialog(
-                        DialogUIModel(
+                        DialogItem.NotificationDialog(
                             title = R.string.error_message_close,
-                            yesButton = { navigateBack() },
+                            onCloseButton = { navigateBack() },
                         )
                     )
                 }

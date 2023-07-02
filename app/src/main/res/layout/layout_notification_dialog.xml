@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rectangle_background"
+    android:backgroundTint="@color/yellow_primary"
+    android:maxWidth="@dimen/dimen_300_dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10_dp"
+        android:paddingHorizontal="@dimen/dimen_34_dp"
+        android:text="@string/congratulation_icon"
+        android:textAlignment="center"
+        android:textSize="@dimen/dimen_30_sp" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8_dp"
+        android:paddingHorizontal="@dimen/dimen_34_dp"
+        android:textAlignment="center"
+        android:textColor="@color/neutral_04_white"
+        android:textSize="@dimen/dimen_14_sp"
+        android:textStyle="bold"
+        tools:text="გილოცავ" />
+
+    <TextView
+        android:id="@+id/description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_4_dp"
+        android:paddingHorizontal="@dimen/dimen_34_dp"
+        android:textAlignment="center"
+        android:textColor="@color/blue_secondary_default"
+        android:textSize="@dimen/dimen_14_sp"
+        android:textStyle="bold"
+        tools:text="შენ დააგროვე 9 ქულა" />
+
+    <View
+        android:id="@+id/line_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1_dp"
+        android:layout_marginTop="@dimen/dimen_8_dp"
+        android:background="@color/neutral_04_white" />
+
+    <TextView
+        android:id="@+id/closeButton"
+        style="@style/normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/dimen_10_dp"
+        android:text="@string/close"
+        android:textAlignment="center"
+        android:textColor="@color/neutral_04_white" />
+</LinearLayout>
