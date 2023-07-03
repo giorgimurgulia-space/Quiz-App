@@ -23,7 +23,7 @@ class DialogNotificationView(context: Context) : BaseDialogView(context) {
             binding.descriptionText.visibility = View.GONE
         } else {
             binding.descriptionText.text = String.format(
-                context.resources.getString(R.string.welcome_messages),
+                context.resources.getString(R.string.your_point),
                 dialog.description
             )
 

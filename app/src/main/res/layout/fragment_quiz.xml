@@ -11,7 +11,7 @@
         style="@style/normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_24_dp"
+        android:layout_marginTop="@dimen/dimen_16_dp"
         android:drawablePadding="@dimen/dimen_5_dp"
         android:gravity="center"
         android:textColor="@color/neutral_01_dark_grey"
@@ -20,6 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="პროგრამირება" />
+
+    <ImageView
+        android:id="@+id/cancel_image"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_cancel"
+        app:layout_constraintBottom_toBottomOf="@id/title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title_text" />
 
     <TextView
         android:id="@+id/question_progress_text"
@@ -51,7 +61,7 @@
         android:id="@+id/quiz_progress_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_9_dp"
-        android:layout_marginTop="@dimen/dimen_44_dp"
+        android:layout_marginTop="@dimen/dimen_34_dp"
         app:indicatorColor="@color/blue_secondary_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,31 +70,19 @@
         app:trackCornerRadius="@dimen/dimen_5_dp"
         app:trackThickness="@dimen/dimen_10_dp" />
 
-    <ImageView
-        android:id="@+id/cancel_image"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_cancel"
-        app:layout_constraintBottom_toBottomOf="@id/title_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title_text" />
-
     <TextView
         android:id="@+id/question_text"
         style="@style/normal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dimen_30_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_24_dp"
         android:background="@drawable/shape_rectangle_background"
         android:backgroundTint="@color/blue_secondary_lightest"
         android:gravity="center"
-        android:paddingHorizontal="@dimen/dimen_34_dp"
-        android:paddingVertical="@dimen/dimen_10_dp"
+        android:padding="@dimen/dimen_34_dp"
         android:textColor="@color/neutral_01_dark_grey"
         app:layout_constraintBottom_toTopOf="@id/main_recycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/quiz_progress_bar"
         tools:text="რომელია ყველაზე პოპულარული პროგრამირების ენა?" />
@@ -93,7 +91,7 @@
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dimen_55_dp"
+        android:layout_marginTop="@dimen/dimen_34_dp"
         app:layout_constraintBottom_toTopOf="@id/submit_button"
         app:layout_constraintTop_toBottomOf="@id/question_text"
         tools:listitem="@layout/layout_answer" />
@@ -104,8 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_55_dp"
         android:layout_marginHorizontal="@dimen/dimen_16_dp"
-        android:layout_marginTop="@dimen/dimen_55_dp"
-        android:layout_marginBottom="@dimen/dimen_55_dp"
+        android:layout_marginVertical="@dimen/dimen_34_dp"
         android:background="@drawable/shape_rectangle_background"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"

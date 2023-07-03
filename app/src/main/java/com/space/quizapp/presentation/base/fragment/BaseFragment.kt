@@ -82,7 +82,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
                             quizDialog.setContentView(R.layout.layout_loader_dialog)
                             quizDialog.show()
                         } else {
-//                            quizDialog.dismiss()
+                            quizDialog.dismiss()
                         }
                     }
                     DialogItem.ViewType.QUESTION -> {
