@@ -7,7 +7,6 @@
     android:layout_gravity="center"
     app:cardBackgroundColor="@color/yellow_primary"
     android:minWidth="@dimen/dimen_270_dp"
-    android:paddingVertical="@dimen/dimen_18_dp"
     app:cardCornerRadius="@dimen/dimen_26_dp"
     tools:ignore="MissingDefaultResource">
 
@@ -16,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:paddingVertical="@dimen/dimen_9_dp">
+        android:paddingVertical="@dimen/dimen_12_dp">
 
         <ProgressBar
             android:id="@+id/loader_progressBarr"

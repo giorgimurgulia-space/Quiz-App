@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/question_progress_text"
-        style="@style/normal"
+        style="@style/small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_2_dp"
@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/current_point_text"
-        style="@style/normal"
+        style="@style/small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_2_dp"
