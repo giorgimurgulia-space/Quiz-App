@@ -13,6 +13,9 @@ class DialogNotificationView(context: Context) : BaseDialogView(context) {
     override val binding = LayoutNotificationDialogBinding.inflate(LayoutInflater.from(context))
 
     fun setContent(dialog: DialogItem.NotificationDialog): DialogNotificationView {
+        if (!dialog.icon)
+            binding.iconText.visibility = View.GONE
+
         if (dialog.title != null) {
             binding.titleText.text = context.getString(dialog.title)
         } else {

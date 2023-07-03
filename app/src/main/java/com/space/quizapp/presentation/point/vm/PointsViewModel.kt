@@ -43,8 +43,8 @@ class PointsViewModel @Inject constructor(
                 it.map { point -> point.toUIModel() }
             }.toResult().collectLatest {
                 it.onSuccess { points ->
-                    closeLoaderDialog()
                     _points.tryEmit(points)
+                    closeLoaderDialog()
                 }
                 it.onLoading {
                     setDialog(DialogItem.LoaderDialog())

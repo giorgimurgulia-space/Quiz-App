@@ -67,6 +67,7 @@ class HomeViewModel @Inject constructor(
             } catch (e: Error) {
                 setDialog(
                     DialogItem.NotificationDialog(
+                        icon = false,
                         title = R.string.error_message_close,
                         onCloseButton = { navigateBack() }
                     )

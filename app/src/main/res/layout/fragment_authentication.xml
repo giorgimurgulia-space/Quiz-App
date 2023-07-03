@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_117_dp"
         android:layout_marginTop="@dimen/dimen_24_dp"
-        android:background="@drawable/shape_rectangle_background"
+        android:background="@drawable/shape_input_background"
         android:backgroundTint="@color/yellow_primary"
         android:padding="@dimen/dimen_16_dp"
         android:text="@string/start_quiz"

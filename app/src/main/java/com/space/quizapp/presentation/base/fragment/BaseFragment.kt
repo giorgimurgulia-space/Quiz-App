@@ -21,6 +21,7 @@ import com.space.quizapp.presentation.navigation.NavigationCommand
 import com.space.quizapp.presentation.view.DialogNotificationView
 import com.space.quizapp.presentation.view.DialogQuestionView
 import kotlinx.coroutines.delay
+import kotlin.concurrent.thread
 
 
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val inflate: Inflater<VB>) :
@@ -37,9 +38,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     open fun setListeners() {}
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = inflate.invoke(inflater, container, false)
         return binding.root
@@ -78,21 +77,28 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
                         dialog as DialogItem.LoaderDialog
                         if (dialog.isProgressbar) {
                             quizDialog = Dialog(requireContext())
+
                             quizDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                            quizDialog.setCancelable(false)
+                            quizDialog.setCanceledOnTouchOutside(false)
+
                             quizDialog.setContentView(R.layout.layout_loader_dialog)
                             quizDialog.show()
                         } else {
-                            quizDialog.dismiss()
+                            if (this::quizDialog.isInitialized) quizDialog.dismiss()
                         }
                     }
                     DialogItem.ViewType.QUESTION -> {
+                        quizDialog.dismiss()
+
                         dialog as DialogItem.QuestionDialog
                         DialogQuestionView(requireContext()).setContent(dialog).show()
                     }
                     DialogItem.ViewType.NOTIFICATION -> {
+                        quizDialog.dismiss()
+
                         dialog as DialogItem.NotificationDialog
-                        DialogNotificationView(requireContext()).setContent(dialog)
-                            .show()
+                        DialogNotificationView(requireContext()).setContent(dialog).show()
                     }
                 }
             }
