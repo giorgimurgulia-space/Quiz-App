@@ -34,7 +34,7 @@ class CurrentQuizRepositoryImpl @Inject constructor(
 
             currentQuiz.set(filteredQuizList.firstOrNull())
         } else {
-            throw ApiError(null)
+            throw ApiError(Throwable())
         }
     }
 

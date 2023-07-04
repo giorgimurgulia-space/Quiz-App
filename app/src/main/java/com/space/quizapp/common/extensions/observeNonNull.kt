@@ -1,4 +1,4 @@
-package com.space.quizapp.common
+package com.space.quizapp.common.extensions
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

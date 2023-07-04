@@ -46,6 +46,20 @@ fun AnswerModel.toUIModel() = AnswerUIModel(answerId, answerTitle)
 
 fun String.toAnswer() = AnswerModel(UUID.randomUUID().toString(), this)
 
+fun Float.toPointString(): String {
+    // Convert float value
+    // of N to integer
+    val x = this.toInt()
+    val temp2 = this - x
+
+    // If N is not equivalent
+    // to any integer
+    return if (temp2 > 0)
+        this.toString()
+    else
+        this.toInt().toString()
+}
+
 fun PointModel.toEntity() =
     UserPointEntity(userId, subjectId, quizTitle, quizDescription, quizIcon, point)
 
