@@ -144,7 +144,6 @@ class QuizViewModel @Inject constructor(
 
     private fun cancelQuiz() {
         val point = getQuizPointUseCase.invoke()
-
         if (point >= 1) finishQuiz()
         else {
             setDialog(
