@@ -14,6 +14,7 @@ import androidx.viewbinding.ViewBinding
 import com.space.quizapp.R
 import com.space.quizapp.common.extensions.observeNonNull
 import com.space.quizapp.common.types.Inflater
+import com.space.quizapp.presentation.base.DialogManager
 import com.space.quizapp.presentation.base.view.BaseDialogView
 import com.space.quizapp.presentation.base.vm.BaseViewModel
 import com.space.quizapp.presentation.model.DialogItem
@@ -72,35 +73,15 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel>(private val in
     private fun observeDialog() {
         viewModel.dialog.observeNonNull(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { dialog ->
-                when (dialog.viewType) {
-                    DialogItem.ViewType.LOADER -> {
-                        dialog as DialogItem.LoaderDialog
-                        if (dialog.isProgressbar) {
-                            quizDialog = Dialog(requireContext())
+                if (this::quizDialog.isInitialized)
+                    quizDialog.dismiss()
 
-                            quizDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                            quizDialog.setCancelable(false)
-                            quizDialog.setCanceledOnTouchOutside(false)
-
-                            quizDialog.setContentView(R.layout.layout_loader_dialog)
-                            quizDialog.show()
-                        } else {
-                            if (this::quizDialog.isInitialized) quizDialog.dismiss()
-                        }
-                    }
-                    DialogItem.ViewType.QUESTION -> {
-                        quizDialog.dismiss()
-
-                        dialog as DialogItem.QuestionDialog
-                        DialogQuestionView(requireContext()).setContent(dialog).show()
-                    }
-                    DialogItem.ViewType.NOTIFICATION -> {
-                        quizDialog.dismiss()
-
-                        dialog as DialogItem.NotificationDialog
-                        DialogNotificationView(requireContext()).setContent(dialog).show()
-                    }
+                val newDialog = DialogManager.getDialog(dialog, requireContext())
+                if (newDialog != null) {
+                    quizDialog = newDialog
+                    quizDialog.show()
                 }
+
             }
         }
     }
