@@ -37,7 +37,7 @@ fun QuestionDto.toDomainModel() =
         questionTitle,
         answers.map { it.toAnswer() },
         answers.indexOf(correctAnswer),
-        questionIndex + 1
+        questionIndex.inc()
     )
 
 fun QuizModel.toUIModel() = QuizUIModel(id, quizTitle, quizDescription, quizIcon, questionsCount)

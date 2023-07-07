@@ -58,10 +58,6 @@ class QuizViewModel @Inject constructor(
                                 quizTitle = quiz.quizTitle, questionCount = quiz.questionsCount
                             )
                         )
-
-                        // todo for test
-                        Thread.sleep(1000)
-
                         closeLoaderDialog()
                         getQuestion()
                     }
@@ -122,6 +118,7 @@ class QuizViewModel @Inject constructor(
                     answer.toUIModel()
                 }
             }.toResult().collectLatest {
+
                 it.onSuccess { answers ->
                     _quizState.tryEmit(_quizState.value.copy(answers = answers))
                     closeLoaderDialog()
