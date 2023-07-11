@@ -10,11 +10,13 @@
     <style name="mediumMyriadGeo_Regular">
         <item name="android:textSize">@dimen/dimen_21_sp</item>
         <item name="lineHeight">@dimen/dimen_21_sp</item>
+        <item name="fontFamily">@font/myriad_geo</item>
     </style>
 
     <style name="smallMyriadGeo_Regular">
         <item name="android:textSize">@dimen/dimen_12_sp</item>
         <item name="lineHeight">@dimen/dimen_16_sp</item>
+        <item name="fontFamily">@font/myriad_geo</item>
     </style>
 
     <style name="MyProgressBar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
