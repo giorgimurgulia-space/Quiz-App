@@ -50,7 +50,7 @@
 
     <TextView
         android:id="@+id/closeButton"
-        style="@style/normal"
+        style="@style/normalMyriadGeo_Regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/dimen_10_dp"

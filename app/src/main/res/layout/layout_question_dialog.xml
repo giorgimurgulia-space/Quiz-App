@@ -28,7 +28,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/no_button"
-            style="@style/small"
+            style="@style/smallMyriadGeo_Regular"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_34_dp"
             android:layout_marginEnd="@dimen/dimen_5_dp"
@@ -38,7 +38,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/yes_button"
-            style="@style/small"
+            style="@style/smallMyriadGeo_Regular"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_34_dp"
             android:background="@drawable/shape_rectangle_background"

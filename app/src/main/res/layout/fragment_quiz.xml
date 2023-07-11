@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/title_text"
-        style="@style/normal"
+        style="@style/normalMyriadGeo_Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_16_dp"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/question_progress_text"
-        style="@style/small"
+        style="@style/smallMyriadGeo_Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_2_dp"
@@ -45,7 +45,7 @@
 
     <TextView
         android:id="@+id/current_point_text"
-        style="@style/small"
+        style="@style/smallMyriadGeo_Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_2_dp"
@@ -72,7 +72,7 @@
 
     <TextView
         android:id="@+id/question_text"
-        style="@style/normal"
+        style="@style/normalMyriadGeo_Regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_24_dp"
@@ -98,7 +98,7 @@
 
     <Button
         android:id="@+id/submit_button"
-        style="@style/medium"
+        style="@style/mediumMyriadGeo_Regular"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_55_dp"
         android:layout_marginHorizontal="@dimen/dimen_16_dp"

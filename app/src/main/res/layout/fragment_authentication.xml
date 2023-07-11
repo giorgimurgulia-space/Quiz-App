@@ -45,7 +45,7 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/name_editText"
-        style="@style/small"
+        style="@style/smallMyriadGeo_Regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_55_dp"
@@ -59,7 +59,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/start_button"
-        style="@style/normal"
+        style="@style/normalMyriadGeo_Regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_117_dp"
