@@ -38,12 +38,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dimen_20_dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/line_view"
         app:layout_constraintTop_toBottomOf="@id/title_text"
         tools:listitem="@layout/layout_quiz" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/no_points_text"
         style="@style/normalMyriadGeo_Regular"
         android:layout_width="match_parent"
